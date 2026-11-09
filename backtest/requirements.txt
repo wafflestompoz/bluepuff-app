@@ -1,0 +1,13 @@
+# Pinned to the versions the model was trained and validated with (2026-11-07).
+numpy==2.5.3
+pandas==3.0.5
+pyarrow==26.0.1
+lightgbm==4.7.0
+scikit-learn==1.9.1
+scipy==1.18.1
+pygrib==2.1.8
+omfiles==1.2.0
+fsspec==2026.9.0
+s3fs==2026.9.0
+requests==2.34.2
+boto3

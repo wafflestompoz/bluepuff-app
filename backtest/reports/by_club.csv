@@ -1,0 +1,45 @@
+club,obs_kn,raw_mean,raw_best,bias,kasta,kasta_ns,raw_bias,name,country,water,gain_pct
+workum,10.97,1.48,2.23,1.44,1.46,1.68,-0.06,Workum / Stavoren,NL,lake,1.0
+cherbourg,9.91,1.33,1.61,1.32,1.3,1.39,-0.17,Cherbourg,FR,sea,2.0
+granton,8.43,1.4,1.56,1.39,1.34,1.47,-0.14,Royal Forth YC,UK,sea,4.0
+veersemeer,12.36,1.8,1.88,1.57,1.7,1.9,-0.94,Veerse Meer,NL,lake,6.0
+hayling,10.25,1.61,1.74,1.57,1.49,1.58,-0.41,Hayling Island SC,UK,sea,7.0
+dinard,9.21,1.48,1.72,1.41,1.37,1.42,-0.49,Saint-Malo / Dinard,FR,sea,7.0
+neuchatel,5.13,1.4,1.65,1.39,1.29,1.4,-0.36,Lac de Neuchatel,CH,lake,8.0
+zurich,3.72,1.41,1.57,1.37,1.28,1.42,0.19,Lake Zurich,CH,lake,9.0
+nieuwpoort,9.61,1.52,1.45,1.53,1.38,1.43,-0.06,Nieuwpoort / Ostend,BE,sea,9.0
+loosdrecht,7.25,1.26,1.28,1.21,1.13,1.32,0.15,Loosdrecht,NL,lake,10.0
+lelystad,12.66,1.93,1.89,1.57,1.71,2.44,-1.35,Lelystad (Markermeer),NL,lake,11.0
+steinhude,8.45,1.59,1.61,1.41,1.41,1.57,-0.89,Steinhuder Meer,DE,lake,11.0
+kiel,9.18,1.5,1.53,1.47,1.32,1.34,-0.34,Kiel-Schilksee,DE,sea,12.0
+weymouth,12.06,1.89,2.24,1.85,1.67,1.91,-0.6,WPNSA Portland Harbour,UK,sea,12.0
+wolfgangsee,3.07,1.2,1.69,1.16,1.06,1.39,0.18,Wolfgangsee,AT,lake,12.0
+lucerne,3.77,1.42,1.52,1.35,1.25,1.35,-0.86,Lake Lucerne,CH,lake,12.0
+plymouth,9.58,1.79,1.96,1.71,1.56,1.7,-0.75,Plymouth Sound,UK,sea,13.0
+hyeres,9.22,1.99,2.04,1.84,1.72,1.93,-0.74,Hyeres,FR,sea,14.0
+gothenburg,7.1,1.34,1.49,1.29,1.15,1.33,0.3,Gothenburg (Langedrag),SE,sea,14.0
+annecy,5.07,1.59,1.71,1.38,1.37,1.5,-0.98,Lac d'Annecy,FR,lake,14.0
+brest,9.65,1.47,1.63,1.36,1.25,1.44,-0.38,Brest,FR,sea,15.0
+grafham,8.68,1.34,1.46,1.28,1.14,1.27,-0.03,Grafham Water SC,UK,reservoir,15.0
+burnham,9.95,1.53,1.67,1.38,1.28,1.47,0.23,Burnham-on-Crouch,UK,sea,16.0
+attersee,4.01,1.81,2.31,1.59,1.52,1.88,0.2,Attersee,AT,lake,16.0
+hellerup,10.13,1.73,1.76,1.57,1.46,1.81,-0.92,Hellerup / Copenhagen,DK,sea,16.0
+gdynia,8.94,1.79,2.58,1.67,1.47,2.07,-0.69,Gdynia / Puck Bay,PL,sea,18.0
+bourget,5.38,1.97,1.77,1.67,1.56,1.71,-1.49,Lac du Bourget,FR,lake,21.0
+locarno,3.74,1.41,1.61,1.23,1.1,1.17,-1.09,Lago Maggiore (Locarno),CH,lake,22.0
+medemblik,9.9,2.03,1.89,1.85,1.59,2.2,0.68,Medemblik (IJsselmeer),NL,lake,22.0
+geneva,6.42,1.92,2.05,1.53,1.48,1.73,-1.4,Lac Leman (Geneva),CH,lake,23.0
+genoa,7.11,2.31,2.76,2.02,1.78,2.18,-1.75,Genoa,IT,sea,23.0
+crosshaven,11.98,2.39,2.45,1.96,1.82,2.24,-1.73,Royal Cork YC,IE,sea,24.0
+howth,9.57,1.99,2.14,1.8,1.49,1.81,-0.77,Howth YC,IE,sea,25.0
+rutland,10.27,1.81,1.65,1.38,1.34,1.91,-1.35,Rutland SC,UK,reservoir,26.0
+konstanz,4.83,1.5,1.64,1.17,1.08,1.17,-0.1,Bodensee (Konstanz),DE,lake,28.0
+cannes,6.22,1.98,1.78,1.79,1.4,1.6,-0.4,Cannes / Antibes,FR,sea,29.0
+larochelle,10.13,2.26,2.11,1.75,1.51,1.72,-1.76,La Rochelle,FR,sea,33.0
+queenmary,8.72,1.92,2.27,1.49,1.23,1.98,-1.46,Queen Mary SC,UK,reservoir,36.0
+trieste,4.53,1.95,2.72,1.37,1.23,2.14,1.52,Trieste,IT,sea,37.0
+flensburg,11.47,3.58,3.4,3.08,2.17,3.75,-2.59,Flensburg,DE,sea,39.0
+thun,5.04,2.79,2.52,1.68,1.6,2.22,-2.68,Lake Thun,CH,lake,43.0
+lausanne,3.31,1.68,1.82,0.94,0.88,1.96,1.21,Lac Leman (Lausanne),CH,lake,48.0
+draycote,6.46,2.4,2.21,1.34,1.07,2.39,2.16,Draycote Water SC,UK,reservoir,55.0
+aarhus,6.7,2.41,2.54,1.26,1.04,2.84,2.19,Aarhus,DK,sea,57.0
