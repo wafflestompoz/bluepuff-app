@@ -1,0 +1,86 @@
+{
+ "hourly": {
+  "raw_mean": {
+   "n": 176326,
+   "mae_kn": 1.79,
+   "bias_kn": -0.48,
+   "band_hit": 0.719
+  },
+  "ns_clubs_only": {
+   "n": 176326,
+   "mae_kn": 1.79,
+   "bias_kn": 0.04,
+   "band_hit": 0.728
+  },
+  "ns_all_stations": {
+   "n": 176326,
+   "mae_kn": 1.69,
+   "bias_kn": -0.07,
+   "band_hit": 0.744
+  }
+ },
+ "race_day": {
+  "raw_mean": {
+   "days": 17403,
+   "brier": 0.1044,
+   "auc": 0.932,
+   "call_right": 0.858
+  },
+  "ns_clubs_only": {
+   "days": 17403,
+   "brier": 0.1014,
+   "auc": 0.934,
+   "call_right": 0.874
+  },
+  "ns_all_stations": {
+   "days": 17403,
+   "brier": 0.0948,
+   "auc": 0.945,
+   "call_right": 0.887
+  }
+ },
+ "light_wind_sunny_hourly": {
+  "raw_mean": {
+   "n": 18189,
+   "mae_kn": 1.55,
+   "bias_kn": -0.95,
+   "band_hit": 0.699
+  },
+  "ns_clubs_only": {
+   "n": 18189,
+   "mae_kn": 1.39,
+   "bias_kn": 0.04,
+   "band_hit": 0.735
+  },
+  "ns_all_stations": {
+   "n": 18189,
+   "mae_kn": 1.28,
+   "bias_kn": -0.12,
+   "band_hit": 0.759
+  }
+ },
+ "by_club_median": {
+  "raw_mean": 1.76,
+  "ns_clubs_only": 1.64,
+  "ns_all_stations": 1.63,
+  "gain_pct": 7.0
+ },
+ "clubs_improved": 32,
+ "top_features": {
+  "raw_mean": 0.504,
+  "ukmows": 0.16,
+  "icond2ws": 0.038,
+  "iconeuws": 0.036,
+  "lon": 0.027,
+  "g_rough10": 0.026,
+  "lat": 0.026,
+  "g_shore_km": 0.022,
+  "g_water_r20": 0.021,
+  "elev": 0.017,
+  "g_water_r5": 0.016,
+  "g_elev": 0.014,
+  "aromews": 0.014,
+  "ifsws": 0.014,
+  "arpegews": 0.009
+ }
+}

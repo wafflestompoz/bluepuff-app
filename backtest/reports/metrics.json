@@ -1,0 +1,216 @@
+{
+ "same_day": {
+  "hourly": {
+   "ifsws_st": {
+    "n": 176326,
+    "mae_kn": 2.16,
+    "bias_kn": -0.33,
+    "band_hit": 0.675
+   },
+   "iconeuws_st": {
+    "n": 166466,
+    "mae_kn": 2.19,
+    "bias_kn": -0.84,
+    "band_hit": 0.666
+   },
+   "icond2ws_st": {
+    "n": 131232,
+    "mae_kn": 1.91,
+    "bias_kn": -0.27,
+    "band_hit": 0.711
+   },
+   "ukmows_st": {
+    "n": 176326,
+    "mae_kn": 2.25,
+    "bias_kn": -0.91,
+    "band_hit": 0.666
+   },
+   "aromews_st": {
+    "n": 98375,
+    "mae_kn": 1.87,
+    "bias_kn": -0.13,
+    "band_hit": 0.719
+   },
+   "arpegews_st": {
+    "n": 167334,
+    "mae_kn": 2.15,
+    "bias_kn": -0.14,
+    "band_hit": 0.681
+   },
+   "raw_mean": {
+    "n": 176326,
+    "mae_kn": 1.79,
+    "bias_kn": -0.48,
+    "band_hit": 0.719
+   },
+   "raw_best": {
+    "n": 166466,
+    "mae_kn": 1.93,
+    "bias_kn": -0.4,
+    "band_hit": 0.708
+   },
+   "raw_water": {
+    "n": 176326,
+    "mae_kn": 1.97,
+    "bias_kn": -0.36,
+    "band_hit": 0.695
+   },
+   "bias": {
+    "n": 176326,
+    "mae_kn": 1.53,
+    "bias_kn": 0.0,
+    "band_hit": 0.767
+   },
+   "kasta": {
+    "n": 176326,
+    "mae_kn": 1.4,
+    "bias_kn": -0.18,
+    "band_hit": 0.785
+   },
+   "kasta_ns": {
+    "n": 176326,
+    "mae_kn": 1.77,
+    "bias_kn": -0.12,
+    "band_hit": 0.727
+   }
+  },
+  "race_day": {
+   "ifsws_st": {
+    "days": 17403,
+    "brier": 0.1178,
+    "auc": 0.912,
+    "call_right": 0.836
+   },
+   "iconeuws_st": {
+    "days": 16406,
+    "brier": 0.1255,
+    "auc": 0.903,
+    "call_right": 0.826
+   },
+   "icond2ws_st": {
+    "days": 12908,
+    "brier": 0.1057,
+    "auc": 0.931,
+    "call_right": 0.86
+   },
+   "ukmows_st": {
+    "days": 17403,
+    "brier": 0.1266,
+    "auc": 0.908,
+    "call_right": 0.82
+   },
+   "aromews_st": {
+    "days": 9744,
+    "brier": 0.0968,
+    "auc": 0.941,
+    "call_right": 0.878
+   },
+   "arpegews_st": {
+    "days": 16494,
+    "brier": 0.115,
+    "auc": 0.917,
+    "call_right": 0.844
+   },
+   "raw_mean": {
+    "days": 17403,
+    "brier": 0.1044,
+    "auc": 0.932,
+    "call_right": 0.858
+   },
+   "raw_best": {
+    "days": 16406,
+    "brier": 0.1083,
+    "auc": 0.926,
+    "call_right": 0.855
+   },
+   "raw_water": {
+    "days": 17403,
+    "brier": 0.1117,
+    "auc": 0.92,
+    "call_right": 0.844
+   },
+   "bias": {
+    "days": 17403,
+    "brier": 0.0875,
+    "auc": 0.96,
+    "call_right": 0.897
+   },
+   "kasta": {
+    "days": 17403,
+    "brier": 0.0826,
+    "auc": 0.967,
+    "call_right": 0.911
+   },
+   "kasta_ns": {
+    "days": 17403,
+    "brier": 0.1011,
+    "auc": 0.935,
+    "call_right": 0.88
+   }
+  },
+  "race_day_base_rate": 0.617,
+  "by_water": {
+   "lake": {
+    "raw_mean": 1.68,
+    "bias": 1.42,
+    "kasta": 1.36,
+    "kasta_ns": 1.67
+   },
+   "reservoir": {
+    "raw_mean": 1.87,
+    "bias": 1.37,
+    "kasta": 1.2,
+    "kasta_ns": 1.89
+   },
+   "sea": {
+    "raw_mean": 1.87,
+    "bias": 1.65,
+    "kasta": 1.46,
+    "kasta_ns": 1.84
+   }
+  },
+  "top_features": {
+   "raw_mean": 0.461,
+   "clubc": 0.126,
+   "raw_water": 0.093,
+   "raw_best": 0.061,
+   "aromews_st": 0.016,
+   "ifsws_st": 0.01,
+   "ukmog_w": 0.006,
+   "icond2ws_st": 0.005,
+   "ukmov_st": 0.005,
+   "hour": 0.005,
+   "icond2v_st": 0.005,
+   "icond2dir_st": 0.005,
+   "icond2u_st": 0.004,
+   "ukmodir_st": 0.004,
+   "ukmog_s": 0.004
+  }
+ },
+ "day_ahead_gfs": {
+  "gfs1_ws": {
+   "n": 52692,
+   "mae_kn": 2.59,
+   "bias_kn": -0.0,
+   "band_hit": 0.618
+  },
+  "bias": {
+   "n": 52692,
+   "mae_kn": 2.05,
+   "bias_kn": -0.0,
+   "band_hit": 0.697
+  },
+  "kasta": {
+   "n": 52692,
+   "mae_kn": 1.87,
+   "bias_kn": -0.11,
+   "band_hit": 0.72
+  },
+  "kasta_ns": {
+   "n": 52692,
+   "mae_kn": 2.41,
+   "bias_kn": -0.17,
+   "band_hit": 0.627
+  }
+ }
+}
