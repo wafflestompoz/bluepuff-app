@@ -1,0 +1,12 @@
+{
+  "name": "bluepuff-brand",
+  "private": true,
+  "type": "module",
+  "scripts": { "icons": "node make-icons.mjs" },
+  "devDependencies": {
+    "@expo-google-fonts/bricolage-grotesque": "^0.4.1",
+    "@expo-google-fonts/space-grotesk": "^0.4.1",
+    "opentype.js": "^2.0.0",
+    "sharp": "^0.35.5"
+  }
+}

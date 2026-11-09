@@ -1,0 +1,511 @@
+<title>Bluepuff Brand Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=Space+Grotesk:wght@700&display=swap">
+<style>
+/* Layout: full-bleed brand-blue bands alternate with a pale page; each section is one brand decision, with Bluepow shown beside it where the hallmark is shared. */
+:root {
+  /* brand tokens: fixed in both themes */
+  --regatta: #0A4DA8;   /* primary, full-bleed */
+  --deep: #063679;      /* surfaces on blue, 4Kasta pill */
+  --abyss: #041F44;     /* night / dark mode base */
+  --raised: #1563C9;
+  --line: #3C78CC;
+  --spray: #D2E8FF;
+  --foam: #F2F8FF;      /* text on blue */
+  --mist: #B5CDEE;      /* secondary text on blue */
+  --sun: #FFD23F;       /* shared with Bluepow: the one call */
+  --sun-ink: #1A1400;
+  --port: #E5484D;
+  --stbd: #1FA971;
+  --cobalt: #0B2BB0;    /* Bluepow, for comparison */
+  --cobalt-navy: #071E80;
+  --snow: #F3F6FF;
+
+  /* page tokens: light */
+  --bg: #F2F8FF;
+  --panel: #FFFFFF;
+  --fg: #0B1E3F;
+  --fg-soft: #46597A;
+  --rule: #CBDAEE;
+  --tint: #E3EEFB;
+  --link: #0A4DA8;
+
+  --f-display: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mark: "Space Grotesk", "Figtree", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #041F44; --panel: #0A2A57; --fg: #EAF2FF; --fg-soft: #A9BEDD; --rule: #1C3E6E; --tint: #0C3060; --link: #8EC0FF; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #041F44; --panel: #0A2A57; --fg: #EAF2FF; --fg-soft: #A9BEDD; --rule: #1C3E6E; --tint: #0C3060; --link: #8EC0FF; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 64px; }
+section + section { border-top: 1px solid var(--rule); }
+.band { background: var(--regatta); color: var(--foam); border-top: 0 !important; }
+.band + section { border-top: 0; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 800; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.1; }
+h3 { font-size: 20px; letter-spacing: -0.01em; font-weight: 600; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-soft); }
+.band .eyebrow { color: var(--mist); }
+.head { display: grid; gap: 12px; margin-bottom: 36px; }
+.head p { color: var(--fg-soft); }
+.grid { display: grid; gap: 20px; }
+.g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.g3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 18px; padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.soft { color: var(--fg-soft); }
+.small { font-size: 14px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Hero */
+.hero { padding-block: 72px 56px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.wordmark { font-family: var(--f-mark); font-weight: 700; letter-spacing: -0.02em; line-height: 1; display: inline-flex; align-items: flex-start; }
+.wordmark svg { margin-left: 0.04em; margin-top: 0.1em; }
+.hero .wordmark { font-size: clamp(56px, 10vw, 104px); }
+.tagline { font-family: var(--f-display); font-weight: 800; font-size: clamp(24px, 3.2vw, 34px); letter-spacing: -0.02em; line-height: 1.15; margin-top: 20px; }
+.hero p.lede { color: var(--mist); margin-top: 16px; font-size: 18px; }
+.lockup { display: inline-flex; gap: 8px; align-items: center; margin-top: 24px; flex-wrap: wrap; }
+.kasta { font-family: var(--f-mark); font-weight: 700; background: var(--deep); color: var(--sun); border: 1px solid var(--line); border-radius: 7px; padding: 2px 8px; font-size: 15px; }
+.kasta.bp { background: var(--cobalt-navy); border-color: #3A55C8; }
+.plus { background: var(--sun); color: var(--sun-ink); font-weight: 600; letter-spacing: 1px; border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+.by { color: var(--mist); font-size: 14px; font-weight: 500; }
+
+/* Phone */
+.phone { background: var(--abyss); border-radius: 40px; padding: 12px; width: 100%; max-width: 330px; justify-self: center; box-shadow: 0 30px 60px -20px rgba(2, 12, 32, 0.6); }
+.screen { background: var(--regatta); border-radius: 30px; padding: 22px 18px 20px; display: grid; gap: 14px; color: var(--foam); }
+.screen .top { display: flex; justify-content: space-between; align-items: center; }
+.screen .wordmark { font-size: 22px; }
+.club { font-size: 13px; color: var(--mist); }
+.club b { display: block; font-family: var(--f-display); font-weight: 800; color: var(--foam); font-size: 22px; letter-spacing: -0.01em; }
+.call { background: var(--deep); border-radius: 20px; padding: 16px; display: grid; gap: 10px; }
+.call .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.chip { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; }
+.chip.on { background: var(--sun); color: var(--sun-ink); }
+.big { font-family: var(--f-display); font-weight: 800; font-size: 48px; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.big small { font-size: 18px; font-weight: 600; letter-spacing: 0; margin-left: 2px; }
+.pct { font-family: var(--f-display); font-weight: 800; font-size: 28px; color: var(--sun); font-variant-numeric: tabular-nums; }
+.meta { font-size: 13px; color: var(--mist); }
+.strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; text-align: center; }
+.strip div { background: var(--raised); border-radius: 10px; padding: 6px 0; font-size: 11px; color: var(--mist); }
+.strip b { display: block; font-family: var(--f-display); font-size: 17px; color: var(--foam); font-variant-numeric: tabular-nums; }
+.strip .gun { outline: 2px solid var(--sun); outline-offset: -2px; }
+.tack { display: flex; gap: 6px; flex-wrap: wrap; font-size: 12px; }
+.tack span { border-radius: 6px; padding: 3px 8px; font-weight: 600; }
+.tp { background: var(--port); color: #fff; }
+.ts { background: var(--stbd); color: #04150D; }
+
+/* Hallmarks */
+.hall { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); border-radius: 18px; overflow: hidden; background: var(--panel); }
+.hall > div { padding: 18px 22px; border-top: 1px solid var(--rule); min-width: 0; }
+.hall > div:nth-child(-n+2) { border-top: 0; }
+.hall > div:nth-child(odd) { border-right: 1px solid var(--rule); }
+.hall .k { font-weight: 600; }
+.hall .eyebrow { margin-bottom: 4px; }
+
+/* Names */
+.name { font-family: var(--f-mark); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1; color: var(--fg); }
+.rec { justify-self: start; background: var(--sun); color: var(--sun-ink); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; }
+.panel.pick { border: 2px solid var(--link); }
+
+/* Logos */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+.tile { display: grid; gap: 10px; justify-items: start; }
+.tile svg.icon { width: 100%; max-width: 160px; height: auto; border-radius: 22.5%; display: block; }
+.tile .cap { font-size: 14px; }
+.tile .cap b { display: block; }
+.marks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.markcard { border-radius: 18px; padding: 28px 24px; display: grid; gap: 14px; }
+.markcard.blue { background: var(--regatta); color: var(--foam); }
+.markcard.light { background: var(--panel); border: 1px solid var(--rule); color: var(--regatta); }
+:root[data-theme="dark"] .markcard.light { color: var(--foam); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .markcard.light { color: var(--foam); } }
+.markcard .wordmark { font-size: 40px; }
+.markcard .cap { font-size: 13px; opacity: 0.8; font-family: var(--f-body); }
+
+/* Colour */
+.sw { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+.chipc { border-radius: 16px; overflow: hidden; border: 1px solid var(--rule); background: var(--panel); }
+.chipc .c { height: 92px; padding: 12px; display: flex; align-items: flex-end; font-weight: 600; font-size: 13px; }
+.chipc .t { padding: 10px 12px 12px; font-size: 13px; display: grid; gap: 2px; }
+.chipc .t b { font-size: 14px; }
+.chipc .t code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--fg-soft); }
+.ratio { display: flex; height: 44px; border-radius: 12px; overflow: hidden; margin-top: 24px; border: 1px solid var(--rule); }
+.ratio div { display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; }
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 28px; }
+.cmp { border-radius: 16px; padding: 18px; display: grid; gap: 6px; }
+.cmp .wordmark { font-size: 28px; }
+
+/* Type */
+.spec { display: grid; gap: 20px; }
+.specrow { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: baseline; padding-block: 18px; border-top: 1px solid var(--rule); }
+.specrow:first-child { border-top: 0; }
+.specrow .sample { min-width: 0; overflow-wrap: anywhere; }
+.s-mark { font-family: var(--f-mark); font-weight: 700; font-size: 48px; letter-spacing: -0.02em; line-height: 1; }
+.s-num { font-family: var(--f-display); font-weight: 800; font-size: 64px; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.s-num small { font-size: 24px; font-weight: 600; letter-spacing: 0; }
+.s-head { font-family: var(--f-display); font-weight: 800; font-size: 32px; letter-spacing: -0.02em; line-height: 1.1; }
+.s-body { font-size: 17px; }
+.s-label { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Voice */
+.dd { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.say { display: grid; gap: 12px; }
+.say .row { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; font-size: 15px; align-items: start; }
+.say .tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 6px; padding: 3px 0; text-align: center; }
+.say .yes { background: var(--stbd); color: #04150D; }
+.say .no { background: var(--tint); color: var(--fg-soft); }
+.push { background: var(--abyss); color: var(--foam); border-radius: 18px; padding: 14px 16px; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; align-items: start; }
+.push .ic { width: 38px; height: 38px; border-radius: 9px; overflow: hidden; }
+.push .ic svg { width: 38px; height: 38px; display: block; }
+.push b { font-size: 14px; display: block; }
+.push p { font-size: 14px; color: var(--spray); }
+.gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0 28px; }
+.gloss div { padding-block: 12px; border-top: 1px solid var(--rule); font-size: 15px; min-width: 0; }
+.gloss b { font-family: var(--f-display); font-weight: 600; }
+ul.tight { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+
+footer { padding-block: 40px; color: var(--fg-soft); font-size: 14px; }
+a { color: var(--link); }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+@media (max-width: 820px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hall { grid-template-columns: 1fr; }
+  .hall > div:nth-child(odd) { border-right: 0; }
+  .hall > div:nth-child(2) { border-top: 1px solid var(--rule); }
+  .specrow { grid-template-columns: 1fr; gap: 6px; }
+  section { padding-block: 48px; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Puff: three wind streaks, the middle one curling. Same stroke weight and round caps as the Bluepow snowflake. -->
+    <symbol id="m-puff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 7.5h9.5a3 3 0 1 0-3-3"/><path d="M2.5 12h15a3.2 3.2 0 1 1-3.2 3.2"/><path d="M2.5 16.5h6"/></g></symbol>
+    <!-- Burgee: the club pennant on a short staff. -->
+    <symbol id="m-burgee" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2.5v19"/><path d="M5 4l14 5L5 14z" fill="currentColor"/></g></symbol>
+    <!-- Lift: a wind-shift arrow, bent the way a lifted tack bends. -->
+    <symbol id="m-lift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l6-8 3 3 7-11"/><path d="M14.5 4H20v5.5"/></g></symbol>
+    <!-- Dinghy: mainsail, jib and hull, filled so it holds up at icon size. -->
+    <symbol id="m-boat" viewBox="0 0 24 24"><g fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M11.5 2.5v13H3.5z"/><path d="M13.5 6v9.5h6z"/><path d="M2.5 17.5h19l-2.6 3.5H5.2z"/></g></symbol>
+    <!-- Bluepow snowflake, from app/src/ui.tsx -->
+    <symbol id="m-flake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M3.34 7l17.32 10M3.34 17 20.66 7"/><path d="m9.5 3.5 2.5 2 2.5-2M9.5 20.5l2.5-2 2.5 2M4.2 10.2l2.9-1.2-.5-3M19.8 13.8l-2.9 1.2.5 3M4.2 13.8l2.9 1.2-.5 3M19.8 10.2l-2.9-1.2.5-3"/></g></symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<section class="band hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Brand guide · sail racing forecasts</div>
+      <div style="margin-top:18px">
+        <span class="wordmark" role="img" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-puff"/></svg></span>
+      </div>
+      <div class="tagline">Know the breeze before the gun.</div>
+      <p class="lede">Wind, puff and shift odds for the start of every race at your club, from the same 4Kasta model behind Bluepow. Built for dinghy racers who want to rig right the first time.</p>
+      <div class="lockup" aria-label="Plus, powered by 4Kasta">
+        <span class="plus">PLUS</span><span class="by">powered by</span><span class="kasta">4Kasta</span>
+      </div>
+    </div>
+
+    <div class="phone" aria-label="Example home screen">
+      <div class="screen">
+        <div class="top">
+          <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-puff"/></svg></span>
+          <span class="meta">Sat 14 June</span>
+        </div>
+        <div class="club">Tomorrow, first gun 11:00<b>Hayling Island SC</b></div>
+        <div class="call">
+          <div class="row"><span class="chip on">RACE ON</span><span class="pct">74%</span></div>
+          <div class="row"><span class="big">12<small>kn</small></span><span class="meta" style="text-align:right">SW 225°<br>puffs to 17 kn</span></div>
+          <div class="meta">Chance the wind sits in your fleet's 6–18 kn range at the start.</div>
+        </div>
+        <div class="strip num" aria-label="Wind by hour">
+          <div>10:00<b>9</b></div><div class="gun">11:00<b>12</b></div><div>12:00<b>13</b></div><div>13:00<b>14</b></div><div>14:00<b>15</b></div>
+        </div>
+        <div class="tack"><span class="ts">Starboard lifted early</span><span class="tp">Port pays after 13:00</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HALLMARKS -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Family resemblance</div>
+      <h2>What it keeps from Bluepow and 4Kasta</h2>
+      <p>Someone who knows Bluepow should see the sailing app and know it's the same people, the same model and the same honesty. Each row is a rule taken from the Bluepow app and launch plan, and how it reads on the water.</p>
+    </div>
+    <div class="hall">
+      <div><div class="eyebrow">Bluepow</div><span class="k">One saturated blue, full-bleed.</span> Cobalt <span class="num">#0B2BB0</span> fills the icon, splash and screens.</div>
+      <div><div class="eyebrow">Sail app</div><span class="k">One saturated blue, full-bleed,</span> moved from alpine sky to open water: Regatta <span class="num">#0A4DA8</span>.</div>
+      <div><span class="k">Yellow is reserved for the bluebird call.</span> Nothing else is yellow.</div>
+      <div><span class="k">The same yellow is reserved for the race-on call:</span> wind in your fleet's range at the start.</div>
+      <div><span class="k">Lowercase wordmark</span> in Space Grotesk Bold, with a small yellow snowflake at its shoulder.</div>
+      <div><span class="k">Same wordmark build,</span> with a yellow puff where the snowflake sits.</div>
+      <div><span class="k">Icon:</span> a white lowercase b on cobalt, snowflake top right.</div>
+      <div><span class="k">Icon:</span> the same white b on Regatta, puff top right. The two sit side by side on a phone as a pair.</div>
+      <div><span class="k">Bricolage Grotesque</span> for numbers and headings, <span class="k">Figtree</span> for text.</div>
+      <div><span class="k">Same two families,</span> with knots and degrees set as large tabular numbers.</div>
+      <div><span class="k">"Plus, powered by 4Kasta"</span>: yellow PLUS pill, then the 4Kasta tag in yellow on navy.</div>
+      <div><span class="k">Identical lockup.</span> 4Kasta is the shared engine, so its tag never changes between apps.</div>
+      <div><span class="k">Odds, never promises.</span> "64% chance", never "it will be a bluebird day". Every hit and miss is published.</div>
+      <div><span class="k">Same rule.</span> "74% chance of 8–14 kn at the start", never "perfect conditions". The scorecard is public.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAMES -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Name</div>
+      <h2>Why bluepuff</h2>
+      <p>Bluepow joins a sky colour to the thing skiers chase. The same pattern for racers is blue plus the thing they chase on the water. Bluepuff was chosen over the options shown here and over bluesail, which is harder to trademark and says sailing rather than racing. It still needs a trademark and app-store search before launch.</p>
+    </div>
+    <div class="grid g3">
+      <div class="panel pick">
+        <span class="rec">CHOSEN · 9 NOV 2026</span>
+        <div class="name">bluepuff</div>
+        <p class="small">A puff is the gust racers hunt for upwind ("puff coming down the left"). Same shape as bluepow: blue, then one short p-word. Reads as an obvious sibling and is easy to say on the dock.</p>
+        <p class="small soft">Risk: it sounds light-hearted. The serious tone has to come from the numbers and the copy, as it does for Bluepow.</p>
+      </div>
+      <div class="panel">
+        <div class="name">blueshift</div>
+        <p class="small">Wind shifts decide most dinghy races, and the word already means something. It sounds more technical and more grown-up.</p>
+        <p class="small soft">Risk: a crowded name. Blueshift is already a marketing software company and a common product name, so the trademark and store search may block it.</p>
+      </div>
+      <div class="panel">
+        <div class="name">bluepow sail</div>
+        <p class="small">One brand with two sports. Uses Bluepow's existing name, store listing and social accounts, and one Plus subscription could cover both.</p>
+        <p class="small soft">Risk: "pow" means powder. It reads oddly to sailors who don't ski, and it ties the sailing product to a winter brand.</p>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- LOGO -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Logo</div>
+      <h2>Same build, a new mark</h2>
+      <p>The Bluepow icon is a white b with a yellow mark in the top-right corner. The sail app keeps that grid exactly and swaps the mark. Four candidates for the mark, drawn with the snowflake's stroke weight and round ends. The dinghy is filled so its sails stay readable at icon size.</p>
+    </div>
+
+    <div class="tiles">
+      <div class="tile">
+        <svg class="icon" viewBox="0 0 1024 1024" role="img" aria-label="Bluepow app icon"><rect width="1024" height="1024" fill="#0B2BB0"/><text x="250" y="828" fill="#F3F6FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="640" y="100" width="270" height="270" style="color:#FFD23F"><use href="#m-flake"/></svg></svg>
+        <div class="cap"><b>Bluepow today</b><span class="soft">Snowflake</span></div>
+      </div>
+      <div class="tile">
+        <svg class="icon" viewBox="0 0 1024 1024" role="img" aria-label="Sail app icon with puff mark"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="630" y="100" width="290" height="290" style="color:#FFD23F"><use href="#m-puff"/></svg></svg>
+        <div class="cap"><b>A · Puff</b><span class="soft">Chosen. Pairs with the name.</span></div>
+      </div>
+      <div class="tile">
+        <svg class="icon" viewBox="0 0 1024 1024" role="img" aria-label="Sail app icon with burgee mark"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="640" y="100" width="270" height="270" style="color:#FFD23F"><use href="#m-burgee"/></svg></svg>
+        <div class="cap"><b>B · Burgee</b><span class="soft">Says "club" before "wind".</span></div>
+      </div>
+      <div class="tile">
+        <svg class="icon" viewBox="0 0 1024 1024" role="img" aria-label="Sail app icon with lift mark"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="640" y="100" width="270" height="270" style="color:#FFD23F"><use href="#m-lift"/></svg></svg>
+        <div class="cap"><b>C · Lift</b><span class="soft">Best with blueshift.</span></div>
+      </div>
+      <div class="tile">
+        <svg class="icon" viewBox="0 0 1024 1024" role="img" aria-label="Sail app icon with dinghy mark"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="640" y="95" width="280" height="280" style="color:#FFD23F"><use href="#m-boat"/></svg></svg>
+        <div class="cap"><b>D · Dinghy</b><span class="soft">Clearest "sailing" read.</span></div>
+      </div>
+    </div>
+
+    <div class="marks" style="margin-top:32px">
+      <div class="markcard blue">
+        <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-puff"/></svg></span>
+        <div class="cap">Primary: Foam wordmark, Sun puff, on Regatta.</div>
+      </div>
+      <div class="markcard light">
+        <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-puff"/></svg></span>
+        <div class="cap">On light: Regatta wordmark, Sun puff. On white the puff gets a 1px Regatta outline if it must sit small.</div>
+      </div>
+      <div class="markcard blue" style="background:var(--abyss)">
+        <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--foam)"><use href="#m-puff"/></svg></span>
+        <div class="cap">One colour (notifications, sail stickers, embroidered kit): all Foam, or all Regatta.</div>
+      </div>
+      <div class="markcard blue">
+        <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-boat"/></svg></span>
+        <div class="cap">Option D in the wordmark: the dinghy at the same size and position as the puff.</div>
+      </div>
+    </div>
+    <ul class="tight small soft" style="margin-top:20px">
+      <li>The puff sits at the top-right of the last letter, half the cap height, exactly where Bluepow's snowflake sits.</li>
+      <li>Always lowercase. Never set the wordmark in Bricolage or Figtree, never stretch it, never put a gradient or a sail photo behind it.</li>
+      <li>Minimum size: 16px wordmark height on screen. Below that, use the b icon alone.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- COLOUR -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Colour</div>
+      <h2>Open-water blue, the same yellow</h2>
+      <p>The palette follows Bluepow's token for token, so the two apps can share code: one full-bleed blue, two darker blues for surfaces and night, three pale tints for text, and one yellow. The blue moves from Bluepow's violet-leaning cobalt toward the sea. Two sailing colours are added, and only for tack advice.</p>
+    </div>
+
+    <div class="sw">
+      <div class="chipc"><div class="c" style="background:var(--regatta);color:var(--foam)">Aa 7.3:1</div><div class="t"><b>Regatta</b><code>#0A4DA8</code><span class="soft">Primary. Icon, splash, screens. Bluepow: cobalt</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--deep);color:var(--foam)">Aa</div><div class="t"><b>Deep</b><code>#063679</code><span class="soft">Cards on blue, 4Kasta tag. Bluepow: navy</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--abyss);color:var(--foam)">Aa</div><div class="t"><b>Abyss</b><code>#041F44</code><span class="soft">Dark mode, night. Bluepow: night</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--raised);color:var(--foam)">Aa</div><div class="t"><b>Raised</b><code>#1563C9</code><span class="soft">Pressed, hourly cells. Bluepow: raised</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--line);color:var(--foam)">Aa</div><div class="t"><b>Line</b><code>#3C78CC</code><span class="soft">Borders, chart grid. Bluepow: line</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--foam);color:var(--regatta)">Aa</div><div class="t"><b>Foam</b><code>#F2F8FF</code><span class="soft">Text on blue. Bluepow: snow</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--spray);color:var(--regatta)">Aa</div><div class="t"><b>Spray</b><code>#D2E8FF</code><span class="soft">Light panels. Bluepow: ice</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--mist);color:var(--abyss)">Aa</div><div class="t"><b>Mist</b><code>#B5CDEE</code><span class="soft">Secondary text on blue. Bluepow: mist</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--sun);color:var(--sun-ink)">RACE ON</div><div class="t"><b>Sun</b><code>#FFD23F</code><span class="soft">Unchanged from Bluepow. Only the race-on call and the PLUS pill.</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--port);color:#fff">PORT</div><div class="t"><b>Port</b><code>#E5484D</code><span class="soft">Port-tack advice only, always labelled.</span></div></div>
+      <div class="chipc"><div class="c" style="background:var(--stbd);color:#04150D">STBD</div><div class="t"><b>Starboard</b><code>#1FA971</code><span class="soft">Starboard-tack advice only, always labelled.</span></div></div>
+    </div>
+
+    <div class="ratio" aria-label="Rough share of each colour on a typical screen">
+      <div style="flex:58;background:var(--regatta);color:var(--foam)">Regatta 58%</div>
+      <div style="flex:20;background:var(--deep);color:var(--foam)">Deep 20%</div>
+      <div style="flex:14;background:var(--foam);color:var(--regatta)">Foam 14%</div>
+      <div style="flex:5;background:var(--sun);color:var(--sun-ink)">Sun</div>
+      <div style="flex:3;background:var(--stbd)"></div>
+    </div>
+    <p class="small soft" style="margin-top:8px">Rough share of a typical screen. If yellow covers more than a race-on chip and one number, something else has borrowed it.</p>
+
+    <div class="compare">
+      <div class="cmp" style="background:var(--cobalt);color:var(--snow)">
+        <span class="wordmark" aria-label="bluepow">bluepow<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-flake"/></svg></span>
+        <span class="small" style="color:#B9C6F5">Cobalt #0B2BB0 · winter, high-altitude sky</span>
+      </div>
+      <div class="cmp" style="background:var(--regatta);color:var(--foam)">
+        <span class="wordmark" aria-label="bluepuff">bluepuff<svg width="0.5em" height="0.5em" style="color:var(--sun)"><use href="#m-puff"/></svg></span>
+        <span class="small" style="color:var(--mist)">Regatta #0A4DA8 · summer, open water</span>
+      </div>
+    </div>
+    <ul class="tight small soft" style="margin-top:20px">
+      <li>Port red and starboard green follow the navigation-light convention every sailor knows. They mark tack-specific advice ("port pays after 13:00") and nothing else: never errors, never success states.</li>
+      <li>Never rely on red and green alone, since about 1 in 12 men can't tell them apart. The word Port or Starboard is always printed on the chip.</li>
+      <li>Wind-strength charts use one blue ramp from Spray (light air) to Abyss (strong), with your fleet's range outlined in Sun. No rainbow wind maps.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Typography</div>
+      <h2>Same three faces as Bluepow</h2>
+      <p>No new fonts. The app already loads all three, so a shared codebase costs nothing extra. What changes is what the big numbers say: knots, degrees and start times.</p>
+    </div>
+    <div class="panel spec">
+      <div class="specrow"><div><div class="eyebrow">Wordmark</div><div class="small soft">Space Grotesk Bold · wordmark and 4Kasta tag only</div></div><div class="sample s-mark">bluepuff</div></div>
+      <div class="specrow"><div><div class="eyebrow">Numbers</div><div class="small soft">Bricolage Grotesque ExtraBold, tabular figures</div></div><div class="sample s-num num">12<small>kn</small> 225<small>°</small> 74<small>%</small></div></div>
+      <div class="specrow"><div><div class="eyebrow">Headings</div><div class="small soft">Bricolage Grotesque ExtraBold, tracking −2%</div></div><div class="sample s-head">Sea breeze fills in by the second race.</div></div>
+      <div class="specrow"><div><div class="eyebrow">Text</div><div class="small soft">Figtree Regular and SemiBold, 15–17px</div></div><div class="sample s-body">Light southerly at the 11:00 start, 6–9 kn. The sea breeze should fill from the SW by 13:00 and build to 14 kn, with puffs to 18 kn on the left of the course.</div></div>
+      <div class="specrow"><div><div class="eyebrow">Labels</div><div class="small soft">Figtree SemiBold, caps, +12% tracking</div></div><div class="sample s-label">First gun · 11:00 · ILCA 6 fleet</div></div>
+    </div>
+    <ul class="tight small soft" style="margin-top:20px">
+      <li>Wind speed in knots by default. Offer m/s and Beaufort in settings, never mixed on one screen.</li>
+      <li>Direction as a compass point plus degrees ("SW 225°"): the point is quick to read, the degrees are what racers plot shifts with.</li>
+      <li>Times in the club's local 24-hour time, tied to the gun: "first gun 11:00", not "late morning".</li>
+    </ul>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Voice</div>
+      <h2>A good club coach on the dock</h2>
+      <p>Bluepow speaks like a friend who checked the models so you didn't have to. Bluepuff speaks like the coach on the dock before the start: short, specific, in the racers' own terms, and straight about how sure it is.</p>
+    </div>
+
+    <div class="dd">
+      <div class="panel say">
+        <h3>Principles</h3>
+        <ul class="tight small">
+          <li><b>Odds, never promises.</b> Every call carries a percentage. Bluepow's rule, unchanged.</li>
+          <li><b>Lead with the start.</b> Racers care about the wind at the gun, then how it changes over the races.</li>
+          <li><b>Speak sailor, correctly.</b> Puffs, lifts, headers, sea breeze, fleet, gun. A misused term costs more trust than a missed forecast.</li>
+          <li><b>Show the record.</b> Publish every hit and miss, and say where a number comes from until the live record has enough races.</li>
+          <li><b>No hype.</b> No "epic", no "send it", no "perfect conditions". Let 74% do the talking.</li>
+        </ul>
+      </div>
+      <div class="panel say">
+        <h3>Say this, not that</h3>
+        <div class="row"><span class="tag yes">Say</span><span>74% chance of 8–14 kn at the 11:00 start.</span></div>
+        <div class="row"><span class="tag no">Not</span><span>Great racing conditions tomorrow!</span></div>
+        <div class="row"><span class="tag yes">Say</span><span>Sea breeze likely by 13:00 (61%). Expect a big right shift when it fills.</span></div>
+        <div class="row"><span class="tag no">Not</span><span>The wind will change in the afternoon.</span></div>
+        <div class="row"><span class="tag yes">Say</span><span>Puffs to 19 kn. That's over the ILCA 4 limit you set.</span></div>
+        <div class="row"><span class="tag no">Not</span><span>Warning: dangerous wind!</span></div>
+        <div class="row"><span class="tag yes">Say</span><span>We called race day right 91 times in 100 in a test on three past summers at 44 European clubs with a nearby weather station.</span></div>
+        <div class="row"><span class="tag no">Not</span><span>The most accurate sailing forecast in the world.</span></div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:24px">
+      <div class="panel">
+        <div class="eyebrow">Taglines</div>
+        <p class="s-head" style="font-size:24px">Know the breeze before the gun.</p>
+        <p class="small soft">Primary. Echoes Bluepow's "Know when to go."</p>
+        <p class="small"><b>Rig right the first time.</b><br><b>Your club's wind, called the night before.</b><br><b>Win the first beat at home.</b></p>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">Push, evening before</div>
+        <div class="push">
+          <div class="ic"><svg viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="630" y="100" width="290" height="290" style="color:#FFD23F"><use href="#m-puff"/></svg></svg></div>
+          <div><b>Race on at Hayling tomorrow</b><p>74% chance of 8–14 kn at the 11:00 gun, SW. Puffs to 17 kn after lunch.</p></div>
+        </div>
+        <div class="push">
+          <div class="ic"><svg viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" fill="#0A4DA8"/><text x="250" y="828" fill="#F2F8FF" font-family="Bricolage Grotesque, Figtree, sans-serif" font-weight="800" font-size="760">b</text><svg x="630" y="100" width="290" height="290" style="color:#FFD23F"><use href="#m-puff"/></svg></svg></div>
+          <div><b>Light start at Rutland</b><p>58% chance it's under 5 kn at 10:30. Sea breeze unlikely. Postponement possible.</p></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="eyebrow">Paywall</div>
+        <p class="s-head" style="font-size:24px">Know the breeze before the gun.</p>
+        <ul class="tight small">
+          <li>The 4Kasta 3-day outlook for your club</li>
+          <li>Puffs, shifts and sea-breeze odds by race</li>
+          <li>Alerts the evening before, set to your fleet's wind range</li>
+          <li>Every club you race at, home and away</li>
+        </ul>
+        <p class="small soft">Buttons: "Start free week", "Stay on free". Same calm wording as Bluepow.</p>
+      </div>
+    </div>
+
+    <div class="head" style="margin-top:44px;margin-bottom:12px"><h3>Words we use</h3></div>
+    <div class="gloss">
+      <div><b>Race on</b> · the wind is in your fleet's chosen range at the first gun. The sail app's bluebird.</div>
+      <div><b>Puff</b> · a gust, given as the peak speed in knots ("puffs to 17 kn"). Not "gust" in the app.</div>
+      <div><b>Shift</b> · a change in wind direction of 10° or more. Say left or right, and which tack it lifts.</div>
+      <div><b>Sea breeze</b> · thermal onshore wind, given as odds and a fill time ("61% by 13:00").</div>
+      <div><b>Fleet range</b> · the lowest and highest wind a racer wants for their class, set once. ILCA, 420, RS200 and Optimist come with defaults.</div>
+      <div><b>First gun</b> · the club's warning signal time. Every forecast is pinned to it.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Built from Bluepow's app theme, wordmark, icon and launch-plan rules in the bluepow-app repository. The 91% race-day figure comes from the sailing backtest at 44 European clubs with a nearby weather station, summers 2023–25 (PR #30); without a station the gain was small. Name chosen 9 November 2026; trademark and store search still to do.</p>
+  </div>
+</footer>
