@@ -147,6 +147,46 @@ where the fetch method is the better guide. No buoy data was reachable to settle
 - Sea temperature: Météo-France, 6-hourly, monthly medians in `reports/water.json`.
 - Lakes get chop only. Lake water temperature isn't in the archive.
 
+## Rounds 4 and 5: what a live forecast can add (`backtest4.py`, `backtest5.py`)
+
+Baseline re-measured from a fresh rebuild of the data: 1.40 kn hourly error at clubs with a station, 1.70 kn without
+(round 3 reported 1.69), raw multi-model mean 1.79 kn. Same out-of-sample schemes as before.
+
+**What worked: learn the correction, not the wind** (`backtest5.py`, `*_res`). The model predicts how far the station will
+be from the multi-model mean and adds that to the mean, instead of predicting the wind from scratch. It starts from the
+raw forecast and moves only where it has learned to.
+
+| Same day | Hourly error (kn) | Wind band right | Race-day call right | Race-day Brier | Light-wind sunny | Median club | Clubs worse than raw |
+|---|---|---|---|---|---|---|---|
+| Raw multi-model mean | 1.79 | 71.9% | 85.8% | 0.104 | 1.55 | 1.76 | n/a |
+| **With a station**, round 1 model | 1.40 | 78.5% | 91.0% | 0.083 | 1.06 | 1.37 | 1 |
+| **With a station, learns the correction** | **1.37** | **79.0%** | **91.4%** | **0.080** | **1.05** | **1.35** | **0** |
+| **No station**, round 3 model | 1.70 | 74.2% | 88.7% | 0.095 | 1.28 | 1.64 | 10 |
+| **No station, learns the correction** | **1.68** | **74.5%** | **88.7%** | **0.093** | **1.27** | **1.60** | 11 |
+| No station, half model and half raw | 1.71 | 73.5% | 87.6% | 0.097 | 1.35 | 1.72 | 6 |
+
+- With a station the gain is small but clean: 2% lower hourly error, 3% better Brier, and no club ends up worse than the raw
+  models (one did before).
+- Without a station: median club 1.64 → 1.60 kn, Aarhus 2.40 → 1.83, Draycote 2.36 → 2.19. Weymouth is still the worst case
+  (1.89 raw → 2.73), and Lausanne, Burnham, Grafham and Rutland stay worse than raw.
+- Halving the no-station correction is the only thing that limits the worst clubs (Weymouth +16% instead of +51%, 6 clubs worse
+  instead of 10), at the cost of most of the average gain. It's a product call, not a free fix.
+
+**What didn't** (`backtest4.py`, kept for the record):
+- Recent error (how wrong the models were at the station in the last 3/10/30 days): on its own it takes the raw mean from
+  1.79 to 1.62 kn with no machine learning at all, which is useful for a club whose anemometer is new and has no history yet.
+  On top of the trained model it adds nothing (1.40 → 1.40): the model already knows the club.
+- The same recent error borrowed from stations 25–100 km away, for clubs without a station: slightly worse (1.70 → 1.72).
+- A fallback guard that drops to the raw mean where the no-station model did badly at the nearest training stations: it
+  picked the wrong clubs (it never flagged Weymouth, whose neighbours the model handles well) and lost accuracy overall.
+- Calibrating the race-day probability with a logistic fit instead of the fixed 2.5 kn spread: worse (Brier 0.083 → 0.084,
+  call right 91.0% → 89.7%). The fixed spread is already well calibrated.
+
+**What's left that would move the numbers most:** day-ahead and day-2/3 multi-model forecasts. Only GFS is scored that far out
+(1.87 kn with a station), and the open archive only keeps past model runs from 2026, when there are no ISD observations yet.
+Open-Meteo's paid API (previous-runs and historical-forecast) has 2024–25 runs at fixed leads and would let this be scored
+against the stations here. Also, the scoring target is still the shore or airport station, not the race course.
+
 ## Rerun
 
 ```bash
@@ -160,5 +200,6 @@ python geo.py && python backtest2.py   # round 2, about 30 minutes
 python marine.py && python chop.py       # water conditions, about 5 minutes
 ALL=1 python obs.py && ALL=1 python geo.py && ALL=1 python extract_wind.py <model> ...   # round 3 data, about 1 hour
 python backtest3.py                       # round 3
+python backtest4.py && python backtest5.py  # rounds 4-5, about 2 hours on 4 cores
 ```
 About 15 minutes of downloads and 15 minutes of training on 4 cores.

@@ -1,6 +1,6 @@
 """Hourly station wind from NOAA ISD (s3://noaa-isd-pds, public domain) for the sailing backtest.
 Writes data/obs.parquet: club, time (UTC, hourly), obs_ws (m/s, 10-min mean at the hour), obs_dir (deg), obs_gust (m/s, may be NaN)."""
-import gzip, io, re, os, requests, pandas as pd, numpy as np
+import gzip, io, re, os, time, requests, pandas as pd, numpy as np
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ALL = os.environ.get("ALL") == "1"          # ALL=1: every lowland European station (all_stations.csv) -> data/all/
@@ -21,7 +21,11 @@ def parse(text):
 def station(club, st):
     out = []
     for y in YEARS:
-        r = requests.get(f"https://noaa-isd-pds.s3.amazonaws.com/data/{y}/{st}-{y}.gz", timeout=120)
+        for k in range(5):   # retry dropped transfers
+            try: r = requests.get(f"https://noaa-isd-pds.s3.amazonaws.com/data/{y}/{st}-{y}.gz", timeout=120); r.content; break
+            except requests.RequestException:
+                if k == 4: raise
+                time.sleep(2 * (k + 1))
         if r.status_code != 200:
             if not ALL: print("missing", club, st, y)
             continue
