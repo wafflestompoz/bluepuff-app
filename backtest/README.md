@@ -293,6 +293,40 @@ For reference, at the 146 land stations the raw mean scores 1.57 kn and a land-t
   UKMO, whose licence is share-alike — check before shipping, or drop UKMO from the live mean.
 - Not covered: UK Met Office MIDAS (CEDA needs a login), Météo-France stations (host blocked here), Rijkswaterstaat (reachable,
   not yet used), Sweden/Poland/Italy national networks.
+### More clubs next to on-water stations (`clubs_euw.csv`, `stations_euw.csv`; Goolwa and Hamilton Island in `clubs_au.csv`)
+
+Found by checking every station in the NOAA archive for open water around it (WorldCover, `geo.py`), keeping those with full
+2023–25 records, and adding a club that races beside each one:
+
+- **Europe (9):** Royal Belgian SC (Zeebrugge mole), WSV IJmuiden (IJmuiden pier), Assens Sejlklub (Assens/Torø), Dragør
+  Sejlklub (Drogden lighthouse), Skagen Sejlklub (Skagen), Pembrokeshire YC (Milford Haven waterway), Blundellsands SC
+  (Crosby), JK Jugo Mali Lošinj (Mali Lošinj harbour) and Circolo Velico Ravennate (Marina di Ravenna).
+- **Australia (2):** Goolwa Regatta YC (Hindmarsh Island, in the Murray mouth) and Hamilton Island YC (the island's shoreline
+  airstrip). Both have hourly records from 2021.
+
+All are scored over 3 summers, leaving one summer out (`REGION=euw python backtest_au.py` for Europe).
+
+| Hourly error (kn), same day | Raw models | Learns the correction | Race-day calls, raw → corrected |
+|---|---|---|---|
+| 9 new European clubs (6 European models) | 2.24 | **1.66 (−26%)** | 81.2% → 87.5% |
+| Goolwa / Hamilton Island (4 global models) | 4.26 / 4.23 | **1.94 / 2.05** | in the Australian set |
+
+- Every one of the 9 European clubs improves, IJmuiden most (3.17 → 1.52) and Dragør (2.97 → 1.93). Skagen and Assens
+  gain least, because the models are already close on open water (1.84 → 1.72, 1.75 → 1.54).
+- With Goolwa and Hamilton Island, the Australian on-water set is 14 clubs and 11,559 hours. Scored on the water, the raw
+  models are off by 3.92 kn, and the correction learned on the water brings that to 1.94 kn, with 92.5% of race-day calls right.
+- No station isn't solved here either: leaving a station out is worse than raw at these clubs, as before.
+
+## Data licences (matters before charging for bluepuff)
+
+Every station observation in this folder comes from NOAA ISD. NOAA's own (US) data is public domain, but ISD carries
+non-US stations under WMO Resolution 40, which restricts commercial use, and the Australian stations are BoM data, which is
+free for non-commercial use only. So **every trained correction here (Europe, Australia and the on-water sets) is learned
+from non-commercial data**. That's fine for research; a paid product needs the same corrections retrained on commercially
+usable observations (KNMI, DWD, MeteoSwiss, DMI, Météo-France and Met Office are open for commercial use) or a BoM licence.
+The model inputs (Open-Meteo open data, CC BY 4.0), WorldCover (CC BY 4.0) and Copernicus DEM are fine with attribution.
+The live forecast (`forecast/`) uses no station data. The exception is *Europe scored on the water* above: its on-water and
+land corrections are trained only on KNMI, DWD, DMI and MeteoSwiss open data (ISD rows are scored, never trained on).
 
 ## Rerun
 
@@ -312,6 +346,9 @@ export REGION=au; python obs.py && for m in ecmwf_ifs dwd_icon meteofrance_arpeg
 python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m
 python extract_wind.py dwd_icon temperature_2m direct_radiation && python geo.py && unset REGION && python backtest_au.py   # Australia, ~10 min
 REGION=au STATIONS=water python obs.py  # then extract_wind.py as above with the same env, then: python backtest_au_water.py
+export REGION=euw; python obs.py && for m in ecmwf_ifs dwd_icon_eu dwd_icon_d2 meteofrance_arome_france0025 meteofrance_arpege_europe; do python extract_wind.py $m; done
+python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m && python extract_wind.py dwd_icon_eu temperature_2m direct_radiation
+python geo.py && python backtest_au.py && unset REGION   # 9 European on-water clubs
 python obs_national.py stations_eu_national.csv data/eu_nat   # Europe on the water, national networks, ~15 min
 python -c "import pandas as p; p.read_csv('stations_eu_national.csv')[['club','lat','lon']].to_csv('/tmp/eu_points.csv', index=False)"
 export POINTS=/tmp/eu_points.csv POINTS_TAG=eu_nat   # then the 6 Europe models and icon_eu temperature_2m direct_radiation, ~25 min

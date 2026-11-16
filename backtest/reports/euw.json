@@ -1,0 +1,166 @@
+{
+ "hourly": {
+  "ifsws_st": {
+   "n": 33940,
+   "mae_kn": 2.38,
+   "bias_kn": -0.06,
+   "band_hit": 0.662
+  },
+  "iconeuws_st": {
+   "n": 32091,
+   "mae_kn": 2.84,
+   "bias_kn": -1.63,
+   "band_hit": 0.591
+  },
+  "icond2ws_st": {
+   "n": 24318,
+   "mae_kn": 2.41,
+   "bias_kn": -0.7,
+   "band_hit": 0.659
+  },
+  "ukmows_st": {
+   "n": 33940,
+   "mae_kn": 2.96,
+   "bias_kn": -0.81,
+   "band_hit": 0.583
+  },
+  "aromews_st": {
+   "n": 11903,
+   "mae_kn": 2.24,
+   "bias_kn": 0.23,
+   "band_hit": 0.68
+  },
+  "arpegews_st": {
+   "n": 32268,
+   "mae_kn": 2.63,
+   "bias_kn": 0.2,
+   "band_hit": 0.641
+  },
+  "raw_mean": {
+   "n": 33940,
+   "mae_kn": 2.24,
+   "bias_kn": -0.51,
+   "band_hit": 0.676
+  },
+  "bias": {
+   "n": 33940,
+   "mae_kn": 1.83,
+   "bias_kn": 0.01,
+   "band_hit": 0.728
+  },
+  "kasta": {
+   "n": 33940,
+   "mae_kn": 1.69,
+   "bias_kn": 0.01,
+   "band_hit": 0.753
+  },
+  "kasta_res": {
+   "n": 33940,
+   "mae_kn": 1.66,
+   "bias_kn": 0.14,
+   "band_hit": 0.755
+  },
+  "kasta_ns": {
+   "n": 33940,
+   "mae_kn": 2.58,
+   "bias_kn": -0.08,
+   "band_hit": 0.638
+  }
+ },
+ "race_day": {
+  "ifsws_st": {
+   "days": 3272,
+   "brier": 0.1286,
+   "auc": 0.863,
+   "call_right": 0.812
+  },
+  "iconeuws_st": {
+   "days": 3086,
+   "brier": 0.1734,
+   "auc": 0.77,
+   "call_right": 0.749
+  },
+  "icond2ws_st": {
+   "days": 2330,
+   "brier": 0.1416,
+   "auc": 0.858,
+   "call_right": 0.793
+  },
+  "ukmows_st": {
+   "days": 3272,
+   "brier": 0.1613,
+   "auc": 0.781,
+   "call_right": 0.779
+  },
+  "aromews_st": {
+   "days": 1163,
+   "brier": 0.1044,
+   "auc": 0.908,
+   "call_right": 0.856
+  },
+  "arpegews_st": {
+   "days": 3104,
+   "brier": 0.1378,
+   "auc": 0.849,
+   "call_right": 0.801
+  },
+  "raw_mean": {
+   "days": 3272,
+   "brier": 0.1315,
+   "auc": 0.856,
+   "call_right": 0.812
+  },
+  "bias": {
+   "days": 3272,
+   "brier": 0.1025,
+   "auc": 0.921,
+   "call_right": 0.862
+  },
+  "kasta": {
+   "days": 3272,
+   "brier": 0.0971,
+   "auc": 0.933,
+   "call_right": 0.879
+  },
+  "kasta_res": {
+   "days": 3272,
+   "brier": 0.0976,
+   "auc": 0.933,
+   "call_right": 0.875
+  },
+  "kasta_ns": {
+   "days": 3272,
+   "brier": 0.1503,
+   "auc": 0.815,
+   "call_right": 0.782
+  }
+ },
+ "race_day_base_rate": 0.721,
+ "clubs_worse_than_raw": {
+  "bias": 1,
+  "kasta": 0,
+  "kasta_res": 0,
+  "kasta_ns": 7
+ },
+ "by_club_median": {
+  "raw_mean": 2.16,
+  "bias": 1.85,
+  "kasta": 1.68,
+  "kasta_res": 1.72,
+  "kasta_ns": 2.63
+ },
+ "top_features": {
+  "raw_mean": 0.255,
+  "ifsws_st": 0.056,
+  "clubc": 0.048,
+  "ifsws_w": 0.035,
+  "arpegews_water": 0.027,
+  "ifsws_water": 0.018,
+  "icond2ws_st": 0.018,
+  "iconeug_st": 0.014,
+  "icond2ws_water": 0.014,
+  "ukmog_s": 0.011,
+  "doy": 0.01,
+  "icond2v_st": 0.01
+ }
+}

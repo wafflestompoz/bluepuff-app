@@ -6,7 +6,7 @@ Open-Meteo API calls**, so it doesn't touch the account quota Bluepow uses. The 
 
 ```bash
 pip install -r backtest/requirements.txt
-python forecast/live.py                 # all 89 clubs in clubs_static.csv, about 2 minutes
+python forecast/live.py                 # all 100 clubs in clubs_static.csv, about 2 minutes
 python forecast/live.py hayling thun    # just these clubs
 ```
 
@@ -33,6 +33,8 @@ and sea clubs among them get waves and tides, but no chop until `geo.py` is run 
 Not in here yet: the trained correction from the backtest (`backtest5.py`). It needs the trained model saved and, for
 clubs with a station, live station readings.
 
-Australia (22 clubs) has no chop gap, but its harbour and river clubs often get no wave value: the nearest global wave
+Australia (24 clubs) has no chop gap, but its harbour and river clubs often get no wave value: the nearest global wave
 cell with data is outside the harbour, and the race-area chop is the better guide there. The global models read about
 1.7 kn light in Australia (backtest/README), so these raw numbers need the trained correction more than in Europe.
+
+`station_kind` marks the 23 clubs whose scoring station is on the water (a pier, beacon, lighthouse or harbour mole).
