@@ -1,0 +1,203 @@
+club,station,name,kind,lat,lon,water_r1,shore_km,hours,near_club,club_km,licence
+knmi_209,knmi:209,IJmond,water,52.465,4.518,1.0,2.3,10819,ijmuiden,0.985,national-open
+knmi_215,knmi:215,Voorschoten,land,52.141,4.437,0.0,1.246,11013,scheveningen,12.916,national-open
+knmi_225,knmi:225,IJmuiden,water,52.463,4.555,0.783,0.111,10757,ijmuiden,1.864,national-open
+knmi_249,knmi:249,Berkhout,land,52.644,4.979,0.0,1.832,11013,,,national-open
+knmi_258,knmi:258,Houtribdijk,water,52.649,5.401,0.814,0.067,11008,lelystad,13.376,national-open
+knmi_260,knmi:260,De Bilt,land,52.1,5.18,0.0,1.684,11013,loosdrecht,13.046,national-open
+knmi_273,knmi:273,Marknesse,land,52.703,5.888,0.0,1.231,11013,,,national-open
+knmi_275,knmi:275,Deelen Airport,land,52.056,5.873,0.0,3.444,11013,,,national-open
+knmi_277,knmi:277,Lauwersoog,water,53.413,6.2,0.842,0.345,11013,,,national-open
+knmi_278,knmi:278,Heino,land,52.435,6.259,0.0,1.331,11013,,,national-open
+knmi_279,knmi:279,Hoogeveen,land,52.75,6.574,0.0,2.136,11013,,,national-open
+knmi_283,knmi:283,Hupsel,land,52.069,6.657,0.0,1.242,11013,,,national-open
+knmi_285,knmi:285,Huibertgat,water,53.575,6.399,1.0,5.546,10999,,,national-open
+knmi_286,knmi:286,Nieuw Beerta,land,53.196,7.15,0.0,2.305,11013,,,national-open
+knmi_290,knmi:290,Twenthe Airport,land,52.274,6.891,0.0,1.856,11013,,,national-open
+knmi_308,knmi:308,Cadzand,water,51.381,3.379,0.722,0.333,10983,,,national-open
+knmi_310,knmi:310,Vlissingen,water,51.442,3.596,0.636,0.069,11013,,,national-open
+knmi_312,knmi:312,Oosterschelde,water,51.768,3.622,1.0,7.014,11008,,,national-open
+knmi_313,knmi:313,Vlakte van De Raan,water,51.505,3.242,1.0,13.441,10982,,,national-open
+knmi_315,knmi:315,Hansweert,water,51.447,3.998,0.592,0.131,10987,,,national-open
+knmi_316,knmi:316,Schaar,water,51.657,3.694,1.0,1.514,10935,veersemeer,9.683,national-open
+knmi_319,knmi:319,Westdorpe,land,51.226,3.861,0.0,1.066,11013,,,national-open
+knmi_324,knmi:324,Stavenisse,water,51.596,4.006,0.568,0.111,11006,,,national-open
+knmi_340,knmi:340,Woensdrecht Airport,land,51.449,4.342,0.0,2.941,11013,,,national-open
+knmi_343,knmi:343,Rotterdam Geulhaven,water,51.893,4.313,0.684,0.34,11013,,,national-open
+knmi_350,knmi:350,Gilze-Rijen Airport,land,51.566,4.936,0.0,1.568,11013,,,national-open
+knmi_356,knmi:356,Herwijnen,land,51.859,5.146,0.0,1.402,11013,,,national-open
+knmi_370,knmi:370,Eindhoven Airport,land,51.451,5.377,0.0,1.163,11013,,,national-open
+knmi_375,knmi:375,Volkel,land,51.659,5.707,0.0,2.833,11013,,,national-open
+knmi_377,knmi:377,Ell,land,51.198,5.763,0.0,4.132,11013,,,national-open
+knmi_380,knmi:380,Maastricht Airport,land,50.906,5.762,0.0,2.219,11013,,,national-open
+dwd_00090,dwd:00090,Alsfeld,land,50.756,9.258,0.0,3.615,11010,,,national-open
+dwd_00164,dwd:00164,Angermünde,land,53.032,13.991,0.0,1.094,11015,,,national-open
+dwd_00183,dwd:00183,Arkona,water,54.679,13.434,0.564,0.128,11015,,,national-open
+dwd_00198,dwd:00198,Artern,land,51.374,11.292,0.0,1.522,11016,,,national-open
+dwd_00298,dwd:00298,Barth,land,54.34,12.711,0.0,2.929,11013,,,national-open
+dwd_00303,dwd:00303,Baruth,land,52.061,13.5,0.0,4.964,10874,,,national-open
+dwd_00342,dwd:00342,Belm,land,52.317,8.169,0.0,1.903,11016,,,national-open
+dwd_00427,dwd:00427,Berlin Brandenburg,land,52.38,13.53,0.0,1.334,10830,,,national-open
+dwd_00433,dwd:00433,Berlin-Tempelhof,land,52.468,13.402,0.0,1.008,11007,,,national-open
+dwd_00460,dwd:00460,Berus,land,49.264,6.687,0.0,4.149,10809,,,national-open
+dwd_00591,dwd:00591,Boizenburg,land,53.391,10.688,0.0,2.0,11009,,,national-open
+dwd_00642,dwd:00642,Brake,water,53.352,8.497,0.428,0.066,11016,,,national-open
+dwd_00662,dwd:00662,Braunschweig,land,52.292,10.446,0.0,2.11,10173,,,national-open
+dwd_00691,dwd:00691,Bremen,land,53.045,8.798,0.0,1.492,10875,,,national-open
+dwd_00701,dwd:00701,Bremerhaven,water,53.533,8.576,0.553,0.129,10590,,,national-open
+dwd_00704,dwd:00704,Bremervörde,land,53.445,9.139,0.0,3.242,10997,,,national-open
+dwd_00788,dwd:00788,Büsum,water,54.119,8.858,0.881,0.129,11012,,,national-open
+dwd_00880,dwd:00880,Cottbus,land,51.776,14.317,0.0,2.414,10940,,,national-open
+dwd_01001,dwd:01001,Doberlug-Kirchhain,land,51.645,13.575,0.0,2.127,10805,,,national-open
+dwd_01011,dwd:01011,Dörrmoschel-Felsbergerhof,land,49.602,7.741,0.0,5.073,11006,,,national-open
+dwd_01048,dwd:01048,Dresden-Klotzsche,land,51.128,13.754,0.0,2.093,11015,,,national-open
+dwd_01200,dwd:01200,Elpersbüttel,land,54.069,9.01,0.0,1.564,10963,,,national-open
+dwd_01262,dwd:01262,München-Flughafen,land,48.348,11.813,0.0,1.969,10902,,,national-open
+dwd_01270,dwd:01270,Erfurt-Weimar,land,50.983,10.961,0.0,4.421,10986,,,national-open
+dwd_01303,dwd:01303,Essen-Bredeney,land,51.404,6.968,0.0,2.387,11014,,,national-open
+dwd_01379,dwd:01379,Flensburg (Schäferhaus),land,54.774,9.375,0.0,1.72,11015,flensburg,7.031,national-open
+dwd_01490,dwd:01490,Friedrichshafen,water,47.645,9.48,0.851,0.45,10987,,,national-open
+dwd_01503,dwd:01503,Friesoythe-Altenoythe,land,53.064,7.902,0.0,1.887,11010,,,national-open
+dwd_01605,dwd:01605,Genthin,land,52.388,12.16,0.0,1.266,11008,,,national-open
+dwd_01612,dwd:01612,Gera-Leumnitz,land,50.881,12.129,0.0,1.244,11016,,,national-open
+dwd_01639,dwd:01639,Gießen/Wettenberg,land,50.602,8.644,0.0,1.902,10760,,,national-open
+dwd_01684,dwd:01684,Görlitz,land,51.162,14.951,0.0,2.381,10843,,,national-open
+dwd_01759,dwd:01759,Greifswalder Oie,water,54.244,13.91,0.868,0.065,10942,,,national-open
+dwd_01963,dwd:01963,Hallig Hooge,water,54.574,8.513,0.686,0.17,11016,,,national-open
+dwd_02115,dwd:02115,Helgoland,water,54.175,7.892,0.85,0.129,10913,,,national-open
+dwd_02429,dwd:02429,Itzehoe,land,53.99,9.57,0.0,3.03,11008,,,national-open
+dwd_02485,dwd:02485,Kaisersbach-Cronhütte,land,48.917,9.687,0.0,2.636,10928,,,national-open
+dwd_02597,dwd:02597,"Kissingen, Bad",land,50.224,10.079,0.0,1.633,10753,,,national-open
+dwd_02667,dwd:02667,Köln/Bonn,land,50.864,7.158,0.0,1.541,10908,,,national-open
+dwd_02794,dwd:02794,Kyritz,land,52.936,12.409,0.0,2.186,10997,,,national-open
+dwd_02856,dwd:02856,Niedergörsdorf-Langenlipsdorf,land,51.917,13.088,0.0,3.698,10663,,,national-open
+dwd_02907,dwd:02907,Leck,land,54.79,8.951,0.0,2.113,10995,,,national-open
+dwd_02928,dwd:02928,Leipzig-Holzhausen,land,51.315,12.446,0.0,2.369,11016,,,national-open
+dwd_02932,dwd:02932,Leipzig/Halle,land,51.435,12.24,0.0,4.73,11014,,,national-open
+dwd_02961,dwd:02961,Leuchtturm Kiel,water,54.5,10.274,1.0,7.042,11012,kiel,10.238,national-open
+dwd_03015,dwd:03015,Lindenberg,land,52.208,14.118,0.0,1.532,10963,,,national-open
+dwd_03093,dwd:03093,Lüchow,land,52.972,11.137,0.0,1.55,11013,,,national-open
+dwd_03126,dwd:03126,Magdeburg,land,52.103,11.583,0.0,2.883,11013,,,national-open
+dwd_03158,dwd:03158,Manschnow,land,52.547,14.545,0.0,1.445,10919,,,national-open
+dwd_03196,dwd:03196,Marnitz,land,53.322,11.932,0.0,4.991,10813,,,national-open
+dwd_03321,dwd:03321,Mönchengladbach-Hilderath,land,51.131,6.361,0.0,1.894,10901,,,national-open
+dwd_03362,dwd:03362,Mühlacker,land,48.972,8.874,0.0,2.705,10937,,,national-open
+dwd_03366,dwd:03366,Mühldorf,land,48.279,12.502,0.0,3.108,10968,,,national-open
+dwd_03668,dwd:03668,Nürnberg,land,49.503,11.055,0.0,2.096,10860,,,national-open
+dwd_03821,dwd:03821,Osterfeld,land,51.087,11.929,0.0,1.11,10840,,,national-open
+dwd_03946,dwd:03946,Plauen,land,50.482,12.13,0.0,1.618,11006,,,national-open
+dwd_04024,dwd:04024,Putbus,land,54.364,13.477,0.0,1.666,10443,,,national-open
+dwd_04036,dwd:04036,Querfurt-Mühle Lodersleben,land,51.39,11.541,0.0,6.601,11016,,,national-open
+dwd_04271,dwd:04271,Rostock-Warnemünde,water,54.18,12.081,0.517,0.224,10938,warnemuende,0.6,national-open
+dwd_04280,dwd:04280,Roth,land,49.216,11.104,0.0,2.804,10874,,,national-open
+dwd_04371,dwd:04371,"Salzuflen, Bad",land,52.104,8.752,0.0,1.334,11015,,,national-open
+dwd_04466,dwd:04466,Schleswig,land,54.528,9.549,0.0,1.181,10922,,,national-open
+dwd_04642,dwd:04642,Seehausen,land,52.891,11.73,0.0,2.833,10926,,,national-open
+dwd_04745,dwd:04745,Soltau,land,52.96,9.793,0.0,2.151,11007,,,national-open
+dwd_04880,dwd:04880,Stimpfach-Weipertshofen,land,49.088,10.124,0.0,1.041,11016,,,national-open
+dwd_04911,dwd:04911,Straubing,land,48.828,12.56,0.0,4.2,10901,,,national-open
+dwd_04919,dwd:04919,Strucklahnungshörn,water,54.496,8.807,0.642,0.064,10881,,,national-open
+dwd_04931,dwd:04931,Stuttgart-Echterdingen,land,48.688,9.224,0.0,5.497,10974,,,national-open
+dwd_04947,dwd:04947,Süpplingen,land,52.232,10.92,0.0,1.591,11016,,,national-open
+dwd_05029,dwd:05029,Tholey,land,49.474,7.038,0.0,1.679,10990,,,national-open
+dwd_05078,dwd:05078,Travemünde,water,53.962,10.889,0.59,0.261,11016,travemuende,0.638,national-open
+dwd_05109,dwd:05109,Trollenhagen,land,53.604,13.295,0.0,1.581,10709,,,national-open
+dwd_05158,dwd:05158,Ummendorf,land,52.16,11.176,0.0,4.704,11016,,,national-open
+dwd_05327,dwd:05327,Walldürn,land,49.579,9.397,0.0,4.871,10926,,,national-open
+dwd_05347,dwd:05347,Warburg,land,51.504,9.112,0.0,5.072,10414,,,national-open
+dwd_05397,dwd:05397,Weiden,land,49.666,12.184,0.0,1.561,11013,,,national-open
+dwd_05404,dwd:05404,Weihenstephan-Dürnast,land,48.402,11.695,0.0,2.894,11007,,,national-open
+dwd_05480,dwd:05480,Werl,land,51.576,7.888,0.0,7.892,10493,,,national-open
+dwd_05546,dwd:05546,Wiesenburg,land,52.121,12.459,0.0,3.703,10927,,,national-open
+dwd_05629,dwd:05629,Wittenberg,land,51.889,12.645,0.0,2.11,10856,,,national-open
+dwd_05797,dwd:05797,Lichtentanne,land,50.688,12.433,0.0,2.432,11014,,,national-open
+dwd_05825,dwd:05825,Nauen-Berge,land,52.62,12.787,0.0,5.443,11016,,,national-open
+dwd_05839,dwd:05839,Emden,land,53.388,7.229,0.0,1.776,7344,,,national-open
+dwd_05856,dwd:05856,Fürstenzell,land,48.545,13.353,0.0,2.68,10942,,,national-open
+dwd_06101,dwd:06101,Bastorf-Kägsdorf (SWN),land,54.132,11.672,0.0,1.128,11016,,,national-open
+dwd_06102,dwd:06102,Lindau (SWN),water,47.54,9.684,0.862,0.444,11014,,,national-open
+dwd_06106,dwd:06106,Rechlin,water,53.331,12.715,0.463,0.129,10876,mueritz,13.258,national-open
+dwd_06159,dwd:06159,Dörpen,land,52.954,7.32,0.0,1.313,11014,,,national-open
+dwd_06211,dwd:06211,Vogtareuth (Kläranlage),land,47.955,12.174,0.0,1.115,11016,,,national-open
+dwd_06314,dwd:06314,Nossen,land,51.051,13.3,0.0,2.997,10848,,,national-open
+dwd_06344,dwd:06344,Runkel-Ennerich,land,50.394,8.142,0.0,1.315,10825,,,national-open
+dwd_07341,dwd:07341,Offenbach-Wetterpark,land,50.09,8.786,0.0,2.202,10951,,,national-open
+dwd_07374,dwd:07374,Ahaus,land,52.081,6.941,0.0,2.875,11006,,,national-open
+dwd_07389,dwd:07389,Heckelberg-Brunow,land,52.746,13.843,0.0,4.29,10102,,,national-open
+dwd_07392,dwd:07392,Aubstadt,land,50.333,10.449,0.0,1.486,10994,,,national-open
+dwd_07393,dwd:07393,Hoyerswerda,land,51.449,14.253,0.0,1.892,11016,,,national-open
+dwd_07410,dwd:07410,Neu-Ulrichstein,land,50.751,9.022,0.0,3.553,11006,,,national-open
+dwd_13674,dwd:13674,Waibstadt,land,49.294,8.905,0.0,2.572,10813,,,national-open
+dwd_13676,dwd:13676,Langquaid-Oberschneidhart,land,48.861,12.032,0.0,3.879,11016,,,national-open
+dwd_13693,dwd:13693,Gütersloh/Ems,land,51.926,8.311,0.0,1.107,10946,,,national-open
+dwd_14138,dwd:14138,Falkenberg (Grenzschichtmessfeld),land,52.166,14.122,0.0,2.424,11016,,,national-open
+dwd_15000,dwd:15000,Aachen-Orsbach,land,50.798,6.024,0.0,5.397,10958,,,national-open
+dwd_15122,dwd:15122,Ergersheim-Neuherberg,land,49.52,10.285,0.0,2.076,11016,,,national-open
+dwd_15189,dwd:15189,Sukow-Levitzow,land,53.828,12.594,0.0,1.184,10693,,,national-open
+dwd_15200,dwd:15200,Wuppertal,land,51.253,7.216,0.0,4.154,11016,,,national-open
+dwd_15547,dwd:15547,Heilbronn/Neckar,land,49.126,9.143,0.0,1.521,11016,,,national-open
+dwd_15813,dwd:15813,Lingen-Baccum,land,52.513,7.413,0.0,3.71,11012,,,national-open
+dwd_15976,dwd:15976,Ober-Olm/Bellem,land,49.953,8.211,0.0,6.391,10698,,,national-open
+dwd_15978,dwd:15978,Sembach,land,49.504,7.862,0.0,1.73,10994,,,national-open
+dwd_19171,dwd:19171,Hasenkrug-Hardebek,land,54.004,9.856,0.0,3.204,10930,,,national-open
+ch_AEG,ch:AEG,Oberägeri,water,47.134,8.608,0.579,0.076,11016,,,national-open
+ch_BAS,ch:BAS,Basel / Binningen,land,47.541,7.584,0.0,1.858,11016,,,national-open
+ch_BER,ch:BER,Bern / Zollikofen,land,46.991,7.464,0.0,1.139,11016,,,national-open
+ch_BOU,ch:BOU,Bouveret,water,46.393,6.857,0.764,0.255,11016,,,national-open
+ch_BUS,ch:BUS,Buchs / Aarau,land,47.384,8.08,0.0,2.525,11016,,,national-open
+ch_FAH,ch:FAH,Fahy,land,47.424,6.941,0.0,8.336,11016,,,national-open
+ch_GRA,ch:GRA,Fribourg / Grangeneuve,land,46.771,7.114,0.0,1.064,11016,,,national-open
+ch_GUT,ch:GUT,Güttingen,land,47.602,9.279,0.0,1.626,11016,konstanz,5.802,national-open
+ch_HLL,ch:HLL,Hallau,land,47.697,8.47,0.0,6.528,11016,,,national-open
+ch_KOP,ch:KOP,Koppigen,land,47.119,7.606,0.0,3.986,11016,,,national-open
+ch_MOE,ch:MOE,Möhlin,land,47.572,7.878,0.0,1.776,10943,,,national-open
+ch_PAY,ch:PAY,Payerne,land,46.812,6.942,0.0,3.738,11016,,,national-open
+ch_PFA,ch:PFA,"Pfäffikon, ZH",land,47.377,8.755,0.0,2.06,11016,,,national-open
+ch_PRE,ch:PRE,St-Prex,land,46.484,6.443,0.0,1.038,11016,lausanne,13.671,national-open
+ch_QUI,ch:QUI,Quinten,water,47.129,9.216,0.542,0.111,11016,,,national-open
+ch_REH,ch:REH,Zürich / Affoltern,land,47.428,8.518,0.0,1.494,11016,,,national-open
+ch_RUE,ch:RUE,Rünenberg,land,47.435,7.879,0.0,7.835,11016,,,national-open
+ch_SMA,ch:SMA,Zürich / Fluntern,land,47.381,8.567,0.0,1.882,11016,zurich,12.969,national-open
+ch_STK,ch:STK,Steckborn,water,47.669,8.981,0.607,0.075,10954,,,national-open
+ch_TAE,ch:TAE,Aadorf / Tänikon,land,47.48,8.905,0.0,2.447,11016,,,national-open
+dmi_06019,dmi:06019,Silstrup,land,56.93,8.641,0.0,1.025,10695,,,national-open
+dmi_06032,dmi:06032,Stenhøj,land,57.383,10.335,0.0,2.317,10562,,,national-open
+dmi_06041,dmi:06041,Skagen Fyr,water,57.736,10.632,0.507,0.059,10545,skagen,1.949,national-open
+dmi_06049,dmi:06049,Hald Vest,land,56.56,10.093,0.0,4.157,10973,,,national-open
+dmi_06052,dmi:06052,Thyborøn,water,56.707,8.215,0.678,0.253,3670,,,national-open
+dmi_06056,dmi:06056,Mejrup,land,56.383,8.67,0.0,1.663,10962,,,national-open
+dmi_06058,dmi:06058,Hvide Sande,water,56.007,8.141,0.782,0.062,10966,,,national-open
+dmi_06065,dmi:06065,Års Syd,land,56.756,9.507,0.0,1.911,10960,,,national-open
+dmi_06068,dmi:06068,Isenvad,land,56.094,9.181,0.0,3.292,10624,,,national-open
+dmi_06072,dmi:06072,Ødum,land,56.303,10.127,0.0,1.565,10830,,,national-open
+dmi_06073,dmi:06073,Sletterhage Fyr,water,56.096,10.514,0.756,0.062,10990,,,national-open
+dmi_06079,dmi:06079,Anholt Havn,water,56.717,11.51,0.793,0.061,10969,,,national-open
+dmi_06082,dmi:06082,Borris,land,55.959,8.624,0.0,1.972,10963,,,national-open
+dmi_06116,dmi:06116,Store Jyndevad,land,54.898,9.128,0.0,6.755,10275,,,national-open
+dmi_06119,dmi:06119,Kegnæs Fyr,water,54.853,9.988,0.814,0.111,10894,,,national-open
+dmi_06123,dmi:06123,Assens/Torø,water,55.244,9.888,0.698,0.063,10972,assens,3.361,national-open
+dmi_06124,dmi:06124,Elvira Madigan Airport,land,55.014,10.569,0.0,1.013,10990,,,national-open
+dmi_06135,dmi:06135,Flakkebjerg,land,55.322,11.388,0.0,4.283,10819,,,national-open
+dmi_06138,dmi:06138,Langø,water,54.82,10.994,0.844,0.064,11002,,,national-open
+dmi_06141,dmi:06141,Abed,land,54.828,11.329,0.0,1.015,10956,,,national-open
+dmi_06147,dmi:06147,Vindebæk Kyst,water,54.879,12.184,0.549,0.064,10939,,,national-open
+dmi_06151,dmi:06151,Omø Fyr,water,55.159,11.135,0.728,0.063,10905,,,national-open
+dmi_06154,dmi:06154,Brandelev,land,55.208,11.86,0.0,1.503,10966,,,national-open
+dmi_06156,dmi:06156,Holbæk Flyveplads,land,55.736,11.604,0.0,2.555,10939,,,national-open
+dmi_06159,dmi:06159,Røsnæs Fyr,water,55.744,10.869,0.909,0.062,10812,,,national-open
+dmi_06169,dmi:06169,Gniben,water,56.008,11.279,0.924,0.124,10788,,,national-open
+dmi_06174,dmi:06174,Tessebølle,land,55.396,12.149,0.0,3.616,10962,,,national-open
+dmi_06183,dmi:06183,Drogden Fyr,water,55.536,12.711,1.0,5.934,10560,dragor,6.003,national-open
+dmi_06193,dmi:06193,Hammer Odde Fyr,water,55.298,14.772,0.732,0.111,10838,,,national-open
+dmi_06197,dmi:06197,Nexø Vest,land,55.056,15.095,0.0,1.865,10987,,,national-open
+isd_038570-99999,isd:038570-99999,ISLE OF PORTLAND,water,50.517,-2.45,0.641,0.071,9878,weymouth,6.449,isd-noncommercial
+isd_063160-99999,isd:063160-99999,OOSTERSCHELDE 4,water,51.65,3.7,0.988,0.78,9697,veersemeer,8.896,isd-noncommercial
+isd_100330-99999,isd:100330-99999,MEIERWIK,water,54.833,9.5,0.789,0.42,9389,flensburg,3.514,isd-noncommercial
+isd_161100-99999,isd:161100-99999,TRIESTE,water,45.65,13.75,0.788,0.382,8119,trieste,0.0,isd-noncommercial
+isd_161200-99999,isd:161200-99999,GENOVA SESTRI,water,44.412,8.842,0.593,0.111,9995,genoa,7.117,isd-noncommercial
+isd_113570-99999,isd:113570-99999,ST. WOLFGANG,water,47.733,13.45,0.727,0.447,9713,wolfgangsee,1.686,isd-noncommercial
+isd_064180-99999,isd:064180-99999,ZEEBRUGGE,water,51.35,3.2,0.799,0.178,9715,rbsc,3.517,isd-noncommercial
+isd_036040-99999,isd:036040-99999,MILFORD HAVEN CONSERVANCY BOARD,water,51.7,-5.05,0.905,0.666,9907,pembrokeshire,2.067,isd-noncommercial
+isd_033160-99999,isd:033160-99999,CROSBY,water,53.5,-3.067,0.781,0.475,9929,blundellsands,1.62,isd-noncommercial
+isd_143140-99999,isd:143140-99999,MALI LOSINJ,water,44.533,14.483,0.621,0.111,7290,losinj,2.729,isd-noncommercial
+isd_161460-99999,isd:161460-99999,POINT MARINA/RAVENN,water,44.45,12.3,0.781,0.475,5404,ravenna,5.56,isd-noncommercial
