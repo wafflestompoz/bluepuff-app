@@ -115,3 +115,14 @@ def test_coach_seats_only_on_pro(client):
     assert client.put("/clubs/hayling/roles", json={"email": "coach@x.com", "role": "coach"}, headers=ha).status_code == 200
     hc = {"Authorization": "Bearer " + client.post("/auth/login", json={"email": "coach@x.com", "password": "sailfast1"}).json()["token"]}
     assert client.get("/me", headers=hc).json()["plan"] == "racer_pro"
+
+
+def test_venue_map_and_tip_in_briefings(client):
+    code = club(client)["code"]
+    v = client.get("/clubs/hayling/venue").json()
+    assert len(v["sectors"]) == 16 and len(v["grids"]) == 16 and len(v["grids"][0]) == v["n"] ** 2
+    ho = signup(client, "ro@x.com"); club(client, admin_email="ro@x.com")
+    today = pd.Timestamp.now(tz="Europe/London").date()
+    client.post("/clubs/hayling/starts", json={"date": str(today + dt.timedelta(days=1)), "time": "11:00", "fleets": ["ILCA6"]}, headers=ho)
+    b = client.get("/clubs/hayling/briefings", headers=ho).json()["briefings"][0]
+    assert b["venue"]["compass"] == "SW" and b["venue"]["notes"]
