@@ -556,3 +556,126 @@ def notice_view(n):
 def list_notices(slug: str, limit: int = Query(20, le=100), s=Depends(db)):
     c = club_or_404(s, slug)
     return [notice_view(n) for n in s.scalars(select(Notice).where(Notice.club_id == c.id).order_by(Notice.id.desc()).limit(limit))]
+
+
+# --- regatta pages (Club Pro: 4 events a year) ---------------------------------------------------------------------
+
+class EventIn(BaseModel):
+    name: str = Field(min_length=3, max_length=120)
+    first_day: dt.date
+    last_day: dt.date
+    classes: list[str]
+    entries: int | None = Field(default=None, ge=0)
+    first_gun: str = Field(default="11:00", pattern=r"^([01]\d|2[0-3]):[0-5]\d$")   # used on days with no starts set
+
+
+def slugify(t): return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+@app.post("/clubs/{slug}/events")
+def add_event(slug: str, b: EventIn, u=Depends(current_user), s=Depends(db)):
+    m = membership(u, slug, OFFICERS); club = m.club
+    if not licensed(club) or TIERS[club.tier]["events"] == 0: raise HTTPException(402, "Regatta pages come with Club Pro")
+    if b.last_day < b.first_day or (b.last_day - b.first_day).days > 13: raise HTTPException(422, "Check the dates (up to 14 days)")
+    bad = [c for c in b.classes if c not in CLASSES]
+    if bad or not b.classes: raise HTTPException(422, f"Unknown class: {', '.join(bad)}" if bad else "Name at least one class")
+    year = b.first_day.year
+    used = s.scalar(select(func.count()).select_from(Event).where(Event.club_id == club.id, Event.first_day >= dt.date(year, 1, 1),
+                                                                  Event.first_day <= dt.date(year, 12, 31)))
+    if used >= TIERS[club.tier]["events"]: raise HTTPException(402, f"Club Pro includes {TIERS[club.tier]['events']} regatta pages a year")
+    base = f"{slugify(b.name)}-{year}"; es = base; k = 2
+    while s.scalar(select(Event).where(Event.slug == es)): es = f"{base}-{k}"; k += 1
+    ev = Event(club_id=club.id, slug=es, name=b.name, first_day=b.first_day, last_day=b.last_day, classes=",".join(b.classes),
+               entries=b.entries)
+    s.add(ev); s.commit()
+    for d in range((b.last_day - b.first_day).days + 1):
+        s.add(Start(club_id=club.id, date=b.first_day + dt.timedelta(days=d), time=b.first_gun, fleets=",".join(b.classes), event_id=ev.id))
+    s.commit()
+    return {"slug": ev.slug, "url": f"/r/{ev.slug}"}
+
+
+def event_or_404(s, es):
+    ev = s.scalar(select(Event).where(Event.slug == es))
+    if not ev: raise HTTPException(404, "No such regatta")
+    return ev
+
+
+def event_view(s, ev):
+    club = s.get(Club, ev.club_id); D = forecast_for(club.slug); tz = club.tz
+    days = []
+    starts = s.scalars(select(Start).where(Start.event_id == ev.id).order_by(Start.date, Start.time)).all()
+    ids = {st.id for st in starts}
+    briefs = (club_briefings(s, club, ev.first_day, (ev.last_day - ev.first_day).days + 1, ids)[0] or []) if D is not None else []
+    for k in range((ev.last_day - ev.first_day).days + 1):
+        d = ev.first_day + dt.timedelta(days=k); ds = d.isoformat()
+        day0 = pd.Timestamp(ds, tz=tz)
+        tide = [{**t, "local": pd.Timestamp(t["time"]).tz_convert(tz).strftime("%H:%M")}
+                for t in (E.tide_turns(D, day0.tz_convert("UTC"), (day0 + pd.Timedelta(days=1)).tz_convert("UTC")) if D is not None else [])]
+        days.append({"date": ds, "label": day0.strftime("%a %d %b"), "tide": tide,
+                     "races": [{**b, "gun_local": pd.Timestamp(b["gun"]).tz_convert(tz).strftime("%H:%M")} for b in briefs if b["date"] == ds],
+                     "starts": [{"time": st.time, "fleets": st.fleets.split(",")} for st in starts if st.date == d]})
+    notices = s.scalars(select(Notice).where(Notice.event_id == ev.id).order_by(Notice.id.desc()).limit(30)).all()
+    return {"slug": ev.slug, "name": ev.name, "club": {"slug": club.slug, "name": club.name}, "tz": tz,
+            "first_day": ev.first_day.isoformat(), "last_day": ev.last_day.isoformat(), "entries": ev.entries,
+            "classes": [{"cls": c, "name": CLASSES[c].name} for c in ev.classes.split(",") if c in CLASSES],
+            "days": days, "notices": [{**notice_view(n), "local": pd.Timestamp(_utc(n.created)).tz_convert(tz).strftime("%a %H:%M")} for n in notices]}
+
+
+@app.get("/events/{es}")
+def event_json(es: str, s=Depends(db)):
+    return event_view(s, event_or_404(s, es))
+
+
+CALL_STYLE = {"race_on": ("ON", "on"), "marginal": ("MARGINAL", "marg"), "too_light": ("TOO LIGHT", "off"), "blown_out": ("TOO WINDY", "off")}
+
+
+def event_html(v, page_url):
+    e = html.escape; days_html = []
+    for d in v["days"]:
+        rows = "".join(
+            f"<tr><td>{e(r['gun_local'])}</td><td>{e(r['fleet_name'])}</td><td><span class='pill {CALL_STYLE[r['call']['call']][1]}'>"
+            f"{CALL_STYLE[r['call']['call']][0]}</span></td><td>{round(r['call']['wind_kn'])} kn</td><td>{round(r['call']['gust_max_kn'])} kn</td>"
+            f"<td>{round(r['call']['dir'])}&deg;</td><td>{round(100 * r['call']['p_race'])}%</td></tr>" for r in d["races"])
+        shifts = {r["shift"]["advice"] for r in d["races"] if r["shift"].get("kind") == "shift"}
+        water = next((r["water"] for r in d["races"] if r["water"]), {})
+        wbits = []
+        if water.get("chop"): wbits.append(f"Chop: {e(water['chop']['label'])}")
+        if water.get("stream"): wbits.append(f"Stream {water['stream']['kn']} kn" + (" against the wind" if water["stream"]["wind_against_tide"] else ""))
+        tide = " &middot; ".join(f"{'HW' if t['kind'] == 'high' else 'LW'} {e(t['local'])}" for t in d["tide"])
+        body = (f"<table><thead><tr><th>Gun</th><th>Class</th><th>Call</th><th>Wind</th><th>Gusts</th><th>From</th><th>Racing</th></tr></thead>"
+                f"<tbody>{rows}</tbody></table>" if rows else "<p class='muted'>The forecast for this day isn't out yet. It appears about a week ahead.</p>")
+        extra = "".join(f"<p class='tip'>{e(a)}</p>" for a in sorted(shifts))
+        meta = " &middot; ".join(x for x in [tide, *wbits] if x)
+        days_html.append(f"<section class='day'><h2>{e(d['label'])}</h2>{f'<p class=muted>{meta}</p>' if meta else ''}{body}{extra}</section>")
+    notices = "".join(f"<li><span class='muted'>{e(n['local'])}</span> {e(n['text'])}</li>" for n in v["notices"]) or "<li class='muted'>No notices yet.</li>"
+    classes = ", ".join(e(c["name"]) for c in v["classes"])
+    entries = f" &middot; {v['entries']} entries" if v.get("entries") else ""
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{e(v['name'])}</title><meta name="description" content="Race-day wind and water for {e(v['name'])} at {e(v['club']['name'])}">
+<style>:root{{--bg:#f6f8fc;--card:#fff;--fg:#0b1b33;--muted:#5b6b85;--blue:#0A4DA8;--on:#1f8a4c;--marg:#c98a00;--off:#b3261e;--line:#e3e8f1}}
+@media (prefers-color-scheme:dark){{:root{{--bg:#07142a;--card:#0d2142;--fg:#eef3fb;--muted:#9fb0cc;--line:#1d3561}}}}
+body{{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,sans-serif}}main{{max-width:960px;margin:auto;padding:16px}}
+header{{background:var(--blue);color:#fff;padding:28px 16px}}header .in{{max-width:960px;margin:auto;display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}}
+h1{{margin:0 0 4px;font-size:28px}}h2{{margin:0 0 6px;font-size:20px}}.muted{{color:var(--muted)}}header .muted{{color:#cfe0ff}}
+.day,.card{{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0;overflow-x:auto}}
+table{{border-collapse:collapse;width:100%;min-width:520px}}th,td{{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}}th{{font-size:13px;color:var(--muted);font-weight:600}}
+.pill{{font-weight:700;font-size:12px;padding:3px 8px;border-radius:999px;color:#fff}}.on{{background:var(--on)}}.marg{{background:var(--marg)}}.off{{background:var(--off)}}
+.tip{{margin:10px 0 0;padding:10px 12px;border-left:4px solid var(--blue);background:color-mix(in srgb,var(--blue) 8%,transparent)}}
+#qr{{background:#fff;padding:8px;border-radius:8px;width:112px;height:112px}}ul{{padding-left:18px}}footer{{font-size:13px;margin:24px 0}}
+@media print{{header{{background:none;color:#000}}header .muted{{color:#333}}.day{{break-inside:avoid}}}}</style></head><body>
+<header><div class="in"><div><h1>{e(v['name'])}</h1><div class="muted">{e(v['club']['name'])} &middot; {e(v['days'][0]['label'])} to {e(v['days'][-1]['label'])}{entries}</div>
+<div class="muted">{classes}</div></div><div id="qr" aria-label="QR code for this page"></div></div></header><main>
+<div class="card"><h2>Notices from the race office</h2><ul>{notices}</ul></div>
+{''.join(days_html)}
+<footer class="muted">Race calls are the chance that wind stays inside each class's limits through the racing window. Times are local ({e(v['tz'])}).
+Forecast by bluepuff from ECMWF, DWD, Météo-France and other open models via Open-Meteo (CC BY 4.0). The race officer's decision on the water is final.</footer>
+</main><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>try{{new QRCode(document.getElementById("qr"),{{text:{json.dumps(page_url)}||location.href,width:96,height:96}})}}catch(e){{}}
+setTimeout(()=>location.reload(),15*60*1000)</script></body></html>"""
+
+
+@app.get("/r/{es}", response_class=HTMLResponse)
+def event_page(es: str, s=Depends(db)):
+    v = event_view(s, event_or_404(s, es))
+    base = os.environ.get("PUBLIC_URL", "").rstrip("/")
+    return event_html(v, f"{base}/r/{es}" if base else "")
