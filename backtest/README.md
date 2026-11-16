@@ -257,6 +257,43 @@ For the same hours scored the usual way, against the airport: raw 2.98 kn, airpo
   Roches Point, Portland). There's nothing more on the water in that archive. The national networks (KNMI and Rijkswaterstaat
   platforms, DWD, MeteoSwiss lake stations, UK Met Office) have more, but their hosts are blocked in this environment.
 
+### Europe scored on the water (`backtest_eu_water.py`, `obs_national.py`, `stations_eu_national.csv`)
+
+The same question as Australia, answered with the national networks instead of NOAA ISD: hourly wind from KNMI, DWD, DMI and
+MeteoSwiss open data, May-Sep 2023-25, 09-18 local. Stations are classed from ESA WorldCover: **on the water** means at least 50%
+water within 1 km (piers, lighthouses, dykes, platforms, islands, lakeshores); **land** means under 5% water and more than 1 km
+from the shore. That gives 45 national on-water stations (11 of them within 15 km of a bluepuff club: IJmuiden, Lelystad,
+Veerse Meer, Kiel, Travemuende, Warnemuende, Mueritz, Assens, Dragoer, Skagen) and 146 land stations. 11 on-water ISD stations at
+clubs (Portland, Zeebrugge, Milford Haven, Crosby, Trieste...) are scored separately and never used for training, because ISD's
+non-US data is non-commercial. Raw forecast: mean of Europe's 6 models from Open-Meteo's open data on AWS (no API calls).
+
+| 45 national on-water stations, 202k hours | Hourly error (kn) | Bias (kn) | Wind band right | Race-day call right | Race-day Brier |
+|---|---|---|---|---|---|
+| Raw mean of 6 models | 2.24 | −0.80 | 70% | 84.4% | 0.115 |
+| Correction learned on land (146 stations) | 2.25 | −0.91 | 69% | 84.8% | 0.115 |
+| Learned on other on-water stations (no station of its own) | 2.12 | −0.05 | 71% | 86.2% | 0.105 |
+| … plus geography (water around, open water upwind) | 2.06 | 0.02 | 71% | 86.4% | 0.103 |
+| Learned on land and water together, plus geography | 2.07 | −0.03 | 71% | 86.0% | 0.104 |
+| Per-station linear fit, other summers | 1.91 | 0.0 | 73% | 87.6% | 0.095 |
+| **Learned on the water, incl. this station's other summers** | **1.63** | −0.11 | **77%** | **89.9%** | **0.084** |
+
+For reference, at the 146 land stations the raw mean scores 1.57 kn and a land-trained correction (other stations) 1.49 kn.
+
+- **The forecast is about 40% worse on the water than on land** (2.24 vs 1.57 kn), and reads 0.8 kn light there (0.3 on land).
+  The water is windier: 10.7 kn mean against 7.2.
+- **A correction learned on land doesn't carry over to the water** (2.24 → 2.25 kn; it makes the light bias worse), the same as
+  Australia. Corrections must learn from on-water readings.
+- **A club with its own on-water station gains most**: 2.24 → 1.63 kn (−27%), race-day calls 84% → 90%. At the 11 stations next to
+  clubs: 2.35 → 1.65 kn and 83.5% → 89.4%; Kiel (Leuchtturm) 3.96 → 2.10, Drogden 2.95 → 1.88, IJmuiden pier 3.02 → 1.57.
+- **Without a station of its own**, learning from other on-water stations plus geography helps modestly: 2.24 → 2.06 kn (−8%),
+  race-day 84% → 86%. It does not transfer outside the regions it was trained in: at the ISD clubs (UK, Adriatic, Ligurian)
+  it is worse than raw (2.09 → 2.22–2.32 kn), so the no-station correction should only be used near its training stations.
+- Data this depends on: observations from KNMI, DWD, DMI and MeteoSwiss open data (open licences that allow commercial use
+  with attribution; confirm each licence page before launch); the ISD rows only in the separate ISD score. Model data: Open-Meteo open data (CC BY 4.0), but the 6-model mean includes
+  UKMO, whose licence is share-alike — check before shipping, or drop UKMO from the live mean.
+- Not covered: UK Met Office MIDAS (CEDA needs a login), Météo-France stations (host blocked here), Rijkswaterstaat (reachable,
+  not yet used), Sweden/Poland/Italy national networks.
+
 ## Rerun
 
 ```bash
@@ -275,5 +312,9 @@ export REGION=au; python obs.py && for m in ecmwf_ifs dwd_icon meteofrance_arpeg
 python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m
 python extract_wind.py dwd_icon temperature_2m direct_radiation && python geo.py && unset REGION && python backtest_au.py   # Australia, ~10 min
 REGION=au STATIONS=water python obs.py  # then extract_wind.py as above with the same env, then: python backtest_au_water.py
+python obs_national.py stations_eu_national.csv data/eu_nat   # Europe on the water, national networks, ~15 min
+python -c "import pandas as p; p.read_csv('stations_eu_national.csv')[['club','lat','lon']].to_csv('/tmp/eu_points.csv', index=False)"
+export POINTS=/tmp/eu_points.csv POINTS_TAG=eu_nat   # then the 6 Europe models and icon_eu temperature_2m direct_radiation, ~25 min
+# geography: geo.feats() per station -> data/eu_nat/geo.parquet (club + st_* columns); then python backtest_eu_water.py (~25 min)
 ```
 About 15 minutes of downloads and 15 minutes of training on 4 cores.

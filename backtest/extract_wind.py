@@ -19,8 +19,16 @@ VARS = ["wind_u_component_10m", "wind_v_component_10m", "wind_gusts_10m"]
 NB = 0.15
 
 ALL = os.environ.get("ALL") == "1"   # ALL=1: station point only, for every station in all_stations.csv -> data/all/model
+POINTS = os.environ.get("POINTS")       # POINTS=file.csv (club, lat, lon): each station's point + 4 neighbours -> data/<POINTS_TAG>/model
 
 def sites():
+    if POINTS:
+        rows = []
+        for r in pd.read_csv(POINTS).itertuples():
+            rows.append((f"{r.club}|st", r.lat, r.lon))
+            for k, (a, b) in {"n": (NB, 0), "s": (-NB, 0), "e": (0, NB * 1.5), "w": (0, -NB * 1.5)}.items():
+                rows.append((f"{r.club}|{k}", r.lat + a, r.lon + b))
+        return pd.DataFrame(rows, columns=["id", "lat", "lon"])
     if ALL:
         A = pd.read_csv(f"{HERE}/all_stations.csv"); return pd.DataFrame({"id": A.id + "|st", "lat": A.lat, "lon": A.lon})
     C = pd.read_csv(f"{HERE}/clubs{SFX}.csv"); S = pd.read_csv(f"{HERE}/stations{SSFX}.csv")
@@ -34,7 +42,7 @@ def sites():
     return pd.DataFrame(rows, columns=["id", "lat", "lon"])
 
 def main(model, vars_):
-    out = f"{HERE}/data/all/model" if ALL else f"{HERE}/data/{TAG}/model" if TAG else f"{HERE}/data/model"; os.makedirs(out, exist_ok=True)
+    out = f"{HERE}/data/{os.environ['POINTS_TAG']}/model" if POINTS else f"{HERE}/data/all/model" if ALL else f"{HERE}/data/{TAG}/model" if TAG else f"{HERE}/data/model"; os.makedirs(out, exist_ok=True)
     meta = requests.get(f"https://openmeteo.s3.amazonaws.com/data/{model}/static/meta.json", timeout=30).json()
     g = GRIDS[model]; S = sites()
     win = [(a.replace(tzinfo=dt.timezone.utc).timestamp(), b.replace(tzinfo=dt.timezone.utc).timestamp()) for a, b in SUMMERS]

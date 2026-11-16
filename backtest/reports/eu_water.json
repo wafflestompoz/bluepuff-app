@@ -1,0 +1,324 @@
+{
+ "stations": {
+  "land/national-open": 146,
+  "water/isd-noncommercial": 11,
+  "water/national-open": 45
+ },
+ "obs_mean_kn": {
+  "land": 7.2,
+  "water": 10.7
+ },
+ "raw_bias_kn": {
+  "land": -0.26,
+  "water": -0.71
+ },
+ "water_national": {
+  "hours": 201983,
+  "stations": 45,
+  "hourly": {
+   "raw_mean": {
+    "n": 201983,
+    "mae_kn": 2.24,
+    "bias_kn": -0.8,
+    "band_hit": 0.695
+   },
+   "water_bias": {
+    "n": 200453,
+    "mae_kn": 1.91,
+    "bias_kn": -0.0,
+    "band_hit": 0.73
+   },
+   "land_corr": {
+    "n": 201983,
+    "mae_kn": 2.25,
+    "bias_kn": -0.91,
+    "band_hit": 0.694
+   },
+   "water_ns": {
+    "n": 201983,
+    "mae_kn": 2.12,
+    "bias_kn": -0.05,
+    "band_hit": 0.707
+   },
+   "water_ns_geo": {
+    "n": 201983,
+    "mae_kn": 2.06,
+    "bias_kn": 0.02,
+    "band_hit": 0.712
+   },
+   "all_ns_geo": {
+    "n": 201983,
+    "mae_kn": 2.07,
+    "bias_kn": -0.03,
+    "band_hit": 0.709
+   },
+   "water_st": {
+    "n": 201983,
+    "mae_kn": 1.63,
+    "bias_kn": -0.11,
+    "band_hit": 0.772
+   }
+  },
+  "race_days": 20149,
+  "race_day": {
+   "raw_mean": {
+    "days": 20149,
+    "brier": 0.1153,
+    "auc": 0.893,
+    "call_right": 0.844
+   },
+   "water_bias": {
+    "days": 19996,
+    "brier": 0.0948,
+    "auc": 0.935,
+    "call_right": 0.876
+   },
+   "land_corr": {
+    "days": 20149,
+    "brier": 0.1146,
+    "auc": 0.894,
+    "call_right": 0.848
+   },
+   "water_ns": {
+    "days": 20149,
+    "brier": 0.1048,
+    "auc": 0.916,
+    "call_right": 0.862
+   },
+   "water_ns_geo": {
+    "days": 20149,
+    "brier": 0.1027,
+    "auc": 0.92,
+    "call_right": 0.864
+   },
+   "all_ns_geo": {
+    "days": 20149,
+    "brier": 0.1043,
+    "auc": 0.917,
+    "call_right": 0.86
+   },
+   "water_st": {
+    "days": 20149,
+    "brier": 0.084,
+    "auc": 0.955,
+    "call_right": 0.899
+   }
+  }
+ },
+ "water_isd_clubs": {
+  "hours": 42071,
+  "stations": 11,
+  "hourly": {
+   "raw_mean": {
+    "n": 42071,
+    "mae_kn": 2.09,
+    "bias_kn": -0.3,
+    "band_hit": 0.689
+   },
+   "water_bias": {
+    "n": 42071,
+    "mae_kn": 1.85,
+    "bias_kn": 0.01,
+    "band_hit": 0.722
+   },
+   "land_corr": {
+    "n": 42071,
+    "mae_kn": 2.28,
+    "bias_kn": -0.8,
+    "band_hit": 0.657
+   },
+   "water_ns": {
+    "n": 42071,
+    "mae_kn": 2.22,
+    "bias_kn": 0.65,
+    "band_hit": 0.678
+   },
+   "water_ns_geo": {
+    "n": 42071,
+    "mae_kn": 2.32,
+    "bias_kn": 0.74,
+    "band_hit": 0.662
+   },
+   "all_ns_geo": {
+    "n": 42071,
+    "mae_kn": 2.26,
+    "bias_kn": 0.62,
+    "band_hit": 0.667
+   },
+   "water_st": {
+    "n": 42071,
+    "mae_kn": 1.58,
+    "bias_kn": 0.01,
+    "band_hit": 0.762
+   }
+  },
+  "race_days": 4097,
+  "race_day": {
+   "raw_mean": {
+    "days": 4097,
+    "brier": 0.1237,
+    "auc": 0.897,
+    "call_right": 0.828
+   },
+   "water_bias": {
+    "days": 4097,
+    "brier": 0.1032,
+    "auc": 0.937,
+    "call_right": 0.86
+   },
+   "land_corr": {
+    "days": 4097,
+    "brier": 0.1392,
+    "auc": 0.872,
+    "call_right": 0.806
+   },
+   "water_ns": {
+    "days": 4097,
+    "brier": 0.134,
+    "auc": 0.89,
+    "call_right": 0.813
+   },
+   "water_ns_geo": {
+    "days": 4097,
+    "brier": 0.1398,
+    "auc": 0.884,
+    "call_right": 0.807
+   },
+   "all_ns_geo": {
+    "days": 4097,
+    "brier": 0.1398,
+    "auc": 0.883,
+    "call_right": 0.81
+   },
+   "water_st": {
+    "days": 4097,
+    "brier": 0.0916,
+    "auc": 0.956,
+    "call_right": 0.887
+   }
+  }
+ },
+ "water_near_clubs": {
+  "hours": 49762,
+  "stations": 11,
+  "hourly": {
+   "raw_mean": {
+    "n": 49762,
+    "mae_kn": 2.35,
+    "bias_kn": -1.19,
+    "band_hit": 0.689
+   },
+   "water_bias": {
+    "n": 49762,
+    "mae_kn": 1.89,
+    "bias_kn": -0.0,
+    "band_hit": 0.734
+   },
+   "land_corr": {
+    "n": 49762,
+    "mae_kn": 2.41,
+    "bias_kn": -1.41,
+    "band_hit": 0.679
+   },
+   "water_ns": {
+    "n": 49762,
+    "mae_kn": 2.15,
+    "bias_kn": -0.41,
+    "band_hit": 0.708
+   },
+   "water_ns_geo": {
+    "n": 49762,
+    "mae_kn": 2.04,
+    "bias_kn": -0.33,
+    "band_hit": 0.72
+   },
+   "all_ns_geo": {
+    "n": 49762,
+    "mae_kn": 2.08,
+    "bias_kn": -0.34,
+    "band_hit": 0.715
+   },
+   "water_st": {
+    "n": 49762,
+    "mae_kn": 1.65,
+    "bias_kn": -0.13,
+    "band_hit": 0.77
+   }
+  },
+  "race_days": 4934,
+  "race_day": {
+   "raw_mean": {
+    "days": 4934,
+    "brier": 0.1224,
+    "auc": 0.856,
+    "call_right": 0.835
+   },
+   "water_bias": {
+    "days": 4934,
+    "brier": 0.0915,
+    "auc": 0.923,
+    "call_right": 0.881
+   },
+   "land_corr": {
+    "days": 4934,
+    "brier": 0.1244,
+    "auc": 0.849,
+    "call_right": 0.832
+   },
+   "water_ns": {
+    "days": 4934,
+    "brier": 0.1048,
+    "auc": 0.896,
+    "call_right": 0.861
+   },
+   "water_ns_geo": {
+    "days": 4934,
+    "brier": 0.1018,
+    "auc": 0.905,
+    "call_right": 0.864
+   },
+   "all_ns_geo": {
+    "days": 4934,
+    "brier": 0.1044,
+    "auc": 0.899,
+    "call_right": 0.859
+   },
+   "water_st": {
+    "days": 4934,
+    "brier": 0.0846,
+    "auc": 0.944,
+    "call_right": 0.894
+   }
+  }
+ },
+ "land_reference": {
+  "hourly": {
+   "raw_mean": {
+    "n": 663187,
+    "mae_kn": 1.57,
+    "bias_kn": -0.26,
+    "band_hit": 0.768
+   },
+   "land_ref": {
+    "n": 663187,
+    "mae_kn": 1.49,
+    "bias_kn": -0.06,
+    "band_hit": 0.778
+   }
+  },
+  "race_day": {
+   "raw_mean": {
+    "days": 66115,
+    "brier": 0.1003,
+    "auc": 0.944,
+    "call_right": 0.872
+   },
+   "land_ref": {
+    "days": 66115,
+    "brier": 0.0992,
+    "auc": 0.949,
+    "call_right": 0.883
+   }
+  }
+ }
+}
