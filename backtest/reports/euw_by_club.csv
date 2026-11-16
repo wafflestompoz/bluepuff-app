@@ -1,0 +1,10 @@
+club,obs_kn,hours,raw_mean,bias,kasta,kasta_res,kasta_ns,name,water,gain_pct
+skagen,12.73,3699.0,1.84,1.85,1.82,1.72,2.14,Skagen Sejlklub,sea,7.0
+assens,10.48,4045.0,1.75,1.75,1.61,1.54,1.93,Assens Sejlklub (Lillebaelt),sea,12.0
+losinj,6.54,3675.0,2.16,1.98,1.78,1.84,2.49,Jedrilicarski klub Jugo (Mali Losinj),sea,15.0
+blundellsands,11.42,4108.0,2.18,2.06,1.81,1.74,2.74,Blundellsands Sailing Club (Mersey/Alt estuary),sea,20.0
+ravenna,4.83,2382.0,2.24,1.76,1.68,1.77,3.18,Circolo Velico Ravennate (Marina di Ravenna),sea,21.0
+pembrokeshire,9.55,4107.0,1.79,1.52,1.38,1.4,2.63,Pembrokeshire Yacht Club (Milford Haven),sea,22.0
+rbsc,11.33,4079.0,2.05,1.89,1.58,1.58,2.66,Royal Belgian Sailing Club (Zeebrugge),sea,23.0
+dragor,13.01,3784.0,2.97,2.0,2.02,1.93,2.58,Dragoer Sejlklub (Oeresund),sea,35.0
+ijmuiden,13.72,4061.0,3.17,1.65,1.58,1.52,3.05,WSV IJmuiden (Seaport Marina),sea,52.0

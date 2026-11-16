@@ -88,3 +88,14 @@ fremantle,Fremantle Sailing Club,AU,sea,-32.08,115.74,2.1,1.5,1.4,1.2,1.1,1.3,2.
 rayc,Royal Adelaide Yacht Club (Gulf St Vincent),AU,sea,-34.79,138.47,10.3,4.6,1.1,1.1,1.3,1.6,2.2,3.8,31.0,31.0,31.0,31.0,31.0,31.0,31.0,24.5,202.5,12.0,956750-99999,au,on water: Black Pole (Gulf St Vincent)
 brightonsa,Brighton and Seacliff Yacht Club,AU,sea,-35.02,138.505,6.8,1.6,1.0,0.9,0.9,1.0,1.4,2.3,3.3,31.0,31.0,31.0,31.0,31.0,31.0,31.0,225.0,10.0,946720-99999,au,
 darwin,Darwin Sailing Club (Fannie Bay),AU,sea,-12.43,130.825,1.9,1.7,1.4,1.2,1.1,1.0,1.1,1.7,2.0,10.3,9.3,7.0,7.7,31.0,31.0,1.9,0.0,6.0,941200-99999,au,
+rbsc,Royal Belgian Sailing Club (Zeebrugge),BE,sea,51.345,3.15,31.0,31.0,28.2,1.5,1.5,2.0,2.0,2.2,2.4,3.2,6.1,31.0,31.0,31.0,31.0,31.0,0.0,10.0,064180-99999,europe,on water: Zeebrugge (harbour mole)
+ijmuiden,WSV IJmuiden (Seaport Marina),NL,sea,52.47,4.53,31.0,14.8,5.7,3.4,2.7,2.5,2.2,4.7,9.5,31.0,31.0,31.0,31.0,31.0,31.0,31.0,0.0,12.0,062250-99999,europe,on water: IJmuiden (pier)
+assens,Assens Sejlklub (Lillebaelt),DK,sea,55.27,9.86,9.0,5.2,2.7,2.1,1.4,1.5,3.0,2.1,25.7,22.9,28.2,10.1,5.4,15.0,4.5,5.3,157.5,12.0,061230-99999,europe,on water: Assens/Toroe (coast)
+dragor,Dragoer Sejlklub (Oeresund),DK,sea,55.59,12.7,31.0,5.5,2.9,3.1,4.5,14.2,21.9,20.9,31.0,31.0,30.5,5.0,1.4,1.9,2.5,3.2,0.0,7.0,061830-99999,europe,on water: Drogden lighthouse (Oeresund)
+skagen,Skagen Sejlklub,DK,sea,57.72,10.62,1.2,1.9,31.0,31.0,31.0,31.0,31.0,31.0,30.2,24.0,14.0,0.9,0.7,0.9,0.9,1.0,0.0,10.0,060410-99999,europe,on water: Skagen (harbour)
+pembrokeshire,Pembrokeshire Yacht Club (Milford Haven),UK,sea,51.7,-5.08,0.8,0.8,1.2,2.5,6.4,2.2,3.3,2.8,1.2,1.2,1.5,2.2,5.5,4.2,2.9,0.8,180.0,15.0,036040-99999,europe,on water: Milford Haven Conservancy Board (waterway)
+blundellsands,Blundellsands Sailing Club (Mersey/Alt estuary),UK,sea,53.505,-3.09,3.5,2.6,2.5,2.0,1.9,2.3,4.3,7.7,8.8,12.0,23.8,31.0,31.0,31.0,31.0,31.0,247.5,4.0,033160-99999,europe,on water: Crosby (shore)
+losinj,Jedrilicarski klub Jugo (Mali Losinj),HR,sea,44.537,14.439,1.2,0.8,0.3,0.3,0.3,0.4,0.8,31.0,31.0,31.0,31.0,11.1,31.0,9.9,1.2,1.0,180.0,25.0,143140-99999,europe,on water: Mali Losinj (harbour)
+ravenna,Circolo Velico Ravennate (Marina di Ravenna),IT,sea,44.5,12.3,31.0,31.0,31.0,31.0,31.0,31.0,31.0,31.0,7.1,2.8,1.4,1.4,1.3,1.5,2.2,4.1,0.0,10.0,161460-99999,europe,on water: Marina di Ravenna (harbour)
+goolwa,Goolwa Regatta Yacht Club (Lower Murray and Coorong),AU,lake,-35.518,138.796,0.6,0.5,0.5,0.5,0.6,1.2,1.7,1.1,0.9,0.8,0.7,0.7,0.8,1.1,1.6,1.0,135.0,3.0,946770-99999,au,on water: Hindmarsh Island (on the island in the Murray mouth)
+hamiltonisland,Hamilton Island Yacht Club (Whitsundays),AU,sea,-20.348,148.942,5.1,1.8,1.0,0.8,1.1,0.8,0.7,1.5,31.0,1.0,0.7,0.8,0.7,0.7,0.9,3.4,90.0,20.0,945952-99999,au,on water: Hamilton Island airstrip (on the shore)
