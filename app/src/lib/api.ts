@@ -53,8 +53,12 @@ export type Water = {
 export type Hour = { time: string; wind_kn?: number; gust_kn?: number; wind_dir?: number; chop_m?: number; current_kn?: number };
 export type Briefing = {
   date: string; start: string; fleet: string; fleet_name: string; gun: string; window_h?: number; call: Call;
-  shift?: Shift; rig?: { band: string; tip: string }; water?: Water; hourly?: Hour[]; sensor_used?: boolean;
+  shift?: Shift; rig?: { band: string; tip: string }; water?: Water; hourly?: Hour[]; sensor_used?: boolean; venue?: VenueTip | null;
 };
+export type VenueTip = { sector: number; from_dir: number; compass: string; left: number | null; right: number | null;
+  top: number | null; bottom: number | null; shadow_m: number | null; notes: string[]; estimate: boolean };
+export type VenueMapData = { club: string; cell_m: number; size_m: number; n: number; grids: string[]; source: string;
+  sectors: { from: number; left: number | null; right: number | null }[] };
 export type Briefings = { club: string; plan: Plan; sensor: { time: string; wind_kn: number; gust_kn: number; dir: number } | null; briefings: Briefing[] };
 export type Fleet = { cls: string; name: string; min_kn: number; max_gust_kn: number; club_limit: boolean };
 export type ClubView = { slug: string; name: string; country: string; tz: string; licensed: boolean; tier: string; fleets: Fleet[];

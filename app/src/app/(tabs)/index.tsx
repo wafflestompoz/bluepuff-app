@@ -1,9 +1,10 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useState } from "react";
+import { Pressable, View } from "react-native";
 import { router } from "expo-router";
 import { useSession } from "../../lib/session";
 import { useApi } from "../../lib/hooks";
-import { Briefing, Briefings, ClubView, Notice } from "../../lib/api";
+import { Briefing, Briefings, ClubView, Notice, VenueMapData } from "../../lib/api";
+import { VenueMap } from "../../components/VenueMap";
 import { CALLS, useColors } from "../../lib/theme";
 import { compass, dayLabel, pct } from "../../lib/format";
 import { Button, Card, CallPill, ClubSwitcher, H, Message, Screen, T, Upsell, styles } from "../../components/ui";
@@ -14,6 +15,7 @@ export default function Race() {
   const b = useApi<Briefings>(club ? `/clubs/${club.slug}/briefings` : null);
   const cv = useApi<ClubView>(club ? `/clubs/${club.slug}` : null);
   const notices = useApi<Notice[]>(club ? `/clubs/${club.slug}/notices?limit=1` : null);
+  const vmap = useApi<VenueMapData>(club ? `/clubs/${club.slug}/venue` : null);
   const reload = () => { b.reload(); notices.reload(); };
 
   if (!club) return (
@@ -35,7 +37,7 @@ export default function Race() {
       {Object.entries(byDay).map(([d, list]) => (
         <View key={d}>
           <T bold size={13} style={{ marginTop: 18, textTransform: "uppercase", letterSpacing: 0.6 }} muted>{dayLabel(d)}</T>
-          {list.map((x) => <BriefingCard key={x.date + x.start + x.fleet} b={x} cv={cv.data} free={b.data?.plan === "free"} />)}
+          {list.map((x) => <BriefingCard key={x.date + x.start + x.fleet} b={x} cv={cv.data} free={b.data?.plan === "free"} vmap={vmap.data} />)}
         </View>
       ))}
       {b.data?.plan === "free" && <Upsell what="7 days ahead, shift and tack advice, rig settings, water and live club wind" />}
@@ -43,8 +45,9 @@ export default function Race() {
   );
 }
 
-function BriefingCard({ b, cv, free }: { b: Briefing; cv: ClubView | null; free: boolean }) {
+function BriefingCard({ b, cv, free, vmap }: { b: Briefing; cv: ClubView | null; free: boolean; vmap: VenueMapData | null }) {
   const c = useColors(); const call = b.call; const fl = cv?.fleets.find((f) => f.cls === b.fleet);
+  const [showMap, setShowMap] = useState(false);
   return (
     <Card>
       <View style={styles.between}><H>{b.start} · {b.fleet_name}</H><CallPill call={call.call} /></View>
@@ -61,6 +64,13 @@ function BriefingCard({ b, cv, free }: { b: Briefing; cv: ClubView | null; free:
       {b.shift?.kind === "shift" && <Tip title={`Shift: ${b.shift.side} ${b.shift.size_deg}°${b.shift.p != null ? ` (${pct(b.shift.p)} of models agree)` : ""}`} text={b.shift.advice!} />}
       {b.shift?.kind === "steady" && <Tip title="Steady direction" text="No big shift expected in the racing window. Play the puffs." />}
       {b.shift?.kind === "unreliable" && <Tip title="Shifty and light" text="Direction is unreliable at this strength. Keep your head out of the boat." />}
+      {b.venue && (
+        <Pressable onPress={() => setShowMap(!showMap)} accessibilityRole="button">
+          <Tip title={`On the course in a ${b.venue.compass} wind`} text={b.venue.notes.join(" ")} />
+          {vmap ? <T size={13} style={{ color: c.blue, marginTop: 4 }}>{showMap ? "Hide the course map" : "Show the course map"}</T> : null}
+        </Pressable>
+      )}
+      {showMap && vmap && b.venue && <VenueMap map={vmap} sector={b.venue.sector} />}
       {b.rig && <Tip title={`Rig: ${b.rig.band} air`} text={b.rig.tip} />}
       {b.sensor_used && <T muted size={12} style={{ marginTop: 8 }}>Adjusted with the club sensor's latest reading.</T>}
     </Card>

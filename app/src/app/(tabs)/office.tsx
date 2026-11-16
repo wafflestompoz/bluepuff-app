@@ -2,7 +2,8 @@ import React, { useMemo, useState } from "react";
 import { Platform, Pressable, Share, View } from "react-native";
 import { useSession } from "../../lib/session";
 import { useApi } from "../../lib/hooks";
-import { api, Briefing, Briefings, ClubView } from "../../lib/api";
+import { api, Briefing, Briefings, ClubView, VenueMapData } from "../../lib/api";
+import { VenueMap } from "../../components/VenueMap";
 import { compass, dayLabel, pct } from "../../lib/format";
 import { CALLS, useColors } from "../../lib/theme";
 import { Button, Card, CallPill, Chip, Field, H, Message, Screen, T, styles } from "../../components/ui";
@@ -49,7 +50,7 @@ function callText(club: string, list: Briefing[]) {
 }
 
 function RaceDay({ slug, b, cv, error }: { slug: string; b: Briefings | null; cv: ClubView | null; error: string | null }) {
-  const c = useColors();
+  const c = useColors(); const vmap = useApi<VenueMapData>(`/clubs/${slug}/venue`);
   const days = useMemo(() => Array.from(new Set((b?.briefings ?? []).map((x) => x.date))), [b]);
   const [day, setDay] = useState<string | null>(null);
   const d = day ?? days[0];
@@ -86,7 +87,9 @@ function RaceDay({ slug, b, cv, error }: { slug: string; b: Briefings | null; cv
               <T bold size={14}>Course: windward mark at {Math.round(axis)}° ({compass(axis)})</T>
               <T size={14}>{x.shift?.kind === "shift" ? `${x.shift.advice} Consider setting the mark a little ${x.shift.side} of the axis and be ready to move it.` :
                 x.shift?.kind === "unreliable" ? "Direction unreliable in light air: wait for it to settle before laying the course." : "Direction steady through the window."}</T>
+              {x.venue && <T size={14} style={{ marginTop: 6 }}>{x.venue.notes.join(" ")}</T>}
             </View>
+            {x.venue && vmap.data && <VenueMap map={vmap.data} sector={x.venue.sector} />}
           </Card>
         );
       })}

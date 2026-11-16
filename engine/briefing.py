@@ -276,7 +276,49 @@ def fmt_local(t, tz):
     return (t.tz_convert(tz) if tz else t).strftime("%H:%M")
 
 
-def briefing(D, gun, fleet, hours=2.5, sensor=None, now=None, base_sd=BASE_SD_KN):
+# --- venue: shore and terrain effects on the course (venue/venue.py) ----------------------------------------------
+
+COMPASS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+
+
+def load_venue(path):
+    if not path or not os.path.exists(path): return None
+    with open(path) as f: return json.load(f)
+
+
+def venue_tip(V, wind_dir):
+    """Race tips from the club's venue map for a wind from `wind_dir`: which side has more wind, where the shore
+    shadow is, offshore puffs, high ground and channelling. None without a venue map."""
+    if not V or wind_dir is None or (isinstance(wind_dir, float) and math.isnan(wind_dir)): return None
+    k = int(round(float(wind_dir) / 22.5)) % 16; S = V["sectors"][k]
+    frm = COMPASS[k]; notes = []
+    L, R, T, B = S.get("left"), S.get("right"), S.get("top"), S.get("bottom")
+    if L is not None and R is not None and abs(R - L) >= 0.05:
+        better, worse = ("right", "left") if R > L else ("left", "right")
+        land = COMPASS[(k - 4) % 16] if worse == "left" else COMPASS[(k + 4) % 16]
+        notes.append(f"More wind on the {better} side of the beat: about {round(abs(R - L) * 100)}% more than the {worse}, "
+                     f"which is closer to the land to the {land}. Favour the {better} unless a shift says otherwise.")
+    if T is not None and B is not None and B - T >= 0.06:
+        reach = f" for about {S['shadow_m']} m off the shore" if S.get("shadow_m") else ""
+        notes.append(f"Lighter, patchier wind near the windward mark: the {frm} shore shelters the top of the course{reach}. "
+                     f"Set the mark clear of it, or expect holes and big shifts there.")
+    if S.get("fetch_m") is not None and S["fetch_m"] < 800:
+        notes.append(f"Offshore wind: puffs and shifts come off the land, so expect them bigger and more frequent than "
+                     f"the forecast shows, especially in the first few hundred metres off the {frm} shore.")
+    if S.get("relief_m", 0) >= 150 and S.get("fetch_m", 99999) < 4000:
+        notes.append(f"High ground upwind (about {S['relief_m']} m above the water): gusts can drop off the hills and fan out "
+                     f"across the course. Look upwind for dark patches.")
+    if S.get("fetch_m", 0) >= 3000 and (S.get("cross_fetch_m") or 99999) <= 1200:
+        notes.append("The wind runs along the water here: it bends to follow the shoreline and is often strongest in the "
+                     "middle of the channel.")
+    if not notes:
+        notes.append("Open water upwind: little shore effect on the course in this direction." if (S.get("mean") or 1) >= 0.95
+                     else "Some shelter from the shore on parts of the course, without a clear side to favour.")
+    return {"sector": k, "from_dir": k * 22.5, "compass": frm, "left": L, "right": R, "top": T, "bottom": B,
+            "shadow_m": S.get("shadow_m"), "notes": notes, "estimate": True}
+
+
+def briefing(D, gun, fleet, hours=2.5, sensor=None, now=None, base_sd=BASE_SD_KN, venue=None):
     """One fleet's briefing for one start. D: the club's hourly forecast (forecast/out/<club>.csv), gun: UTC time."""
     gun = pd.Timestamp(gun); gun = gun.tz_localize("UTC") if gun.tz is None else gun.tz_convert("UTC")
     Ds = sensor_blend(D, sensor, now=now); Ds.attrs = D.attrs
@@ -285,7 +327,7 @@ def briefing(D, gun, fleet, hours=2.5, sensor=None, now=None, base_sd=BASE_SD_KN
     return {"fleet": fleet.cls, "fleet_name": fleet.name, "gun": iso(gun), "window_h": hours,
             "call": rc, "shift": shifts(Ds, gun, hours), "rig": rig(rc["wind_kn"], rc["gust_max_kn"], fleet),
             "water": water(Ds, gun, hours), "sensor_used": bool(sensor) and float(Ds.sensor_weight.max()) > 0,
-            "hourly": hourly(Ds, gun, hours)}
+            "hourly": hourly(Ds, gun, hours), "venue": venue_tip(venue, rc["dir"])}
 
 
 def hourly(D, gun, hours):
@@ -294,7 +336,7 @@ def hourly(D, gun, hours):
     return [{"time": iso(t), **{c: (None if pd.isna(r[c]) else round(float(r[c]), 1)) for c in cols}} for t, r in W[cols].iterrows()]
 
 
-def club_briefings(D, programme, classes, tz, sensor=None, now=None):
+def club_briefings(D, programme, classes, tz, sensor=None, now=None, venue=None):
     """All briefings for a club. programme: [{"date": "YYYY-MM-DD", "starts": [{"time": "HH:MM", "fleets": [...],
     "window_h": 2.5, "limits": {"CLASS": {"max_gust_kn": 16}}}]}], times local to the club."""
     D = D.copy(); D.attrs["tz"] = tz; out = []
@@ -305,7 +347,7 @@ def club_briefings(D, programme, classes, tz, sensor=None, now=None):
             for f in st["fleets"]:
                 fl = classes.get(f) or classes["GENERIC"]
                 if st.get("limits", {}).get(f): fl = Fleet(**{**asdict(fl), **st["limits"][f]})
-                b = briefing(D, gun, fl, st.get("window_h", 2.5), sensor, now)
+                b = briefing(D, gun, fl, st.get("window_h", 2.5), sensor, now, venue=venue)
                 if b: out.append({"date": day["date"], "start": st["time"], **b})
     return out
 
@@ -321,7 +363,8 @@ def main():
         f = f"{a.forecast}/{club}.csv"
         if not os.path.exists(f): print("no forecast for", club); continue
         c = S.loc[club]; tz = club_tz(c.country, c.water_lat, c.water_lon)
-        res["clubs"][club] = {"tz": tz, "briefings": club_briefings(load_forecast(f), prog["days"], classes, tz, prog.get("sensor"))}
+        V = load_venue(f"{ROOT}/venue/out/{club}.json")
+        res["clubs"][club] = {"tz": tz, "briefings": club_briefings(load_forecast(f), prog["days"], classes, tz, prog.get("sensor"), venue=V)}
     out = a.out or f"{a.forecast}/briefings.json"
     json.dump(res, open(out, "w"), indent=1); print(f"{sum(len(v['briefings']) for v in res['clubs'].values())} briefings -> {out}")
 

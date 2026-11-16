@@ -30,7 +30,8 @@ def settings():
     return {"db": os.environ.get("DATABASE_URL", f"sqlite:///{ROOT}/server/bluepuff.db"),
             "forecast": os.environ.get("FORECAST_DIR", f"{ROOT}/forecast/out"),
             "admin": os.environ.get("ADMIN_TOKEN", ""),
-            "static": os.environ.get("CLUBS_STATIC", f"{ROOT}/forecast/clubs_static.csv")}
+            "static": os.environ.get("CLUBS_STATIC", f"{ROOT}/forecast/clubs_static.csv"),
+            "venue": os.environ.get("VENUE_DIR", f"{ROOT}/venue/out")}
 
 
 @lru_cache(maxsize=4)
@@ -313,6 +314,24 @@ def _load_forecast(path, mtime):
     return E.load_forecast(path)
 
 
+def venue_for(slug):
+    f = os.path.join(settings()["venue"], f"{slug}.json")
+    return _load_venue(f, os.path.getmtime(f)) if os.path.exists(f) else None
+
+
+@lru_cache(maxsize=128)
+def _load_venue(path, mtime):
+    return E.load_venue(path)
+
+
+@app.get("/clubs/{slug}/venue")
+def venue_map(slug: str, s=Depends(db)):
+    """The club's venue map: wind on the course as % of open-water wind, for 16 directions (venue/venue.py)."""
+    club_or_404(s, slug); V = venue_for(slug)
+    if not V: raise HTTPException(404, "No venue map for this club yet")
+    return {k: V[k] for k in ("club", "lat", "lon", "cell_m", "size_m", "n", "sectors", "grids", "source")}
+
+
 def latest_reading(s, club):
     r = s.execute(select(Reading).join(Sensor, Reading.sensor_id == Sensor.id).where(Sensor.club_id == club.id)
                   .order_by(Reading.time.desc()).limit(1)).scalar()
@@ -335,7 +354,7 @@ def club_briefings(s, club, d0, days, start_ids=None):
     D = forecast_for(club.slug)
     if D is None: return None, None
     sensor = latest_reading(s, club)
-    out = E.club_briefings(D, programme_for(s, club, d0, days, start_ids), CLASSES, club.tz, sensor)
+    out = E.club_briefings(D, programme_for(s, club, d0, days, start_ids), CLASSES, club.tz, sensor, venue=venue_for(club.slug))
     names = {f["cls"]: f["name"] for f in fleets_view(club)}
     for b in out: b["fleet_name"] = names.get(b["fleet"], b["fleet_name"])
     return out, sensor
@@ -637,6 +656,8 @@ def event_html(v, page_url):
             f"{CALL_STYLE[r['call']['call']][0]}</span></td><td>{round(r['call']['wind_kn'])} kn</td><td>{round(r['call']['gust_max_kn'])} kn</td>"
             f"<td>{round(r['call']['dir'])}&deg;</td><td>{round(100 * r['call']['p_race'])}%</td></tr>" for r in d["races"])
         shifts = {r["shift"]["advice"] for r in d["races"] if r["shift"].get("kind") == "shift"}
+        venue = next((r["venue"] for r in d["races"] if r.get("venue")), None)
+        if venue: shifts |= {f"On the course ({venue['compass']} wind): {venue['notes'][0]}"}
         water = next((r["water"] for r in d["races"] if r["water"]), {})
         wbits = []
         if water.get("chop"): wbits.append(f"Chop: {e(water['chop']['label'])}")
