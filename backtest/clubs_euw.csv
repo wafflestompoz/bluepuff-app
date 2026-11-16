@@ -1,0 +1,10 @@
+id,name,country,lat,lon,water,tz,depth_m
+rbsc,Royal Belgian Sailing Club (Zeebrugge),BE,51.345,3.150,sea,Europe/Brussels,10
+ijmuiden,WSV IJmuiden (Seaport Marina),NL,52.470,4.530,sea,Europe/Amsterdam,12
+assens,Assens Sejlklub (Lillebaelt),DK,55.270,9.860,sea,Europe/Copenhagen,12
+dragor,Dragoer Sejlklub (Oeresund),DK,55.590,12.700,sea,Europe/Copenhagen,7
+skagen,Skagen Sejlklub,DK,57.720,10.620,sea,Europe/Copenhagen,10
+pembrokeshire,Pembrokeshire Yacht Club (Milford Haven),UK,51.700,-5.080,sea,Europe/London,15
+blundellsands,Blundellsands Sailing Club (Mersey/Alt estuary),UK,53.505,-3.090,sea,Europe/London,4
+losinj,Jedrilicarski klub Jugo (Mali Losinj),HR,44.540,14.450,sea,Europe/Zagreb,25
+ravenna,Circolo Velico Ravennate (Marina di Ravenna),IT,44.500,12.300,sea,Europe/Rome,10

@@ -8,6 +8,8 @@ Scores (all out of sample), as in rounds 1 and 5:
   raw_mean, bias (per-club linear fit), kasta (club has a station, leave one summer out),
   kasta_res (learns the correction to the mean instead of the wind), kasta_ns (no station: leave one station out)
 Writes reports/au.json and reports/au_by_club.csv.
+REGION=euw: the same for the European clubs in clubs_euw.csv next to on-water stations (May-Sep 2023-25, Europe's 6 models)
+  -> reports/euw.json, reports/euw_by_club.csv.
 """
 import os, json, numpy as np, pandas as pd
 import backtest as B
@@ -15,6 +17,10 @@ HERE = B.HERE; OUT = B.OUT; KN = B.KN; DA = f"{HERE}/data/au"
 MODELS = {"ecmwf_ifs": "ifs", "dwd_icon": "icon", "ukmo_global_deterministic_10km": "ukmo", "meteofrance_arpege_world025": "arpege"}
 CTX = {("dwd_icon", "temperature_2m"): "t2", ("dwd_icon", "direct_radiation"): "sw"}
 HOURS = range(9, 19)                  # 09-18 local
+MONTHS = [11, 12, 1, 2, 3]; CLUBS = "clubs_au.csv"; STATIONS = "stations_au.csv"; NAME = "au"
+if os.environ.get("REGION") == "euw":  # European clubs racing next to an on-water station: Europe's models and summers
+    DA = f"{HERE}/data/euw"; MODELS = B.MODELS; MONTHS = [5, 6, 7, 8, 9]; CLUBS = "clubs_euw.csv"; STATIONS = "stations_euw.csv"; NAME = "euw"
+    CTX = {("dwd_icon_eu", "temperature_2m"): "t2", ("dwd_icon_eu", "direct_radiation"): "sw"}
 
 def load(model, var, name):
     f = f"{DA}/model/{model}__{var}.parquet"
@@ -22,10 +28,10 @@ def load(model, var, name):
     d = pd.read_parquet(f); d[["club", "pt"]] = d.site.str.split("|", expand=True)
     return d.pivot_table(index=["club", "time"], columns="pt", values="v").add_prefix(name + "_")
 
-def table(da=None, stations="stations_au.csv"):
+def table(da=None, stations=None):
     global DA
     if da: DA = da
-    C = pd.read_csv(f"{HERE}/clubs_au.csv").set_index("id"); S = pd.read_csv(f"{HERE}/{stations}")[["club", "station"]]
+    C = pd.read_csv(f"{HERE}/{CLUBS}").set_index("id"); S = pd.read_csv(f"{HERE}/{stations or STATIONS}")[["club", "station"]]
     O = pd.read_parquet(f"{DA}/obs.parquet").merge(S, on="club")      # obs.py names rows by club
     O["obs"] = O.obs_ws * KN; O = O.set_index(["club", "time"])[["obs", "station"]]
     parts = [O]
@@ -43,7 +49,7 @@ def table(da=None, stations="stations_au.csv"):
     D = pd.concat(parts, axis=1, join="outer").reindex(O.index).reset_index()
     tz = C.tz.to_dict()
     D["local"] = [t.tz_localize("UTC").tz_convert(tz[c]).tz_localize(None) for c, t in zip(D.club, D.time)]
-    D = D[D.local.dt.month.isin([11, 12, 1, 2, 3]) & D.local.dt.hour.isin(HOURS) & D.obs.notna()].copy()
+    D = D[D.local.dt.month.isin(MONTHS) & D.local.dt.hour.isin(HOURS) & D.obs.notna()].copy()
     D["year"] = D.local.dt.year - (D.local.dt.month <= 3)          # season label: Nov 2022 - Mar 2023 -> 2022
     D["hour"] = D.local.dt.hour; D["doy"] = D.local.dt.dayofyear; D["clubc"] = D.club.astype("category")
     for s in MODELS.values():
@@ -73,14 +79,14 @@ def main():
     cand = R + ["raw_mean", "bias", "kasta", "kasta_res", "kasta_ns"]
     res = {"hourly": {c: B.score_speed(D, c) for c in cand}}
     G = day_table(D, cand); res["race_day"] = {c: B.score_day(G, c) for c in cand}; res["race_day_base_rate"] = round(float(G.race.mean()), 3)
-    C = pd.read_csv(f"{HERE}/clubs_au.csv").set_index("id")
+    C = pd.read_csv(f"{HERE}/{CLUBS}").set_index("id")
     bc = D.groupby("club").apply(lambda x: pd.Series({"obs_kn": x.obs.mean(), "hours": len(x)} | {c: (x[c] - x.obs).abs().mean() for c in ["raw_mean", "bias", "kasta", "kasta_res", "kasta_ns"]})).round(2)
     bc = bc.join(C[["name", "water"]]); bc["gain_pct"] = (100 * (1 - bc.kasta_res / bc.raw_mean)).round(0)
-    bc.sort_values("gain_pct").to_csv(f"{OUT}/au_by_club.csv")
+    bc.sort_values("gain_pct").to_csv(f"{OUT}/{NAME}_by_club.csv")
     res["clubs_worse_than_raw"] = {c: int((bc[c] > bc.raw_mean + 0.005).sum()) for c in ["bias", "kasta", "kasta_res", "kasta_ns"]}
     res["by_club_median"] = bc[["raw_mean", "bias", "kasta", "kasta_res", "kasta_ns"]].median().round(2).to_dict()
     res["top_features"] = (imp / imp.sum()).sort_values(ascending=False).head(12).round(3).to_dict()
-    json.dump(res, open(f"{OUT}/au.json", "w"), indent=1); print(json.dumps(res, indent=1)); print(bc.sort_values("gain_pct").to_string())
+    json.dump(res, open(f"{OUT}/{NAME}.json", "w"), indent=1); print(json.dumps(res, indent=1)); print(bc.sort_values("gain_pct").to_string())
 
 if __name__ == "__main__":
     main()
