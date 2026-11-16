@@ -133,6 +133,8 @@ def run(clubs=None):
         U = D[[c_ for c_ in D if c_.endswith("_u")]].mean(axis=1); V = D[[c_ for c_ in D if c_.endswith("_v")]].mean(axis=1)
         D["wind_kn"] = D[ks].mean(axis=1); D["wind_spread_kn"] = D[ks].std(axis=1); D["wind_dir"] = np.degrees(np.arctan2(-U, -V)) % 360
         D["gust_kn"] = D[[c_ for c_ in D if c_.endswith("_gust_kn")]].mean(axis=1); D["n_models"] = D[ks].notna().sum(axis=1)
+        for s in wind_of(club).values():            # each model's direction, for shift odds (engine/briefing.py)
+            if f"{s}_u" in D: D[f"{s}_dir"] = np.degrees(np.arctan2(-D[f"{s}_u"], -D[f"{s}_v"])) % 360
         D = D.drop(columns=[c_ for c_ in D if c_.endswith(("_u", "_v"))])
         if pd.notna(c.water_fetch_0) and pd.notna(c.depth_m):
             D["fetch_km"] = upwind(c, D.wind_dir.values)
