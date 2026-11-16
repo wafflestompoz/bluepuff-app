@@ -22,8 +22,10 @@ def load(model, var, name):
     d = pd.read_parquet(f); d[["club", "pt"]] = d.site.str.split("|", expand=True)
     return d.pivot_table(index=["club", "time"], columns="pt", values="v").add_prefix(name + "_")
 
-def table():
-    C = pd.read_csv(f"{HERE}/clubs_au.csv").set_index("id"); S = pd.read_csv(f"{HERE}/stations_au.csv")
+def table(da=None, stations="stations_au.csv"):
+    global DA
+    if da: DA = da
+    C = pd.read_csv(f"{HERE}/clubs_au.csv").set_index("id"); S = pd.read_csv(f"{HERE}/{stations}")[["club", "station"]]
     O = pd.read_parquet(f"{DA}/obs.parquet").merge(S, on="club")      # obs.py names rows by club
     O["obs"] = O.obs_ws * KN; O = O.set_index(["club", "time"])[["obs", "station"]]
     parts = [O]
@@ -51,10 +53,10 @@ def table():
     D["raw_mean"] = D[R].mean(axis=1); D = D[D.raw_mean.notna()].reset_index(drop=True)
     return D, R
 
-def day_table(D, cols):
+def day_table(D, cols, min_obs=6):
     D = D.assign(date=D.local.dt.date); L = D[D.hour.between(10, 16)]
     G = L.groupby(["club", "date"]).agg({"obs": ["mean", "max"]} | {c: ["mean", "max"] for c in cols}); G.columns = [f"{a}_{b}" for a, b in G.columns]
-    G = G[L.groupby(["club", "date"]).obs.count() >= 6]
+    G = G[L.groupby(["club", "date"]).obs.count() >= min_obs]
     G["race"] = ((G.obs_mean >= B.ENOUGH) & (G.obs_max <= B.TOO_MUCH)).astype(int); return G
 
 def main():

@@ -84,8 +84,9 @@ def main_all():
 
 def main():
     if os.environ.get("ALL") == "1": return main_all()
-    R = os.environ.get("REGION", ""); X = f"_{R}" if R else ""; DD = f"{HERE}/data/{R}" if R else f"{HERE}/data"; os.makedirs(DD, exist_ok=True)
-    C = pd.read_csv(f"{HERE}/clubs{X}.csv"); S = pd.read_csv(f"{HERE}/stations{X}.csv")
+    R = os.environ.get("REGION", ""); SET = os.environ.get("STATIONS", ""); X = f"_{R}" if R else ""; XS = X + (f"_{SET}" if SET else "")
+    TAG = R + (f"_{SET}" if SET else ""); DD = f"{HERE}/data/{TAG}" if TAG else f"{HERE}/data"; os.makedirs(DD, exist_ok=True)
+    C = pd.read_csv(f"{HERE}/clubs{X}.csv"); S = pd.read_csv(f"{HERE}/stations{XS}.csv")
     H = pd.read_csv(os.environ.get("ISD_HISTORY", "/tmp/claude-0/sail/isd-history.csv"), dtype=str); H["station"] = H.USAF + "-" + H.WBAN
     S = S.merge(H[["station", "LAT", "LON"]], on="station").merge(C, left_on="club", right_on="id")
     def one(r):
