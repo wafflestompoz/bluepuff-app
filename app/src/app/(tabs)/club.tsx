@@ -5,6 +5,7 @@ import { useApi } from "../../lib/hooks";
 import { api, API_URL, ClubView, Notice } from "../../lib/api";
 import { useColors } from "../../lib/theme";
 import { Button, Card, Chip, Field, H, Message, Screen, T, styles } from "../../components/ui";
+import { ClubLicence, SailorPlans } from "../../components/Upgrade";
 
 const PLAN = { free: "Free", racer: "Racer", racer_pro: "Racer Pro" } as const;
 
@@ -64,6 +65,9 @@ export default function Club() {
         ))}
       </Card>
       {err && <Message text={err} />}
+
+      <SailorPlans />
+      {club?.role === "admin" && cv.data && <ClubLicence slug={club.slug} tier={cv.data.licensed ? cv.data.tier : "none"} />}
 
       {club && <Card><H>Notices from {club.name}</H>
         {(notices.data ?? []).length === 0 ? <T muted>Nothing yet.</T> : notices.data!.map((n) => (

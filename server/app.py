@@ -7,14 +7,14 @@ Env: DATABASE_URL (default sqlite:///server/bluepuff.db), FORECAST_DIR (default 
 import os, re, json, html, secrets, hashlib, datetime as dt
 from functools import lru_cache
 import pandas as pd
-from fastapi import Depends, FastAPI, Header, HTTPException, Query
+from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import func, select
 
 from engine import briefing as E
-from server import push
+from server import payments, push
 from server.models import (TIERS, ClubFleet, Club, Event, Membership, Notice, PushToken, Reading, Sensor, Session, Start,
                            User, make_session_factory)
 
@@ -123,7 +123,7 @@ def licensed(club):
 
 def entitlement(s, u):
     """free | racer | racer_pro, and where it comes from."""
-    if u.plan in ("racer", "racer_pro") and (u.plan_until is None or u.plan_until >= dt.datetime.now(dt.timezone.utc)):
+    if u.plan in ("racer", "racer_pro") and (u.plan_until is None or _utc(u.plan_until) >= dt.datetime.now(dt.timezone.utc)):
         own = u.plan
     else: own = "free"
     via = None
@@ -688,3 +688,59 @@ def club_events(slug: str, s=Depends(db)):
                      .order_by(Event.first_day)).all()
     return [{"slug": e.slug, "name": e.name, "first_day": e.first_day.isoformat(), "last_day": e.last_day.isoformat(),
              "classes": e.classes.split(","), "entries": e.entries, "url": f"/r/{e.slug}"} for e in rows]
+
+
+# --- payments: RevenueCat (sailors, in the apps) and Stripe (club licences, on the web) -----------------------------
+
+@app.post("/hooks/revenuecat")
+def revenuecat_hook(body: dict, authorization: str = Header(default=""), s=Depends(db)):
+    want = os.environ.get("REVENUECAT_WEBHOOK_AUTH", "")
+    if not want or not secrets.compare_digest(authorization, want): raise HTTPException(403, "Bad webhook auth")
+    ch = payments.revenuecat_change(body.get("event") or {})
+    if not ch: return {"ok": True, "changed": False}
+    uid, plan, until = ch; u = s.get(User, uid)
+    if not u: return {"ok": True, "changed": False}
+    if plan is not None: u.plan = plan
+    u.plan_until = until; s.commit()
+    return {"ok": True, "changed": True}
+
+
+class CheckoutIn(BaseModel):
+    tier: str
+
+
+@app.post("/clubs/{slug}/checkout")
+def club_checkout(slug: str, b: CheckoutIn, u=Depends(current_user), s=Depends(db)):
+    """Club admins buy or upgrade the club's licence. Returns a Stripe Checkout URL to open in the browser."""
+    m = membership(u, slug, ("admin",))
+    if b.tier not in ("club", "plus", "pro"): raise HTTPException(422, "Pick club, plus or pro")
+    if licensed(m.club) and m.club.tier == "pro" and b.tier != "pro": raise HTTPException(409, "Talk to us to move down a tier")
+    base = os.environ.get("PUBLIC_URL", "").rstrip("/") or "http://localhost:8000"
+    try: cs = payments.checkout_session(slug, b.tier, u.email, base)
+    except KeyError as e: raise HTTPException(503, str(e.args[0]))
+    return {"url": cs["url"]}
+
+
+@app.post("/hooks/stripe")
+async def stripe_hook(request: Request, s=Depends(db)):
+    secret = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+    try: ev = payments.stripe_verify(await request.body(), request.headers.get("stripe-signature", ""), secret) if secret else None
+    except ValueError: ev = None
+    if not ev: raise HTTPException(400, "Bad signature")
+    ch = payments.licence_change(ev)
+    if not ch: return {"ok": True, "changed": False}
+    slug, tier, until = ch; club = s.scalar(select(Club).where(Club.slug == slug))
+    if not club or tier not in TIERS: return {"ok": True, "changed": False}
+    club.tier = tier; club.licence_until = max(until, club.licence_until or until); s.commit()
+    return {"ok": True, "changed": True}
+
+
+@app.get("/clubs/{slug}/licence", response_class=HTMLResponse)
+def licence_page(slug: str, paid: int = 0, s=Depends(db)):
+    c = club_or_404(s, slug); e = html.escape
+    state = (f"{e(c.name)} is on <b>{e({'club': 'Club', 'plus': 'Club Plus', 'pro': 'Club Pro'}.get(c.tier, 'no licence'))}</b>"
+             + (f" until {c.licence_until:%d %b %Y}" if c.licence_until and licensed(c) else "") + ".")
+    note = "<p>Thank you. Your payment went through; the licence updates within a minute.</p>" if paid else ""
+    return (f"<!doctype html><meta name=viewport content='width=device-width,initial-scale=1'><title>{e(c.name)} licence</title>"
+            f"<body style='font:16px system-ui;max-width:560px;margin:40px auto;padding:0 16px'><h1>bluepuff club licence</h1>{note}<p>{state}</p>"
+            f"<p>Members join in the app with your club code. Questions: reply to your receipt email.</p></body>")
