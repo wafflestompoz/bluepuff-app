@@ -257,6 +257,30 @@ For the same hours scored the usual way, against the airport: raw 2.98 kn, airpo
   Roches Point, Portland). There's nothing more on the water in that archive. The national networks (KNMI and Rijkswaterstaat
   platforms, DWD, MeteoSwiss lake stations, UK Met Office) have more, but their hosts are blocked in this environment.
 
+### More clubs next to on-water stations (`clubs_euw.csv`, `stations_euw.csv`; Goolwa and Hamilton Island in `clubs_au.csv`)
+
+Found by checking every station in the NOAA archive for open water around it (WorldCover, `geo.py`), keeping those with full
+2023–25 records, and adding a club that races beside each one:
+
+- **Europe (9):** Royal Belgian SC (Zeebrugge mole), WSV IJmuiden (IJmuiden pier), Assens Sejlklub (Assens/Torø), Dragør
+  Sejlklub (Drogden lighthouse), Skagen Sejlklub (Skagen), Pembrokeshire YC (Milford Haven waterway), Blundellsands SC
+  (Crosby), JK Jugo Mali Lošinj (Mali Lošinj harbour) and Circolo Velico Ravennate (Marina di Ravenna).
+- **Australia (2):** Goolwa Regatta YC (Hindmarsh Island, in the Murray mouth) and Hamilton Island YC (the island's shoreline
+  airstrip). Both have hourly records from 2021.
+
+All are scored over 3 summers, leaving one summer out (`REGION=euw python backtest_au.py` for Europe).
+
+| Hourly error (kn), same day | Raw models | Learns the correction | Race-day calls, raw → corrected |
+|---|---|---|---|
+| 9 new European clubs (6 European models) | 2.24 | **1.66 (−26%)** | 81.2% → 87.5% |
+| Goolwa / Hamilton Island (4 global models) | 4.26 / 4.23 | **1.94 / 2.05** | in the Australian set |
+
+- Every one of the 9 European clubs improves, IJmuiden most (3.17 → 1.52) and Dragør (2.97 → 1.93). Skagen and Assens
+  gain least, because the models are already close on open water (1.84 → 1.72, 1.75 → 1.54).
+- With Goolwa and Hamilton Island, the Australian on-water set is 14 clubs and 11,559 hours. Scored on the water, the raw
+  models are off by 3.92 kn, and the correction learned on the water brings that to 1.94 kn, with 92.5% of race-day calls right.
+- No station isn't solved here either: leaving a station out is worse than raw at these clubs, as before.
+
 ## Rerun
 
 ```bash
@@ -275,5 +299,8 @@ export REGION=au; python obs.py && for m in ecmwf_ifs dwd_icon meteofrance_arpeg
 python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m
 python extract_wind.py dwd_icon temperature_2m direct_radiation && python geo.py && unset REGION && python backtest_au.py   # Australia, ~10 min
 REGION=au STATIONS=water python obs.py  # then extract_wind.py as above with the same env, then: python backtest_au_water.py
+export REGION=euw; python obs.py && for m in ecmwf_ifs dwd_icon_eu dwd_icon_d2 meteofrance_arome_france0025 meteofrance_arpege_europe; do python extract_wind.py $m; done
+python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m && python extract_wind.py dwd_icon_eu temperature_2m direct_radiation
+python geo.py && python backtest_au.py && unset REGION   # 9 European on-water clubs
 ```
 About 15 minutes of downloads and 15 minutes of training on 4 cores.
