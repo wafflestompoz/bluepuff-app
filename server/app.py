@@ -223,7 +223,7 @@ def fleets_view(c):
     return [{"cls": k, "name": (own[k].label if k in own and own[k].label else v.name),
              "min_kn": own[k].min_kn if k in own and own[k].min_kn is not None else v.min_kn,
              "max_gust_kn": own[k].max_gust_kn if k in own and own[k].max_gust_kn is not None else v.max_gust_kn,
-             "club_limit": k in own} for k, v in CLASSES.items() if k in own or not own]
+             "club_limit": k in own and (own[k].min_kn is not None or own[k].max_gust_kn is not None)} for k, v in CLASSES.items() if k in own or not own]
 
 
 def starts_view(s, c, d0, days):
@@ -679,3 +679,12 @@ def event_page(es: str, s=Depends(db)):
     v = event_view(s, event_or_404(s, es))
     base = os.environ.get("PUBLIC_URL", "").rstrip("/")
     return event_html(v, f"{base}/r/{es}" if base else "")
+
+
+@app.get("/clubs/{slug}/events")
+def club_events(slug: str, s=Depends(db)):
+    c = club_or_404(s, slug)
+    rows = s.scalars(select(Event).where(Event.club_id == c.id, Event.last_day >= club_today(c) - dt.timedelta(days=7))
+                     .order_by(Event.first_day)).all()
+    return [{"slug": e.slug, "name": e.name, "first_day": e.first_day.isoformat(), "last_day": e.last_day.isoformat(),
+             "classes": e.classes.split(","), "entries": e.entries, "url": f"/r/{e.slug}"} for e in rows]

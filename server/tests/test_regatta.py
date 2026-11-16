@@ -36,3 +36,4 @@ def test_event_page_shows_calls_tide_and_notices(client, monkeypatch):
     page = client.get(r["url"]).text
     assert "Spring Open" in page and "Course 2 today" in page and "64 entries" in page and "ON</span>" in page and 'id="qr"' in page
     assert client.get("/r/nope").status_code == 404
+    assert client.get("/clubs/hayling/events").json()[0]["slug"] == r["slug"]
