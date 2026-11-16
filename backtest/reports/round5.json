@@ -1,0 +1,257 @@
+{
+ "with_station": {
+  "hourly": {
+   "raw_mean": {
+    "n": 176326,
+    "mae_kn": 1.79,
+    "bias_kn": -0.48,
+    "band_hit": 0.719
+   },
+   "bias": {
+    "n": 176326,
+    "mae_kn": 1.53,
+    "bias_kn": 0.0,
+    "band_hit": 0.767
+   },
+   "kasta": {
+    "n": 176326,
+    "mae_kn": 1.4,
+    "bias_kn": -0.2,
+    "band_hit": 0.785
+   },
+   "kasta_res": {
+    "n": 176326,
+    "mae_kn": 1.37,
+    "bias_kn": -0.07,
+    "band_hit": 0.79
+   },
+   "kasta_blend": {
+    "n": 176326,
+    "mae_kn": 1.43,
+    "bias_kn": -0.1,
+    "band_hit": 0.783
+   },
+   "kasta_res_blend": {
+    "n": 176326,
+    "mae_kn": 1.37,
+    "bias_kn": -0.13,
+    "band_hit": 0.789
+   }
+  },
+  "race_day": {
+   "raw_mean": {
+    "days": 17403,
+    "brier": 0.1044,
+    "auc": 0.932,
+    "call_right": 0.858
+   },
+   "bias": {
+    "days": 17403,
+    "brier": 0.0875,
+    "auc": 0.96,
+    "call_right": 0.897
+   },
+   "kasta": {
+    "days": 17403,
+    "brier": 0.0832,
+    "auc": 0.967,
+    "call_right": 0.91
+   },
+   "kasta_res": {
+    "days": 17403,
+    "brier": 0.0804,
+    "auc": 0.971,
+    "call_right": 0.914
+   },
+   "kasta_blend": {
+    "days": 17403,
+    "brier": 0.0838,
+    "auc": 0.966,
+    "call_right": 0.907
+   },
+   "kasta_res_blend": {
+    "days": 17403,
+    "brier": 0.0813,
+    "auc": 0.97,
+    "call_right": 0.913
+   }
+  },
+  "light_wind_sunny_hourly": {
+   "raw_mean": {
+    "n": 18189,
+    "mae_kn": 1.55,
+    "bias_kn": -0.95,
+    "band_hit": 0.699
+   },
+   "bias": {
+    "n": 18189,
+    "mae_kn": 1.22,
+    "bias_kn": -0.17,
+    "band_hit": 0.778
+   },
+   "kasta": {
+    "n": 18189,
+    "mae_kn": 1.06,
+    "bias_kn": -0.08,
+    "band_hit": 0.803
+   },
+   "kasta_res": {
+    "n": 18189,
+    "mae_kn": 1.05,
+    "bias_kn": -0.07,
+    "band_hit": 0.803
+   },
+   "kasta_blend": {
+    "n": 18189,
+    "mae_kn": 1.1,
+    "bias_kn": -0.12,
+    "band_hit": 0.796
+   },
+   "kasta_res_blend": {
+    "n": 18189,
+    "mae_kn": 1.05,
+    "bias_kn": -0.07,
+    "band_hit": 0.803
+   }
+  },
+  "by_club_median": {
+   "raw_mean": 1.76,
+   "bias": 1.46,
+   "kasta": 1.37,
+   "kasta_res": 1.35,
+   "kasta_blend": 1.37,
+   "kasta_res_blend": 1.35
+  },
+  "clubs_worse_than_raw": {
+   "bias": 1,
+   "kasta": 1,
+   "kasta_res": 0,
+   "kasta_blend": 0,
+   "kasta_res_blend": 0
+  },
+  "worst_club_pct_vs_raw": {
+   "bias": 1.0,
+   "kasta": 1.0,
+   "kasta_res": -5.0,
+   "kasta_blend": -3.0,
+   "kasta_res_blend": -4.0
+  }
+ },
+ "no_station": {
+  "hourly": {
+   "raw_mean": {
+    "n": 176326,
+    "mae_kn": 1.79,
+    "bias_kn": -0.48,
+    "band_hit": 0.719
+   },
+   "ns": {
+    "n": 176326,
+    "mae_kn": 1.7,
+    "bias_kn": -0.06,
+    "band_hit": 0.742
+   },
+   "ns_res": {
+    "n": 176326,
+    "mae_kn": 1.68,
+    "bias_kn": -0.07,
+    "band_hit": 0.745
+   },
+   "ns_blend": {
+    "n": 176326,
+    "mae_kn": 1.71,
+    "bias_kn": -0.27,
+    "band_hit": 0.735
+   },
+   "ns_res_blend": {
+    "n": 176326,
+    "mae_kn": 1.69,
+    "bias_kn": -0.06,
+    "band_hit": 0.744
+   }
+  },
+  "race_day": {
+   "raw_mean": {
+    "days": 17403,
+    "brier": 0.1044,
+    "auc": 0.932,
+    "call_right": 0.858
+   },
+   "ns": {
+    "days": 17403,
+    "brier": 0.0946,
+    "auc": 0.945,
+    "call_right": 0.887
+   },
+   "ns_res": {
+    "days": 17403,
+    "brier": 0.0934,
+    "auc": 0.947,
+    "call_right": 0.887
+   },
+   "ns_blend": {
+    "days": 17403,
+    "brier": 0.0973,
+    "auc": 0.94,
+    "call_right": 0.876
+   },
+   "ns_res_blend": {
+    "days": 17403,
+    "brier": 0.0938,
+    "auc": 0.946,
+    "call_right": 0.888
+   }
+  },
+  "light_wind_sunny_hourly": {
+   "raw_mean": {
+    "n": 18189,
+    "mae_kn": 1.55,
+    "bias_kn": -0.95,
+    "band_hit": 0.699
+   },
+   "ns": {
+    "n": 18189,
+    "mae_kn": 1.28,
+    "bias_kn": -0.14,
+    "band_hit": 0.761
+   },
+   "ns_res": {
+    "n": 18189,
+    "mae_kn": 1.27,
+    "bias_kn": -0.14,
+    "band_hit": 0.763
+   },
+   "ns_blend": {
+    "n": 18189,
+    "mae_kn": 1.35,
+    "bias_kn": -0.55,
+    "band_hit": 0.732
+   },
+   "ns_res_blend": {
+    "n": 18189,
+    "mae_kn": 1.27,
+    "bias_kn": -0.14,
+    "band_hit": 0.762
+   }
+  },
+  "by_club_median": {
+   "raw_mean": 1.76,
+   "ns": 1.64,
+   "ns_res": 1.6,
+   "ns_blend": 1.72,
+   "ns_res_blend": 1.62
+  },
+  "clubs_worse_than_raw": {
+   "ns": 10,
+   "ns_res": 11,
+   "ns_blend": 6,
+   "ns_res_blend": 11
+  },
+  "worst_club_pct_vs_raw": {
+   "ns": 51.0,
+   "ns_res": 44.0,
+   "ns_blend": 16.0,
+   "ns_res_blend": 48.0
+  }
+ }
+}

@@ -1,0 +1,25 @@
+id,name,country,lat,lon,water,tz,depth_m
+rsys,Royal Sydney Yacht Squadron (Sydney Harbour),AU,-33.850,151.235,sea,Australia/Sydney,15
+mhyc,Middle Harbour Yacht Club,AU,-33.805,151.245,sea,Australia/Sydney,10
+woollahra,Woollahra Sailing Club (Rose Bay),AU,-33.865,151.265,sea,Australia/Sydney,10
+rpayc,Royal Prince Alfred Yacht Club (Pittwater),AU,-33.620,151.300,sea,Australia/Sydney,8
+lakemacquarie,Lake Macquarie Yacht Club,AU,-33.040,151.640,lake,Australia/Sydney,8
+canberra,Canberra Yacht Club (Lake Burley Griffin),AU,-35.300,149.110,lake,Australia/Sydney,4
+rbyc,Royal Brighton Yacht Club (Port Phillip),AU,-37.910,144.975,sea,Australia/Melbourne,12
+sandringham,Sandringham Yacht Club (Port Phillip),AU,-37.955,144.990,sea,Australia/Melbourne,12
+rmys,Royal Melbourne Yacht Squadron (St Kilda),AU,-37.870,144.965,sea,Australia/Melbourne,10
+albertpark,Albert Park Sailing Club (Albert Park Lake),AU,-37.846,144.970,lake,Australia/Melbourne,2
+geelong,Royal Geelong Yacht Club (Corio Bay),AU,-38.135,144.375,sea,Australia/Melbourne,8
+ballarat,Ballarat Yacht Club (Lake Wendouree),AU,-37.555,143.840,lake,Australia/Melbourne,1.5
+rytc,Royal Yacht Club of Tasmania (River Derwent),AU,-42.900,147.350,sea,Australia/Hobart,15
+rqys,Royal Queensland Yacht Squadron (Moreton Bay),AU,-27.440,153.200,sea,Australia/Brisbane,5
+southport,Southport Yacht Club (Broadwater),AU,-27.960,153.415,sea,Australia/Brisbane,4
+townsville,Townsville Yacht Club (Cleveland Bay),AU,-19.240,146.830,sea,Australia/Brisbane,6
+rpyc,Royal Perth Yacht Club (Swan River),AU,-31.980,115.830,lake,Australia/Perth,5
+rfbyc,Royal Freshwater Bay Yacht Club (Swan River),AU,-32.005,115.775,lake,Australia/Perth,6
+fremantle,Fremantle Sailing Club,AU,-32.080,115.740,sea,Australia/Perth,15
+rayc,Royal Adelaide Yacht Club (Gulf St Vincent),AU,-34.790,138.470,sea,Australia/Adelaide,12
+brightonsa,Brighton and Seacliff Yacht Club,AU,-35.020,138.505,sea,Australia/Adelaide,10
+darwin,Darwin Sailing Club (Fannie Bay),AU,-12.430,130.825,sea,Australia/Darwin,6
+goolwa,Goolwa Regatta Yacht Club (Lower Murray and Coorong),AU,-35.515,138.785,lake,Australia/Adelaide,3
+hamiltonisland,Hamilton Island Yacht Club (Whitsundays),AU,-20.350,148.940,sea,Australia/Brisbane,20

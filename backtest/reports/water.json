@@ -1,0 +1,875 @@
+{
+ "chop_by_club": {
+  "aarhus": {
+   "water": "sea",
+   "median_hs_m": 0.05,
+   "p90_hs_m": 0.29,
+   "share_moderate_or_worse": 0.096,
+   "share_short_chop": 0.067
+  },
+  "annecy": {
+   "water": "lake",
+   "median_hs_m": 0.03,
+   "p90_hs_m": 0.08,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "attersee": {
+   "water": "lake",
+   "median_hs_m": 0.04,
+   "p90_hs_m": 0.09,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "bourget": {
+   "water": "lake",
+   "median_hs_m": 0.02,
+   "p90_hs_m": 0.07,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "brest": {
+   "water": "sea",
+   "median_hs_m": 0.15,
+   "p90_hs_m": 0.3,
+   "share_moderate_or_worse": 0.099,
+   "share_short_chop": 0.098
+  },
+  "burnham": {
+   "water": "sea",
+   "median_hs_m": 0.06,
+   "p90_hs_m": 0.13,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "cannes": {
+   "water": "sea",
+   "median_hs_m": 0.1,
+   "p90_hs_m": 0.2,
+   "share_moderate_or_worse": 0.015,
+   "share_short_chop": 0.014
+  },
+  "cherbourg": {
+   "water": "sea",
+   "median_hs_m": 0.08,
+   "p90_hs_m": 0.35,
+   "share_moderate_or_worse": 0.115,
+   "share_short_chop": 0.063
+  },
+  "crosshaven": {
+   "water": "sea",
+   "median_hs_m": 0.08,
+   "p90_hs_m": 0.27,
+   "share_moderate_or_worse": 0.084,
+   "share_short_chop": 0.047
+  },
+  "dinard": {
+   "water": "sea",
+   "median_hs_m": 0.15,
+   "p90_hs_m": 0.52,
+   "share_moderate_or_worse": 0.313,
+   "share_short_chop": 0.182
+  },
+  "draycote": {
+   "water": "reservoir",
+   "median_hs_m": 0.06,
+   "p90_hs_m": 0.11,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "flensburg": {
+   "water": "sea",
+   "median_hs_m": 0.09,
+   "p90_hs_m": 0.16,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "gdynia": {
+   "water": "sea",
+   "median_hs_m": 0.1,
+   "p90_hs_m": 0.33,
+   "share_moderate_or_worse": 0.119,
+   "share_short_chop": 0.068
+  },
+  "geneva": {
+   "water": "lake",
+   "median_hs_m": 0.05,
+   "p90_hs_m": 0.17,
+   "share_moderate_or_worse": 0.031,
+   "share_short_chop": 0.025
+  },
+  "genoa": {
+   "water": "sea",
+   "median_hs_m": 0.07,
+   "p90_hs_m": 0.33,
+   "share_moderate_or_worse": 0.117,
+   "share_short_chop": 0.076
+  },
+  "gothenburg": {
+   "water": "sea",
+   "median_hs_m": 0.09,
+   "p90_hs_m": 0.27,
+   "share_moderate_or_worse": 0.083,
+   "share_short_chop": 0.072
+  },
+  "grafham": {
+   "water": "reservoir",
+   "median_hs_m": 0.07,
+   "p90_hs_m": 0.12,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "granton": {
+   "water": "sea",
+   "median_hs_m": 0.14,
+   "p90_hs_m": 0.39,
+   "share_moderate_or_worse": 0.189,
+   "share_short_chop": 0.136
+  },
+  "hayling": {
+   "water": "sea",
+   "median_hs_m": 0.21,
+   "p90_hs_m": 0.52,
+   "share_moderate_or_worse": 0.365,
+   "share_short_chop": 0.262
+  },
+  "hellerup": {
+   "water": "sea",
+   "median_hs_m": 0.08,
+   "p90_hs_m": 0.17,
+   "share_moderate_or_worse": 0.042,
+   "share_short_chop": 0.028
+  },
+  "howth": {
+   "water": "sea",
+   "median_hs_m": 0.12,
+   "p90_hs_m": 0.33,
+   "share_moderate_or_worse": 0.117,
+   "share_short_chop": 0.081
+  },
+  "hyeres": {
+   "water": "sea",
+   "median_hs_m": 0.13,
+   "p90_hs_m": 0.37,
+   "share_moderate_or_worse": 0.163,
+   "share_short_chop": 0.09
+  },
+  "kiel": {
+   "water": "sea",
+   "median_hs_m": 0.08,
+   "p90_hs_m": 0.33,
+   "share_moderate_or_worse": 0.124,
+   "share_short_chop": 0.087
+  },
+  "konstanz": {
+   "water": "lake",
+   "median_hs_m": 0.03,
+   "p90_hs_m": 0.17,
+   "share_moderate_or_worse": 0.005,
+   "share_short_chop": 0.005
+  },
+  "larochelle": {
+   "water": "sea",
+   "median_hs_m": 0.16,
+   "p90_hs_m": 0.54,
+   "share_moderate_or_worse": 0.303,
+   "share_short_chop": 0.162
+  },
+  "lausanne": {
+   "water": "lake",
+   "median_hs_m": 0.02,
+   "p90_hs_m": 0.22,
+   "share_moderate_or_worse": 0.078,
+   "share_short_chop": 0.03
+  },
+  "lelystad": {
+   "water": "lake",
+   "median_hs_m": 0.1,
+   "p90_hs_m": 0.4,
+   "share_moderate_or_worse": 0.175,
+   "share_short_chop": 0.138
+  },
+  "locarno": {
+   "water": "lake",
+   "median_hs_m": 0.01,
+   "p90_hs_m": 0.03,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "loosdrecht": {
+   "water": "lake",
+   "median_hs_m": 0.07,
+   "p90_hs_m": 0.17,
+   "share_moderate_or_worse": 0.008,
+   "share_short_chop": 0.008
+  },
+  "lucerne": {
+   "water": "lake",
+   "median_hs_m": 0.01,
+   "p90_hs_m": 0.03,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "medemblik": {
+   "water": "lake",
+   "median_hs_m": 0.08,
+   "p90_hs_m": 0.36,
+   "share_moderate_or_worse": 0.142,
+   "share_short_chop": 0.115
+  },
+  "neuchatel": {
+   "water": "lake",
+   "median_hs_m": 0.03,
+   "p90_hs_m": 0.24,
+   "share_moderate_or_worse": 0.063,
+   "share_short_chop": 0.051
+  },
+  "nieuwpoort": {
+   "water": "sea",
+   "median_hs_m": 0.29,
+   "p90_hs_m": 0.68,
+   "share_moderate_or_worse": 0.483,
+   "share_short_chop": 0.201
+  },
+  "plymouth": {
+   "water": "sea",
+   "median_hs_m": 0.13,
+   "p90_hs_m": 0.33,
+   "share_moderate_or_worse": 0.122,
+   "share_short_chop": 0.072
+  },
+  "queenmary": {
+   "water": "reservoir",
+   "median_hs_m": 0.05,
+   "p90_hs_m": 0.1,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "rutland": {
+   "water": "reservoir",
+   "median_hs_m": 0.06,
+   "p90_hs_m": 0.13,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "steinhude": {
+   "water": "lake",
+   "median_hs_m": 0.09,
+   "p90_hs_m": 0.15,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "thun": {
+   "water": "lake",
+   "median_hs_m": 0.02,
+   "p90_hs_m": 0.06,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "trieste": {
+   "water": "sea",
+   "median_hs_m": 0.07,
+   "p90_hs_m": 0.16,
+   "share_moderate_or_worse": 0.01,
+   "share_short_chop": 0.01
+  },
+  "veersemeer": {
+   "water": "lake",
+   "median_hs_m": 0.05,
+   "p90_hs_m": 0.12,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "weymouth": {
+   "water": "sea",
+   "median_hs_m": 0.1,
+   "p90_hs_m": 0.22,
+   "share_moderate_or_worse": 0.041,
+   "share_short_chop": 0.041
+  },
+  "wolfgangsee": {
+   "water": "lake",
+   "median_hs_m": 0.01,
+   "p90_hs_m": 0.03,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  },
+  "workum": {
+   "water": "lake",
+   "median_hs_m": 0.3,
+   "p90_hs_m": 0.57,
+   "share_moderate_or_worse": 0.491,
+   "share_short_chop": 0.31
+  },
+  "zurich": {
+   "water": "lake",
+   "median_hs_m": 0.02,
+   "p90_hs_m": 0.07,
+   "share_moderate_or_worse": 0.0,
+   "share_short_chop": 0.0
+  }
+ },
+ "chop_vs_ewam": {
+  "aarhus": {
+   "n": 4590,
+   "corr": 0.55,
+   "ours_median_m": 0.05,
+   "ewam_median_m": 0.16,
+   "same_state": 0.42
+  },
+  "brest": {
+   "n": 4590,
+   "corr": 0.67,
+   "ours_median_m": 0.15,
+   "ewam_median_m": 0.02,
+   "same_state": 0.48
+  },
+  "burnham": {
+   "n": 4590,
+   "corr": 0.75,
+   "ours_median_m": 0.06,
+   "ewam_median_m": 0.3,
+   "same_state": 0.19
+  },
+  "cannes": {
+   "n": 4590,
+   "corr": 0.59,
+   "ours_median_m": 0.1,
+   "ewam_median_m": 0.04,
+   "same_state": 0.61
+  },
+  "cherbourg": {
+   "n": 4590,
+   "corr": 0.56,
+   "ours_median_m": 0.08,
+   "ewam_median_m": 0.22,
+   "same_state": 0.32
+  },
+  "crosshaven": {
+   "n": 4590,
+   "corr": 0.44,
+   "ours_median_m": 0.08,
+   "ewam_median_m": 0.34,
+   "same_state": 0.25
+  },
+  "dinard": {
+   "n": 4590,
+   "corr": 0.66,
+   "ours_median_m": 0.15,
+   "ewam_median_m": 0.18,
+   "same_state": 0.45
+  },
+  "gdynia": {
+   "n": 4590,
+   "corr": 0.39,
+   "ours_median_m": 0.1,
+   "ewam_median_m": 0.1,
+   "same_state": 0.41
+  },
+  "genoa": {
+   "n": 4590,
+   "corr": 0.77,
+   "ours_median_m": 0.07,
+   "ewam_median_m": 0.04,
+   "same_state": 0.69
+  },
+  "gothenburg": {
+   "n": 4590,
+   "corr": 0.73,
+   "ours_median_m": 0.09,
+   "ewam_median_m": 0.06,
+   "same_state": 0.67
+  },
+  "granton": {
+   "n": 4590,
+   "corr": 0.62,
+   "ours_median_m": 0.14,
+   "ewam_median_m": 0.18,
+   "same_state": 0.56
+  },
+  "hayling": {
+   "n": 4590,
+   "corr": 0.85,
+   "ours_median_m": 0.21,
+   "ewam_median_m": 0.18,
+   "same_state": 0.58
+  },
+  "hellerup": {
+   "n": 4590,
+   "corr": 0.64,
+   "ours_median_m": 0.08,
+   "ewam_median_m": 0.14,
+   "same_state": 0.58
+  },
+  "howth": {
+   "n": 4590,
+   "corr": 0.48,
+   "ours_median_m": 0.12,
+   "ewam_median_m": 0.2,
+   "same_state": 0.46
+  },
+  "hyeres": {
+   "n": 4590,
+   "corr": 0.64,
+   "ours_median_m": 0.13,
+   "ewam_median_m": 0.06,
+   "same_state": 0.56
+  },
+  "kiel": {
+   "n": 4590,
+   "corr": 0.66,
+   "ours_median_m": 0.08,
+   "ewam_median_m": 0.2,
+   "same_state": 0.37
+  },
+  "larochelle": {
+   "n": 4590,
+   "corr": 0.83,
+   "ours_median_m": 0.16,
+   "ewam_median_m": 0.16,
+   "same_state": 0.52
+  },
+  "nieuwpoort": {
+   "n": 4590,
+   "corr": 0.84,
+   "ours_median_m": 0.29,
+   "ewam_median_m": 0.16,
+   "same_state": 0.52
+  },
+  "plymouth": {
+   "n": 4590,
+   "corr": 0.69,
+   "ours_median_m": 0.13,
+   "ewam_median_m": 0.24,
+   "same_state": 0.4
+  },
+  "trieste": {
+   "n": 4590,
+   "corr": 0.52,
+   "ours_median_m": 0.07,
+   "ewam_median_m": 0.02,
+   "same_state": 0.7
+  },
+  "weymouth": {
+   "n": 4590,
+   "corr": 0.41,
+   "ours_median_m": 0.1,
+   "ewam_median_m": 0.24,
+   "same_state": 0.41
+  }
+ },
+ "chop_vs_ewam_all": {
+  "n": 96390,
+  "corr": 0.47,
+  "ours_median_m": 0.1,
+  "ewam_median_m": 0.14,
+  "same_state": 0.48
+ },
+ "tide_daily_range_m": {
+  "aarhus": {
+   "median": 0.43,
+   "p95": 0.63
+  },
+  "brest": {
+   "median": 4.19,
+   "p95": 6.02
+  },
+  "burnham": {
+   "median": 3.71,
+   "p95": 4.72
+  },
+  "cannes": {
+   "median": 0.22,
+   "p95": 0.3
+  },
+  "cherbourg": {
+   "median": 4.1,
+   "p95": 5.87
+  },
+  "crosshaven": {
+   "median": 2.74,
+   "p95": 3.73
+  },
+  "dinard": {
+   "median": 7.88,
+   "p95": 11.24
+  },
+  "gdynia": {
+   "median": 0.08,
+   "p95": 0.16
+  },
+  "genoa": {
+   "median": 0.24,
+   "p95": 0.33
+  },
+  "gothenburg": {
+   "median": 0.24,
+   "p95": 0.35
+  },
+  "granton": {
+   "median": 3.71,
+   "p95": 5.17
+  },
+  "hayling": {
+   "median": 3.07,
+   "p95": 4.09
+  },
+  "hellerup": {
+   "median": 0.12,
+   "p95": 0.24
+  },
+  "howth": {
+   "median": 2.89,
+   "p95": 3.91
+  },
+  "hyeres": {
+   "median": 0.21,
+   "p95": 0.29
+  },
+  "kiel": {
+   "median": 0.21,
+   "p95": 0.43
+  },
+  "larochelle": {
+   "median": 3.53,
+   "p95": 5.12
+  },
+  "nieuwpoort": {
+   "median": 4.01,
+   "p95": 5.11
+  },
+  "plymouth": {
+   "median": 3.66,
+   "p95": 4.96
+  },
+  "trieste": {
+   "median": 0.89,
+   "p95": 1.18
+  },
+  "weymouth": {
+   "median": 2.38,
+   "p95": 3.42
+  }
+ },
+ "current_kn": {
+  "aarhus": {
+   "median": 0.14,
+   "p95": 0.35
+  },
+  "brest": {
+   "median": 0.31,
+   "p95": 0.65
+  },
+  "burnham": {
+   "median": 0.62,
+   "p95": 1.05
+  },
+  "cannes": {
+   "median": 0.55,
+   "p95": 1.0
+  },
+  "cherbourg": {
+   "median": 1.47,
+   "p95": 2.64
+  },
+  "crosshaven": {
+   "median": 0.22,
+   "p95": 0.41
+  },
+  "dinard": {
+   "median": 0.78,
+   "p95": 1.58
+  },
+  "gdynia": {
+   "median": 0.14,
+   "p95": 0.22
+  },
+  "genoa": {
+   "median": 0.31,
+   "p95": 0.71
+  },
+  "gothenburg": {
+   "median": 0.22,
+   "p95": 0.5
+  },
+  "granton": {
+   "median": 0.1,
+   "p95": 0.22
+  },
+  "hayling": {
+   "median": 0.59,
+   "p95": 1.18
+  },
+  "hellerup": {
+   "median": 0.22,
+   "p95": 0.5
+  },
+  "howth": {
+   "median": 0.6,
+   "p95": 1.17
+  },
+  "hyeres": {
+   "median": 0.4,
+   "p95": 0.97
+  },
+  "kiel": {
+   "median": 0.1,
+   "p95": 0.22
+  },
+  "larochelle": {
+   "median": 0.31,
+   "p95": 0.71
+  },
+  "nieuwpoort": {
+   "median": 0.92,
+   "p95": 1.65
+  },
+  "plymouth": {
+   "median": 0.31,
+   "p95": 0.78
+  },
+  "trieste": {
+   "median": 0.1,
+   "p95": 0.22
+  },
+  "weymouth": {
+   "median": 1.26,
+   "p95": 2.62
+  }
+ },
+ "sea_temp_c_by_month": {
+  "aarhus": {
+   "5": 13.100000381469727,
+   "6": 16.200000762939453,
+   "7": 17.799999237060547,
+   "8": 18.200000762939453,
+   "9": 17.799999237060547
+  },
+  "brest": {
+   "5": 14.600000381469727,
+   "6": 17.0,
+   "7": 18.0,
+   "8": 18.200000762939453,
+   "9": 17.200000762939453
+  },
+  "burnham": {
+   "5": 13.899999618530273,
+   "6": 16.899999618530273,
+   "7": 19.299999237060547,
+   "8": 20.5,
+   "9": 19.0
+  },
+  "cannes": {
+   "5": 18.799999237060547,
+   "6": 22.700000762939453,
+   "7": 25.899999618530273,
+   "8": 26.799999237060547,
+   "9": 24.399999618530273
+  },
+  "cherbourg": {
+   "5": 12.800000190734863,
+   "6": 15.600000381469727,
+   "7": 17.799999237060547,
+   "8": 18.399999618530273,
+   "9": 18.0
+  },
+  "crosshaven": {
+   "5": 13.300000190734863,
+   "6": 13.600000381469727,
+   "7": 14.399999618530273,
+   "8": 14.399999618530273,
+   "9": 15.100000381469727
+  },
+  "dinard": {
+   "5": 14.600000381469727,
+   "6": 17.700000762939453,
+   "7": 19.799999237060547,
+   "8": 20.299999237060547,
+   "9": 19.0
+  },
+  "gdynia": {
+   "5": 11.100000381469727,
+   "6": 17.299999237060547,
+   "7": 20.200000762939453,
+   "8": 20.799999237060547,
+   "9": 18.600000381469727
+  },
+  "genoa": {
+   "5": 19.0,
+   "6": 22.799999237060547,
+   "7": 26.200000762939453,
+   "8": 26.799999237060547,
+   "9": 24.100000381469727
+  },
+  "gothenburg": {
+   "5": 13.199999809265137,
+   "6": 17.200000762939453,
+   "7": 18.600000381469727,
+   "8": 18.5,
+   "9": 17.299999237060547
+  },
+  "granton": {
+   "5": 13.0,
+   "6": 14.800000190734863,
+   "7": 15.199999809265137,
+   "8": 16.399999618530273,
+   "9": 14.399999618530273
+  },
+  "hayling": {
+   "5": 14.699999809265137,
+   "6": 17.100000381469727,
+   "7": 18.299999237060547,
+   "8": 19.600000381469727,
+   "9": 18.200000762939453
+  },
+  "hellerup": {
+   "5": 12.399999618530273,
+   "6": 16.600000381469727,
+   "7": 18.799999237060547,
+   "8": 19.0,
+   "9": 17.700000762939453
+  },
+  "howth": {
+   "5": 13.399999618530273,
+   "6": 14.800000190734863,
+   "7": 15.5,
+   "8": 16.200000762939453,
+   "9": 15.199999809265137
+  },
+  "hyeres": {
+   "5": 18.200000762939453,
+   "6": 21.799999237060547,
+   "7": 24.0,
+   "8": 26.0,
+   "9": 23.600000381469727
+  },
+  "kiel": {
+   "5": 14.0,
+   "6": 17.600000381469727,
+   "7": 19.399999618530273,
+   "8": 19.600000381469727,
+   "9": 18.200000762939453
+  },
+  "larochelle": {
+   "5": 17.0,
+   "6": 20.799999237060547,
+   "7": 21.600000381469727,
+   "8": 22.0,
+   "9": 20.600000381469727
+  },
+  "nieuwpoort": {
+   "5": 14.100000381469727,
+   "6": 17.700000762939453,
+   "7": 19.799999237060547,
+   "8": 20.5,
+   "9": 18.700000762939453
+  },
+  "plymouth": {
+   "5": 13.600000381469727,
+   "6": 15.199999809265137,
+   "7": 15.899999618530273,
+   "8": 17.200000762939453,
+   "9": 17.0
+  },
+  "trieste": {
+   "5": 17.799999237060547,
+   "6": 23.0,
+   "7": 25.700000762939453,
+   "8": 25.600000381469727,
+   "9": 24.0
+  },
+  "weymouth": {
+   "5": 13.300000190734863,
+   "6": 15.0,
+   "7": 16.0,
+   "8": 17.399999618530273,
+   "9": 17.200000762939453
+  }
+ },
+ "wave_height_m": {
+  "aarhus": {
+   "median": 0.18,
+   "p90": 0.46
+  },
+  "brest": {
+   "median": 0.02,
+   "p90": 0.32
+  },
+  "burnham": {
+   "median": 0.32,
+   "p90": 0.72
+  },
+  "cannes": {
+   "median": 0.26,
+   "p90": 0.72
+  },
+  "cherbourg": {
+   "median": 0.44,
+   "p90": 1.06
+  },
+  "crosshaven": {
+   "median": 0.78,
+   "p90": 1.7
+  },
+  "dinard": {
+   "median": 0.32,
+   "p90": 0.7
+  },
+  "gdynia": {
+   "median": 0.22,
+   "p90": 0.58
+  },
+  "genoa": {
+   "median": 0.22,
+   "p90": 0.68
+  },
+  "gothenburg": {
+   "median": 0.2,
+   "p90": 0.74
+  },
+  "granton": {
+   "median": 0.18,
+   "p90": 0.34
+  },
+  "hayling": {
+   "median": 0.22,
+   "p90": 0.6
+  },
+  "hellerup": {
+   "median": 0.12,
+   "p90": 0.3
+  },
+  "howth": {
+   "median": 0.4,
+   "p90": 0.98
+  },
+  "hyeres": {
+   "median": 0.18,
+   "p90": 0.5
+  },
+  "kiel": {
+   "median": 0.2,
+   "p90": 0.48
+  },
+  "larochelle": {
+   "median": 0.69,
+   "p90": 1.36
+  },
+  "nieuwpoort": {
+   "median": 0.28,
+   "p90": 0.74
+  },
+  "plymouth": {
+   "median": 0.54,
+   "p90": 1.42
+  },
+  "trieste": {
+   "median": 0.06,
+   "p90": 0.22
+  },
+  "weymouth": {
+   "median": 0.52,
+   "p90": 1.4
+  }
+ }
+}

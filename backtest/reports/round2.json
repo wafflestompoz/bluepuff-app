@@ -1,0 +1,184 @@
+{
+ "hourly": {
+  "raw_mean_": {
+   "n": 176326,
+   "mae_kn": 1.79,
+   "bias_kn": -0.48,
+   "band_hit": 0.719
+  },
+  "st_v1": {
+   "n": 176326,
+   "mae_kn": 1.4,
+   "bias_kn": -0.2,
+   "band_hit": 0.785
+  },
+  "ns_v1": {
+   "n": 176326,
+   "mae_kn": 1.77,
+   "bias_kn": -0.13,
+   "band_hit": 0.73
+  },
+  "st_geo": {
+   "n": 176326,
+   "mae_kn": 1.38,
+   "bias_kn": -0.17,
+   "band_hit": 0.788
+  },
+  "ns_geo": {
+   "n": 176326,
+   "mae_kn": 1.78,
+   "bias_kn": -0.13,
+   "band_hit": 0.728
+  },
+  "st_geo_weather": {
+   "n": 176326,
+   "mae_kn": 1.4,
+   "bias_kn": -0.2,
+   "band_hit": 0.785
+  },
+  "ns_geo_weather": {
+   "n": 176326,
+   "mae_kn": 1.78,
+   "bias_kn": -0.15,
+   "band_hit": 0.728
+  },
+  "st_geo_weather_morning": {
+   "n": 176326,
+   "mae_kn": 1.38,
+   "bias_kn": -0.19,
+   "band_hit": 0.788
+  }
+ },
+ "race_day": {
+  "raw_mean_": {
+   "days": 17403,
+   "brier": 0.1044,
+   "auc": 0.932,
+   "call_right": 0.858
+  },
+  "st_v1": {
+   "days": 17403,
+   "brier": 0.0832,
+   "auc": 0.967,
+   "call_right": 0.91
+  },
+  "ns_v1": {
+   "days": 17403,
+   "brier": 0.1004,
+   "auc": 0.936,
+   "call_right": 0.88
+  },
+  "st_geo": {
+   "days": 17403,
+   "brier": 0.0822,
+   "auc": 0.969,
+   "call_right": 0.914
+  },
+  "ns_geo": {
+   "days": 17403,
+   "brier": 0.1015,
+   "auc": 0.935,
+   "call_right": 0.876
+  },
+  "st_geo_weather": {
+   "days": 17403,
+   "brier": 0.0831,
+   "auc": 0.967,
+   "call_right": 0.912
+  },
+  "ns_geo_weather": {
+   "days": 17403,
+   "brier": 0.1013,
+   "auc": 0.935,
+   "call_right": 0.878
+  },
+  "st_geo_weather_morning": {
+   "days": 17403,
+   "brier": 0.0827,
+   "auc": 0.968,
+   "call_right": 0.912
+  }
+ },
+ "thermal_days_hourly": {
+  "raw_mean_": {
+   "n": 18189,
+   "mae_kn": 1.55,
+   "bias_kn": -0.95,
+   "band_hit": 0.699
+  },
+  "st_v1": {
+   "n": 18189,
+   "mae_kn": 1.06,
+   "bias_kn": -0.08,
+   "band_hit": 0.803
+  },
+  "ns_v1": {
+   "n": 18189,
+   "mae_kn": 1.34,
+   "bias_kn": -0.13,
+   "band_hit": 0.739
+  },
+  "st_geo": {
+   "n": 18189,
+   "mae_kn": 1.05,
+   "bias_kn": -0.06,
+   "band_hit": 0.803
+  },
+  "ns_geo": {
+   "n": 18189,
+   "mae_kn": 1.33,
+   "bias_kn": -0.05,
+   "band_hit": 0.747
+  },
+  "st_geo_weather": {
+   "n": 18189,
+   "mae_kn": 1.05,
+   "bias_kn": -0.06,
+   "band_hit": 0.805
+  },
+  "ns_geo_weather": {
+   "n": 18189,
+   "mae_kn": 1.33,
+   "bias_kn": -0.07,
+   "band_hit": 0.748
+  },
+  "st_geo_weather_morning": {
+   "n": 18189,
+   "mae_kn": 1.05,
+   "bias_kn": -0.06,
+   "band_hit": 0.804
+  }
+ },
+ "top_features_full": {
+  "raw_mean": 0.431,
+  "clubc": 0.091,
+  "ukmows_st": 0.081,
+  "arpegews_st": 0.032,
+  "icond2ws_st": 0.026,
+  "aromews_st": 0.023,
+  "ifsws_st": 0.023,
+  "ukmows_s": 0.017,
+  "m_err06": 0.016,
+  "hour": 0.007,
+  "ukmog_w": 0.007,
+  "m_obs06": 0.006,
+  "g_water_up_wf0_2": 0.006,
+  "g_st_up_wf10_30": 0.006,
+  "icond2ws_water": 0.005,
+  "ukmog_s": 0.005,
+  "g_st_up_wf0_2": 0.004,
+  "g_st_up_relief": 0.004,
+  "g_water_up_wf10_30": 0.004,
+  "iconeuws_st": 0.004
+ },
+ "by_club_median": {
+  "raw_mean_": 1.76,
+  "st_v1": 1.37,
+  "ns_v1": 1.7,
+  "st_geo": 1.37,
+  "ns_geo": 1.65,
+  "st_geo_weather": 1.38,
+  "ns_geo_weather": 1.64,
+  "st_geo_weather_morning": 1.37
+ }
+}

@@ -1,0 +1,68 @@
+id,name,country,lat,lon,water
+cowes,Cowes (Solent),UK,50.770,-1.300,sea
+hayling,Hayling Island SC,UK,50.785,-0.980,sea
+weymouth,WPNSA Portland Harbour,UK,50.575,-2.450,sea
+falmouth,Restronguet / Falmouth,UK,50.150,-5.050,sea
+plymouth,Plymouth Sound,UK,50.350,-4.140,sea
+rutland,Rutland SC,UK,52.650,-0.630,reservoir
+grafham,Grafham Water SC,UK,52.290,-0.330,reservoir
+draycote,Draycote Water SC,UK,52.320,-1.330,reservoir
+queenmary,Queen Mary SC,UK,51.420,-0.460,reservoir
+burnham,Burnham-on-Crouch,UK,51.620,0.820,sea
+whitstable,Whitstable YC,UK,51.360,1.020,sea
+pwllheli,Pwllheli SC,UK,52.880,-4.400,sea
+windermere,Royal Windermere YC,UK,54.370,-2.930,lake
+largs,Largs (Clyde),UK,55.790,-4.880,sea
+granton,Royal Forth YC,UK,55.990,-3.220,sea
+dunlaoghaire,Dun Laoghaire,IE,53.300,-6.130,sea
+crosshaven,Royal Cork YC,IE,51.800,-8.290,sea
+howth,Howth YC,IE,53.390,-6.070,sea
+medemblik,Medemblik (IJsselmeer),NL,52.770,5.110,lake
+loosdrecht,Loosdrecht,NL,52.200,5.080,lake
+scheveningen,Scheveningen,NL,52.100,4.260,sea
+veersemeer,Veerse Meer,NL,51.570,3.700,lake
+workum,Workum / Stavoren,NL,52.880,5.360,lake
+nieuwpoort,Nieuwpoort / Ostend,BE,51.150,2.720,sea
+kiel,Kiel-Schilksee,DE,54.430,10.170,sea
+travemuende,Travemuende,DE,53.960,10.880,sea
+warnemuende,Warnemuende,DE,54.180,12.090,sea
+flensburg,Flensburg,DE,54.820,9.450,sea
+steinhude,Steinhuder Meer,DE,52.460,9.320,lake
+konstanz,Bodensee (Konstanz),DE,47.650,9.250,lake
+chiemsee,Chiemsee,DE,47.870,12.450,lake
+starnberg,Starnberger See,DE,47.920,11.300,lake
+ammersee,Ammersee,DE,48.000,11.120,lake
+wannsee,Berlin Wannsee,DE,52.430,13.170,lake
+mueritz,Mueritz,DE,53.450,12.700,lake
+aarhus,Aarhus,DK,56.150,10.250,sea
+hellerup,Hellerup / Copenhagen,DK,55.730,12.600,sea
+brest,Brest,FR,48.350,-4.500,sea
+quiberon,Quiberon Bay,FR,47.550,-3.050,sea
+larochelle,La Rochelle,FR,46.140,-1.200,sea
+marseille,Marseille,FR,43.270,5.350,sea
+hyeres,Hyeres,FR,43.080,6.180,sea
+cannes,Cannes / Antibes,FR,43.550,7.050,sea
+annecy,Lac d'Annecy,FR,45.860,6.180,lake
+bourget,Lac du Bourget,FR,45.700,5.870,lake
+cherbourg,Cherbourg,FR,49.650,-1.620,sea
+dinard,Saint-Malo / Dinard,FR,48.640,-2.050,sea
+geneva,Lac Leman (Geneva),CH,46.230,6.170,lake
+lausanne,Lac Leman (Lausanne),CH,46.500,6.620,lake
+zurich,Lake Zurich,CH,47.270,8.620,lake
+neuchatel,Lac de Neuchatel,CH,46.950,6.900,lake
+thun,Lake Thun,CH,46.700,7.700,lake
+garda,Lake Garda (north),IT,45.850,10.850,lake
+como,Lake Como (Dervio),IT,46.070,9.300,lake
+trieste,Trieste,IT,45.650,13.750,sea
+genoa,Genoa,IT,44.400,8.930,sea
+attersee,Attersee,AT,47.900,13.550,lake
+neusiedl,Neusiedler See,AT,47.850,16.750,lake
+traunsee,Traunsee,AT,47.870,13.800,lake
+gdynia,Gdynia / Puck Bay,PL,54.520,18.560,sea
+lelystad,Lelystad (Markermeer),NL,52.530,5.430,lake
+locarno,Lago Maggiore (Locarno),CH,46.160,8.800,lake
+wolfgangsee,Wolfgangsee,AT,47.740,13.430,lake
+balaton,Balaton (Balatonfured),HU,46.950,17.900,lake
+lucerne,Lake Lucerne,CH,47.040,8.330,lake
+gothenburg,Gothenburg (Langedrag),SE,57.670,11.850,sea
+fehmarn,Fehmarn,DE,54.430,11.200,sea

@@ -1,0 +1,45 @@
+club,depth_m,source
+hayling,8,approx. local bay
+weymouth,10,approx. Portland Harbour
+plymouth,15,approx. Plymouth Sound
+burnham,5,approx. River Crouch
+granton,15,approx. Firth of Forth
+crosshaven,10,approx. Cork Harbour
+howth,15,approx. local bay
+nieuwpoort,10,approx. North Sea coast
+kiel,15,approx. Kiel Bay
+flensburg,15,approx. Flensburg Fjord
+aarhus,15,approx. Aarhus Bay
+hellerup,10,approx. Oresund
+gothenburg,15,approx. archipelago
+gdynia,30,approx. Gulf of Gdansk
+brest,15,approx. Rade de Brest
+larochelle,10,approx. Pertuis
+hyeres,30,approx. Rade d'Hyeres
+cannes,30,approx. Golfe de la Napoule
+cherbourg,15,approx. Rade de Cherbourg
+dinard,10,approx. Rance estuary mouth
+trieste,20,approx. Gulf of Trieste
+genoa,40,approx. Gulf of Genoa
+rutland,10,reservoir mean depth (approx.)
+grafham,9,reservoir mean depth (approx.)
+draycote,8,reservoir mean depth (approx.)
+queenmary,12,reservoir mean depth (approx.)
+medemblik,4.5,IJsselmeer mean depth
+loosdrecht,2,Loosdrechtse Plassen (approx.)
+veersemeer,5,Veerse Meer mean depth (approx.)
+workum,4.5,IJsselmeer mean depth
+lelystad,3.6,Markermeer mean depth
+steinhude,1.35,Steinhuder Meer mean depth
+konstanz,90,Lake Constance mean depth
+annecy,41,Lac d'Annecy mean depth
+bourget,85,Lac du Bourget mean depth
+geneva,153,Lac Leman mean depth
+lausanne,153,Lac Leman mean depth
+zurich,49,Lake Zurich mean depth
+neuchatel,64,Lac de Neuchatel mean depth
+thun,136,Lake Thun mean depth
+lucerne,104,Lake Lucerne mean depth
+locarno,177,Lago Maggiore mean depth
+attersee,84,Attersee mean depth
+wolfgangsee,47,Wolfgangsee mean depth

@@ -1,0 +1,102 @@
+{
+ "hours": 11559,
+ "clubs": [
+  "fremantle",
+  "goolwa",
+  "hamiltonisland",
+  "mhyc",
+  "rayc",
+  "rbyc",
+  "rfbyc",
+  "rmys",
+  "rpyc",
+  "rqys",
+  "rsys",
+  "sandringham",
+  "southport",
+  "woollahra"
+ ],
+ "vs_on_water": {
+  "raw_mean": {
+   "n": 11559,
+   "mae_kn": 3.92,
+   "bias_kn": -3.47,
+   "band_hit": 0.431
+  },
+  "airport_corr": {
+   "n": 11559,
+   "mae_kn": 3.42,
+   "bias_kn": -1.31,
+   "band_hit": 0.553
+  },
+  "water_bias": {
+   "n": 11559,
+   "mae_kn": 2.24,
+   "bias_kn": 0.01,
+   "band_hit": 0.688
+  },
+  "water_corr": {
+   "n": 11559,
+   "mae_kn": 1.94,
+   "bias_kn": 0.05,
+   "band_hit": 0.737
+  },
+  "water_corr_ap": {
+   "n": 11559,
+   "mae_kn": 1.94,
+   "bias_kn": 0.05,
+   "band_hit": 0.737
+  }
+ },
+ "vs_airport_same_hours": {
+  "raw_ap": {
+   "n": 11559,
+   "mae_kn": 3.32,
+   "bias_kn": -2.51,
+   "band_hit": 0.504
+  },
+  "airport_corr": {
+   "n": 11559,
+   "mae_kn": 1.67,
+   "bias_kn": -0.17,
+   "band_hit": 0.764
+  }
+ },
+ "obs_mean_kn": {
+  "on_water": 12.8,
+  "airport": 11.6
+ },
+ "race_day_on_water": {
+  "raw_mean": {
+   "days": 1986,
+   "brier": 0.18,
+   "auc": 0.515,
+   "call_right": 0.732
+  },
+  "airport_corr": {
+   "days": 1986,
+   "brier": 0.1303,
+   "auc": 0.664,
+   "call_right": 0.811
+  },
+  "water_bias": {
+   "days": 1986,
+   "brier": 0.0754,
+   "auc": 0.851,
+   "call_right": 0.911
+  },
+  "water_corr": {
+   "days": 1986,
+   "brier": 0.064,
+   "auc": 0.888,
+   "call_right": 0.925
+  },
+  "water_corr_ap": {
+   "days": 1986,
+   "brier": 0.064,
+   "auc": 0.888,
+   "call_right": 0.924
+  }
+ },
+ "race_days": 1986
+}
