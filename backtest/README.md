@@ -147,6 +147,116 @@ where the fetch method is the better guide. No buoy data was reachable to settle
 - Sea temperature: Météo-France, 6-hourly, monthly medians in `reports/water.json`.
 - Lakes get chop only. Lake water temperature isn't in the archive.
 
+## Rounds 4 and 5: what a live forecast can add (`backtest4.py`, `backtest5.py`)
+
+Baseline re-measured from a fresh rebuild of the data: 1.40 kn hourly error at clubs with a station, 1.70 kn without
+(round 3 reported 1.69), raw multi-model mean 1.79 kn. Same out-of-sample schemes as before.
+
+**What worked: learn the correction, not the wind** (`backtest5.py`, `*_res`). The model predicts how far the station will
+be from the multi-model mean and adds that to the mean, instead of predicting the wind from scratch. It starts from the
+raw forecast and moves only where it has learned to.
+
+| Same day | Hourly error (kn) | Wind band right | Race-day call right | Race-day Brier | Light-wind sunny | Median club | Clubs worse than raw |
+|---|---|---|---|---|---|---|---|
+| Raw multi-model mean | 1.79 | 71.9% | 85.8% | 0.104 | 1.55 | 1.76 | n/a |
+| **With a station**, round 1 model | 1.40 | 78.5% | 91.0% | 0.083 | 1.06 | 1.37 | 1 |
+| **With a station, learns the correction** | **1.37** | **79.0%** | **91.4%** | **0.080** | **1.05** | **1.35** | **0** |
+| **No station**, round 3 model | 1.70 | 74.2% | 88.7% | 0.095 | 1.28 | 1.64 | 10 |
+| **No station, learns the correction** | **1.68** | **74.5%** | **88.7%** | **0.093** | **1.27** | **1.60** | 11 |
+| No station, half model and half raw | 1.71 | 73.5% | 87.6% | 0.097 | 1.35 | 1.72 | 6 |
+
+- With a station the gain is small but clean: 2% lower hourly error, 3% better Brier, and no club ends up worse than the raw
+  models (one did before).
+- Without a station: median club 1.64 → 1.60 kn, Aarhus 2.40 → 1.83, Draycote 2.36 → 2.19. Weymouth is still the worst case
+  (1.89 raw → 2.73), and Lausanne, Burnham, Grafham and Rutland stay worse than raw.
+- Halving the no-station correction is the only thing that limits the worst clubs (Weymouth +16% instead of +51%, 6 clubs worse
+  instead of 10), at the cost of most of the average gain. It's a product call, not a free fix.
+
+**What didn't** (`backtest4.py`, kept for the record):
+- Recent error (how wrong the models were at the station in the last 3/10/30 days): on its own it takes the raw mean from
+  1.79 to 1.62 kn with no machine learning at all, which is useful for a club whose anemometer is new and has no history yet.
+  On top of the trained model it adds nothing (1.40 → 1.40): the model already knows the club.
+- The same recent error borrowed from stations 25–100 km away, for clubs without a station: slightly worse (1.70 → 1.72).
+- A fallback guard that drops to the raw mean where the no-station model did badly at the nearest training stations: it
+  picked the wrong clubs (it never flagged Weymouth, whose neighbours the model handles well) and lost accuracy overall.
+- Calibrating the race-day probability with a logistic fit instead of the fixed 2.5 kn spread: worse (Brier 0.083 → 0.084,
+  call right 91.0% → 89.7%). The fixed spread is already well calibrated.
+
+**What's left that would move the numbers most:** day-ahead and day-2/3 multi-model forecasts. Only GFS is scored that far out
+(1.87 kn with a station), and the open archive only keeps past model runs from 2026, when there are no ISD observations yet.
+Open-Meteo's paid API (previous-runs and historical-forecast) has 2024–25 runs at fixed leads and would let this be scored
+against the stations here. Also, the scoring target is still the shore or airport station, not the race course.
+
+## Australia (`backtest_au.py`, `clubs_au.csv`, `stations_au.csv`)
+
+22 Australian clubs in `clubs_au.csv`. Race-area coordinates and depths are approximate and were entered by hand. 21 clubs
+have an ISD station within 17 km; Ballarat (Lake Wendouree) has none within 45 km. Several clubs share a station (three in
+Sydney Harbour, three in Melbourne, three on the Swan River and Fremantle), so 15 distinct stations. The on-water stations
+(Fort Denison, St Kilda Harbour, Fawkner Beacon, Inner Dolphin Pylon) only appear in ISD from April 2024 and are sparse,
+so the nearest full-record land or airport station is used instead (Sydney airport for the harbour, 11–16 km away).
+Southern summers (Nov–Mar) 2022/23–2024/25, 09–18 local time. Europe's regional models don't reach Australia, so the raw
+forecast is the mean of four global models: ECMWF IFS, DWD ICON (13 km), UKMO 10 km and ARPEGE world (25 km).
+
+| Same day, out of sample | Hourly error (kn) | Bias (kn) | Wind band right | Race-day call right | Race-day Brier |
+|---|---|---|---|---|---|
+| Best single model (ARPEGE / IFS) | 3.21 / 3.20 | −1.6 / −1.3 | 56% / 54% | 71.8% / 73.7% | 0.199 / 0.176 |
+| Raw mean of 4 global models | 3.02 | −1.68 | 55% | 73.1% | 0.177 |
+| Per-club linear correction | 1.89 | 0.0 | 72% | 89.6% | 0.083 |
+| **Learns the correction, club has a station** | **1.78 (−41%)** | −0.33 | **73%** | **90.0%** | 0.086 |
+| Learns the wind, club has a station | 2.12 | −0.98 | 67% | 85.2% | 0.112 |
+| No station (leave one station out) | 3.23 | −0.23 | 56% | 76.4% | 0.163 |
+| No station, one pooled linear fit for all of Australia | 2.89 | 0.0 | 60% | 78.8% | 0.152 |
+
+- The global models are much worse here than Europe's regional ones (3.0 vs 1.8 kn) and read about 1.7 kn light, most at
+  the windy sea-breeze clubs: Sydney Harbour (4.7 kn raw → 2.1 corrected), Brighton SA and Adelaide (4.6–5.0 → 2.3–2.5),
+  Hobart (4.3 → 2.2). With a station, every club improves, by 22–55%.
+- Learning the correction is clearly better than learning the wind here (1.78 vs 2.12): with 21 clubs the direct model
+  can't extrapolate, while the correction starts from the models.
+- Without a station there's no usable gain yet. 15 stations are too few to learn geography, the same lesson as Europe
+  round 3; the fix is to train on the ~640 Australian ISD stations. A single pooled linear fit removes the low bias
+  (race-day calls 73% → 79%) but makes the median club worse (2.85 → 3.05 kn), so it isn't a safe default either.
+- Scoring is against shore and airport stations, so the harbour numbers say more about the models' low bias than the race course.
+
+### Scored on the water (`backtest_au_water.py`, `stations_au_water.csv`)
+
+The table above is scored against land and airport stations. 12 of the clubs have an on-water or harbour station nearby:
+
+- Fort Denison, Sydney Harbour (RSYS, Woollahra, Middle Harbour)
+- Fawkner Beacon, Port Phillip (Brighton, Sandringham)
+- St Kilda Harbour (RMYS)
+- Banana Bank North Beacon, Moreton Bay (RQYS)
+- Inner Dolphin Pylon, Swan River (Royal Perth, Freshwater Bay)
+- Garden Island, Cockburn Sound (Fremantle)
+- Gold Coast Seaway (Southport)
+- Black Pole, Gulf St Vincent (Royal Adelaide)
+
+Most of these only reach the NOAA archive from 2024, about every 3 hours, so this covers the 2024/25 southern summer: 8,660
+club-hours, scored against the **on-water** reading. The two corrections trained on the water use the other months of that
+summer (5 month folds). That's one summer only, and neighbouring months share weather, so those two rows are somewhat optimistic.
+
+| 2024/25, scored on the water | Hourly error (kn) | Bias (kn) | Wind band right | Race-day call right | Race-day Brier |
+|---|---|---|---|---|---|
+| Raw mean of 4 global models | 3.79 | −3.27 | 45% | 72.3% | 0.179 |
+| Correction learned at the airport | 3.94 | −1.75 | 48% | 79.0% | 0.142 |
+| Per-club linear fit on the water | 2.31 | 0.0 | 68% | 91.3% | 0.077 |
+| **Correction learned on the water** | **1.97** | 0.05 | **73%** | **92.6%** | **0.065** |
+
+For the same hours scored the usual way, against the airport: raw 2.98 kn, airport correction 1.62 kn.
+
+- The water is windier than the airports: 12.2 kn mean against 10.7. The raw models read 3.3 kn light on the water, against
+  2.0 at the airports.
+- **A correction learned at the airport doesn't carry over to the water.** It's worse than raw hour by hour (3.94 vs 3.79 kn),
+  and much worse where the land station is sheltered. Brighton, RMYS and RQYS are scored at Melbourne Olympic Park and
+  Brisbane airport, which average 5–7 kn while the water averages 11–13 kn. Their error goes up from about 2.4–5.3 kn raw
+  to 6.0–6.9 kn.
+- Learned on the water, even from one summer of 3-hourly readings, it halves the raw error (3.79 → 1.97 kn) and gets 93% of
+  race-day calls right. Every club improves, Fremantle most (4.85 → 1.62 kn on Garden Island).
+- So on-water readings are what the correction should learn from. For these 12 clubs the live forecast lists the on-water
+  station (`forecast/clubs_static.csv`).
+- Europe: the clubs already use the few coastal or lake stations in the NOAA archive (Stavoren, Oosterschelde, Houtribdijk,
+  Roches Point, Portland). There's nothing more on the water in that archive. The national networks (KNMI and Rijkswaterstaat
+  platforms, DWD, MeteoSwiss lake stations, UK Met Office) have more, but their hosts are blocked in this environment.
+
 ## Rerun
 
 ```bash
@@ -160,5 +270,10 @@ python geo.py && python backtest2.py   # round 2, about 30 minutes
 python marine.py && python chop.py       # water conditions, about 5 minutes
 ALL=1 python obs.py && ALL=1 python geo.py && ALL=1 python extract_wind.py <model> ...   # round 3 data, about 1 hour
 python backtest3.py                       # round 3
+python backtest4.py && python backtest5.py  # rounds 4-5, about 2 hours on 4 cores
+export REGION=au; python obs.py && for m in ecmwf_ifs dwd_icon meteofrance_arpege_world025; do python extract_wind.py $m; done
+python extract_wind.py ukmo_global_deterministic_10km wind_speed_10m wind_direction_10m wind_gusts_10m
+python extract_wind.py dwd_icon temperature_2m direct_radiation && python geo.py && unset REGION && python backtest_au.py   # Australia, ~10 min
+REGION=au STATIONS=water python obs.py  # then extract_wind.py as above with the same env, then: python backtest_au_water.py
 ```
 About 15 minutes of downloads and 15 minutes of training on 4 cores.

@@ -41,4 +41,6 @@ GRIDS = {
     "meteofrance_arpege_europe": Regular(521, 741, 20.0, -32.0, 0.1, 0.1),
     "italia_meteo_arpae_icon_2i": Regular(761, 761, 33.7, 3.0, 0.02, 0.025),
     "geosphere_arome_austria": Regular(492, 594, 42.981, 5.498, 0.018, 0.028),
+    "dwd_icon": Regular(1441, 2879, -90, -180, 0.125, 0.125),
+    "meteofrance_arpege_world025": Regular(721, 1440, -90, -180, 0.25, 0.25),
 }
