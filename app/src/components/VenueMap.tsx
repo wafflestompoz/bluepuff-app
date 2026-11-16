@@ -11,11 +11,11 @@ export function VenueMap({ map, sector }: { map: VenueMapData; sector: number })
   const c = useColors(); const [w, setW] = useState(300);
   const n = map.n; const g = map.grids[sector]; const px = w / n; const frm = sector * 22.5;
   const cells = useMemo(() => {
-    const out: { x: number; y: number; fill: string; o: number }[] = [];
+    const out: { x: number; y: number; fill: string }[] = [];
     for (let r = 0; r < n; r++) for (let q = 0; q < n; q++) {
       const ch = g[r * n + q];
-      if (ch === "!") out.push({ x: q, y: r, fill: c.land, o: 1 });
-      else { const p = (ch.charCodeAt(0) - 35) * 2; out.push({ x: q, y: r, fill: c.blue, o: Math.max(0.08, Math.min(0.9, (p - 60) / 42)) }); }
+      if (ch === "!") out.push({ x: q, y: r, fill: c.land });
+      else { const p = (ch.charCodeAt(0) - 35) * 2; out.push({ x: q, y: r, fill: mix(c.card, c.blue, Math.max(0.08, Math.min(0.9, (p - 60) / 42))) }); }
     }
     return out;
   }, [g, n, c]);
@@ -30,7 +30,7 @@ export function VenueMap({ map, sector }: { map: VenueMapData; sector: number })
       accessibilityLabel={`Map of the race area with the wind from ${Math.round(frm)} degrees`}>
       <Svg width={w} height={w}>
         <Rect x={0} y={0} width={w} height={w} fill={c.card} />
-        <G shapeRendering="crispEdges">{cells.map((k) => <Rect key={k.y * n + k.x} x={k.x * px} y={k.y * px} width={px + 0.5} height={px + 0.5} fill={k.fill} opacity={k.o} />)}</G>
+        <G shapeRendering="crispEdges">{cells.map((k) => <Rect key={k.y * n + k.x} x={k.x * px} y={k.y * px} width={px + 0.5} height={px + 0.5} fill={k.fill} />)}</G>
         <Line x1={tail.x} y1={tail.y} x2={head.x + ux * 10} y2={head.y + uy * 10} stroke={c.off} strokeWidth={3} />
         <Polygon points={arrow} fill={c.off} />
         <SvgText x={cx - lx * w * 0.32} y={cx - ly * w * 0.32} fontSize={12} fontFamily="System" fontWeight="bold" fill={c.fg} textAnchor="middle">right</SvgText>
@@ -40,4 +40,11 @@ export function VenueMap({ map, sector }: { map: VenueMapData; sector: number })
       <T muted size={12}>Darker water = more wind. Estimated from the shore, trees, buildings and hills; not yet checked on the water.</T>
     </View>
   );
+}
+
+/** Solid colour a fraction t of the way from a to b (hex), so neighbouring cells never double up at their edges. */
+function mix(a: string, b: string, t: number) {
+  const h = (x: string) => [1, 3, 5].map((i) => parseInt(x.slice(i, i + 2), 16));
+  const A = h(a), B = h(b);
+  return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join("");
 }
