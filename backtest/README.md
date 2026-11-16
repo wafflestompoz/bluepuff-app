@@ -281,6 +281,16 @@ All are scored over 3 summers, leaving one summer out (`REGION=euw python backte
   models are off by 3.92 kn, and the correction learned on the water brings that to 1.94 kn, with 92.5% of race-day calls right.
 - No station isn't solved here either: leaving a station out is worse than raw at these clubs, as before.
 
+## Data licences (matters before charging for bluepuff)
+
+Every station observation in this folder comes from NOAA ISD. NOAA's own (US) data is public domain, but ISD carries
+non-US stations under WMO Resolution 40, which restricts commercial use, and the Australian stations are BoM data, which is
+free for non-commercial use only. So **every trained correction here (Europe, Australia and the on-water sets) is learned
+from non-commercial data**. That's fine for research; a paid product needs the same corrections retrained on commercially
+usable observations (KNMI, DWD, MeteoSwiss, DMI, Météo-France and Met Office are open for commercial use) or a BoM licence.
+The model inputs (Open-Meteo open data, CC BY 4.0), WorldCover (CC BY 4.0) and Copernicus DEM are fine with attribution.
+The live forecast (`forecast/`) uses no station data.
+
 ## Rerun
 
 ```bash
