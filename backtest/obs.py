@@ -4,8 +4,10 @@ import gzip, io, re, os, time, requests, pandas as pd, numpy as np
 from concurrent.futures import ThreadPoolExecutor
 HERE = os.path.dirname(os.path.abspath(__file__))
 ALL = os.environ.get("ALL") == "1"          # ALL=1: every lowland European station (all_stations.csv) -> data/all/
-DATA = f"{HERE}/data/all" if ALL else f"{HERE}/data"; os.makedirs(DATA, exist_ok=True)
-YEARS = [2023, 2024, 2025]
+REGION = os.environ.get("REGION", "")      # REGION=au: Australian clubs (clubs_au.csv, stations_au.csv) -> data/au/
+SFX = f"_{REGION}" if REGION else ""
+DATA = f"{HERE}/data/all" if ALL else f"{HERE}/data/{REGION}" if REGION else f"{HERE}/data"; os.makedirs(DATA, exist_ok=True)
+YEARS = [2022, 2023, 2024, 2025] if REGION == "au" else [2023, 2024, 2025]
 
 def parse(text):
     rows = []
@@ -37,7 +39,7 @@ def station(club, st):
     return df
 
 if __name__ == "__main__":
-    S = pd.read_csv(f"{HERE}/all_stations.csv").rename(columns={"id": "club"}) if ALL else pd.read_csv(f"{HERE}/stations.csv")
+    S = pd.read_csv(f"{HERE}/all_stations.csv").rename(columns={"id": "club"}) if ALL else pd.read_csv(f"{HERE}/stations{SFX}.csv")
     with ThreadPoolExecutor(12) as ex:
         parts = list(ex.map(lambda r: station(r.club, r.station), S.itertuples()))
     O = pd.concat(parts, ignore_index=True)

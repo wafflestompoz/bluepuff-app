@@ -1,0 +1,142 @@
+{
+ "hourly": {
+  "ifsws_st": {
+   "n": 76965,
+   "mae_kn": 3.2,
+   "bias_kn": -1.27,
+   "band_hit": 0.536
+  },
+  "iconws_st": {
+   "n": 58951,
+   "mae_kn": 3.31,
+   "bias_kn": -1.67,
+   "band_hit": 0.537
+  },
+  "ukmows_st": {
+   "n": 88746,
+   "mae_kn": 3.38,
+   "bias_kn": -2.01,
+   "band_hit": 0.504
+  },
+  "arpegews_st": {
+   "n": 47702,
+   "mae_kn": 3.21,
+   "bias_kn": -1.57,
+   "band_hit": 0.555
+  },
+  "raw_mean": {
+   "n": 88746,
+   "mae_kn": 3.02,
+   "bias_kn": -1.68,
+   "band_hit": 0.552
+  },
+  "bias": {
+   "n": 88746,
+   "mae_kn": 1.89,
+   "bias_kn": 0.01,
+   "band_hit": 0.722
+  },
+  "kasta": {
+   "n": 88746,
+   "mae_kn": 2.12,
+   "bias_kn": -0.98,
+   "band_hit": 0.667
+  },
+  "kasta_res": {
+   "n": 88746,
+   "mae_kn": 1.78,
+   "bias_kn": -0.33,
+   "band_hit": 0.734
+  },
+  "kasta_ns": {
+   "n": 88746,
+   "mae_kn": 3.23,
+   "bias_kn": -0.23,
+   "band_hit": 0.564
+  }
+ },
+ "race_day": {
+  "ifsws_st": {
+   "days": 7568,
+   "brier": 0.1756,
+   "auc": 0.744,
+   "call_right": 0.737
+  },
+  "iconws_st": {
+   "days": 5780,
+   "brier": 0.1909,
+   "auc": 0.701,
+   "call_right": 0.714
+  },
+  "ukmows_st": {
+   "days": 8737,
+   "brier": 0.2089,
+   "auc": 0.713,
+   "call_right": 0.692
+  },
+  "arpegews_st": {
+   "days": 4671,
+   "brier": 0.1986,
+   "auc": 0.794,
+   "call_right": 0.718
+  },
+  "raw_mean": {
+   "days": 8737,
+   "brier": 0.1769,
+   "auc": 0.755,
+   "call_right": 0.731
+  },
+  "bias": {
+   "days": 8737,
+   "brier": 0.0833,
+   "auc": 0.934,
+   "call_right": 0.896
+  },
+  "kasta": {
+   "days": 8737,
+   "brier": 0.1121,
+   "auc": 0.891,
+   "call_right": 0.852
+  },
+  "kasta_res": {
+   "days": 8737,
+   "brier": 0.086,
+   "auc": 0.936,
+   "call_right": 0.9
+  },
+  "kasta_ns": {
+   "days": 8737,
+   "brier": 0.1629,
+   "auc": 0.707,
+   "call_right": 0.764
+  }
+ },
+ "race_day_base_rate": 0.782,
+ "clubs_worse_than_raw": {
+  "bias": 0,
+  "kasta": 1,
+  "kasta_res": 0,
+  "kasta_ns": 12
+ },
+ "by_club_median": {
+  "raw_mean": 2.85,
+  "bias": 1.84,
+  "kasta": 2.13,
+  "kasta_res": 1.87,
+  "kasta_ns": 2.74
+ },
+ "top_features": {
+  "clubc": 0.264,
+  "raw_mean": 0.161,
+  "ukmows_s": 0.031,
+  "ukmog_water": 0.025,
+  "ukmog_st": 0.021,
+  "ifsws_s": 0.017,
+  "ukmou_st": 0.015,
+  "ukmov_st": 0.014,
+  "ifsg_st": 0.014,
+  "hour": 0.014,
+  "ifsws_st": 0.013,
+  "ukmodir_st": 0.012
+ }
+}

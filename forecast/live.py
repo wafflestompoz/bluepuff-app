@@ -21,12 +21,16 @@ from chop import chop, label
 
 KN = 1.943844
 BASE = "https://openmeteo.s3.amazonaws.com"
-WIND = {"ecmwf_ifs": "ifs", "dwd_icon_eu": "iconeu", "dwd_icon_d2": "icond2", "ukmo_global_deterministic_10km": "ukmo",
-        "meteofrance_arome_france0025": "arome", "meteofrance_arpege_europe": "arpege"}
+WIND_EU = {"ecmwf_ifs": "ifs", "dwd_icon_eu": "iconeu", "dwd_icon_d2": "icond2", "ukmo_global_deterministic_10km": "ukmo",
+           "meteofrance_arome_france0025": "arome", "meteofrance_arpege_europe": "arpege"}
+WIND_GLOBAL = {"ecmwf_ifs": "ifs", "dwd_icon": "icon", "ukmo_global_deterministic_10km": "ukmo", "meteofrance_arpege_world025": "arpege"}
+WIND = {"europe": WIND_EU, "au": WIND_GLOBAL}          # region -> models; anywhere else uses the global set
 GRIDS["dwd_ewam"] = Regular(721, 526, 30.0, -10.5, 0.05, 0.1)
 GRIDS["meteofrance_currents"] = Regular(2041, 4320, -79.958336, -179.95833, 1 / 12, 1 / 12)
-MARINE = {"dwd_ewam": ["wave_height", "wave_period", "wave_direction", "swell_wave_height"],
-          "meteofrance_currents": ["sea_level_height_msl", "ocean_u_current", "ocean_v_current"]}
+GRIDS["meteofrance_wave"] = Regular(2041, 4320, -79.958336, -179.95833, 1 / 12, 1 / 12)
+WAVES = ["wave_height", "wave_period", "wave_direction", "swell_wave_height"]
+TIDES = ("meteofrance_currents", ["sea_level_height_msl", "ocean_u_current", "ocean_v_current"])
+MARINE = {"europe": {"dwd_ewam": WAVES, TIDES[0]: TIDES[1]}, "au": {"meteofrance_wave": WAVES, TIDES[0]: TIDES[1]}}
 MARINE_STEPS_KM = [0, 3, 6, 10, 15]          # race area, then out toward open water, until a sea cell has data
 hfs = HttpFS()
 
@@ -91,11 +95,16 @@ def run(clubs=None):
     if clubs: C = C[C.club.isin(clubs)]
     C = C.set_index("club")
     t0 = time.time() - 3600 * float(os.environ.get("HOURS_BACK", 6))
-    pts = [(c, r.water_lat, r.water_lon) for c, r in C.iterrows()]
-    sea = [p for r in C[C.water == "sea"].itertuples() for p in marine_points(r)]
-    jobs = [(m, v, pts) for m, s in WIND.items() for v in (["wind_speed_10m", "wind_direction_10m", "wind_gusts_10m"] if m.startswith("ukmo")
-                                                          else ["wind_u_component_10m", "wind_v_component_10m", "wind_gusts_10m"])]
-    jobs += [(m, v, sea) for m, vs in MARINE.items() for v in vs] if sea else []
+    C["region"] = C.region.fillna("europe") if "region" in C else "europe"
+    wind_of = lambda c: WIND.get(C.region[c], WIND_GLOBAL); marine_of = lambda c: MARINE.get(C.region[c], MARINE["au"])
+    jobs = []
+    for m in dict.fromkeys(k for w in WIND.values() for k in w):
+        pts = [(c, r.water_lat, r.water_lon) for c, r in C.iterrows() if m in wind_of(c)]
+        if pts: jobs += [(m, v, pts) for v in (["wind_speed_10m", "wind_direction_10m", "wind_gusts_10m"] if m.startswith("ukmo")
+                                                else ["wind_u_component_10m", "wind_v_component_10m", "wind_gusts_10m"])]
+    for m, vs in {k: v for mm in MARINE.values() for k, v in mm.items()}.items():
+        sea = [p for r in C[C.water == "sea"].itertuples() if m in marine_of(r.Index) for p in marine_points(r)]
+        if sea: jobs += [(m, v, sea) for v in vs]
     metas = {m: meta(m) for m in {j[0] for j in jobs}}
     with ThreadPoolExecutor(16) as ex:
         res = dict(zip([(m, v) for m, v, _ in jobs], ex.map(lambda j: series(j[0], j[1], j[2], t0, metas[j[0]]), jobs)))
@@ -105,7 +114,7 @@ def run(clubs=None):
                "model_runs": runs, "clubs": {}}
     for club, c in C.iterrows():
         cols = {}
-        for m, s in WIND.items():
+        for m, s in wind_of(club).items():
             if m.startswith("ukmo"):
                 sp, dr = res[(m, "wind_speed_10m")].get(club), res[(m, "wind_direction_10m")].get(club)
                 if sp is None or dr is None: continue
@@ -118,7 +127,7 @@ def run(clubs=None):
             if g is not None: cols[f"{s}_gust_kn"] = g * KN
         D = pd.DataFrame(cols)
         if D.empty: continue
-        for s in WIND.values():
+        for s in wind_of(club).values():
             if f"{s}_u" in D: D[f"{s}_kn"] = np.hypot(D[f"{s}_u"], D[f"{s}_v"]) * KN
         ks = [c_ for c_ in D if c_.endswith("_kn") and "gust" not in c_]
         U = D[[c_ for c_ in D if c_.endswith("_u")]].mean(axis=1); V = D[[c_ for c_ in D if c_.endswith("_v")]].mean(axis=1)
@@ -131,7 +140,7 @@ def run(clubs=None):
             D["chop"] = label(D.chop_m).astype(str); D["short_chop"] = (hs >= 0.3) & (9.81 * tp ** 2 / (2 * np.pi) < 12)
         if c.water == "sea":
             for (m, v), d in res.items():
-                if m not in MARINE: continue
+                if m not in marine_of(club): continue
                 ok = [k for k in range(len(MARINE_STEPS_KM)) if f"{club}|k{k}" in d and d[f"{club}|k{k}"].notna().any()]
                 if ok: D[v] = d[f"{club}|k{ok[0]}"]
             if "ocean_u_current" in D:
@@ -141,7 +150,7 @@ def run(clubs=None):
         D = D[D.n_models > 0].round(2); D.index.name = "time"
         D.to_csv(f"{OUT}/{club}.csv")
         nxt = D[D.index >= pd.Timestamp.now(tz="UTC").floor("h")].head(48)
-        summary["clubs"][club] = {"name": c["name"], "hours": len(D), "until": D.index.max().strftime("%Y-%m-%d %H:%MZ"),
+        summary["clubs"][club] = {"name": c["name"], "region": c.region, "models": list(wind_of(club).values()), "hours": len(D), "until": D.index.max().strftime("%Y-%m-%d %H:%MZ"),
                                   "next_48h": json.loads(nxt.reset_index().assign(time=lambda x: x.time.dt.strftime("%Y-%m-%dT%H:%MZ"))
                                                          .to_json(orient="records"))}
     json.dump(summary, open(f"{OUT}/latest.json", "w"), indent=1)

@@ -84,7 +84,8 @@ def main_all():
 
 def main():
     if os.environ.get("ALL") == "1": return main_all()
-    C = pd.read_csv(f"{HERE}/clubs.csv"); S = pd.read_csv(f"{HERE}/stations.csv")
+    R = os.environ.get("REGION", ""); X = f"_{R}" if R else ""; DD = f"{HERE}/data/{R}" if R else f"{HERE}/data"; os.makedirs(DD, exist_ok=True)
+    C = pd.read_csv(f"{HERE}/clubs{X}.csv"); S = pd.read_csv(f"{HERE}/stations{X}.csv")
     H = pd.read_csv(os.environ.get("ISD_HISTORY", "/tmp/claude-0/sail/isd-history.csv"), dtype=str); H["station"] = H.USAF + "-" + H.WBAN
     S = S.merge(H[["station", "LAT", "LON"]], on="station").merge(C, left_on="club", right_on="id")
     def one(r):
@@ -94,7 +95,7 @@ def main():
             row |= {f"{name}_{k}": v for k, v in feats(la, lo).items()}
         return row
     with ThreadPoolExecutor(8) as ex: rows = list(ex.map(one, S.itertuples()))
-    G = pd.DataFrame(rows); G.to_parquet(f"{HERE}/data/geo.parquet", index=False)
+    G = pd.DataFrame(rows); G.to_parquet(f"{DD}/geo.parquet", index=False)
     print(G[["club", "water_moved_km", "st_on_water", "st_shore_km", "st_water_r5", "water_on_water", "water_shore_km", "water_water_r5", "st_rough10"]].round(2).to_string())
 
 if __name__ == "__main__":

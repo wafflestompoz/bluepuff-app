@@ -9,7 +9,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "lib"))   # 4Kasta open-data readers, copied from bluepow-app model/kasta/src
 import extract
 from grids import GRIDS
-SUMMERS = [(dt.datetime(y, 5, 1), dt.datetime(y, 10, 1)) for y in (2023, 2024, 2025)]
+REGION = os.environ.get("REGION", "")   # REGION=au: southern summers (Nov-Mar), clubs_au.csv/stations_au.csv -> data/au/model
+SFX = f"_{REGION}" if REGION else ""
+SUMMERS = ([(dt.datetime(y, 11, 1), dt.datetime(y + 1, 4, 1)) for y in (2022, 2023, 2024)] if REGION == "au"
+           else [(dt.datetime(y, 5, 1), dt.datetime(y, 10, 1)) for y in (2023, 2024, 2025)])
 extract.WINTERS = SUMMERS                      # files_for() picks chunks overlapping these windows
 VARS = ["wind_u_component_10m", "wind_v_component_10m", "wind_gusts_10m"]
 NB = 0.15
@@ -19,7 +22,7 @@ ALL = os.environ.get("ALL") == "1"   # ALL=1: station point only, for every stat
 def sites():
     if ALL:
         A = pd.read_csv(f"{HERE}/all_stations.csv"); return pd.DataFrame({"id": A.id + "|st", "lat": A.lat, "lon": A.lon})
-    C = pd.read_csv(f"{HERE}/clubs.csv"); S = pd.read_csv(f"{HERE}/stations.csv")
+    C = pd.read_csv(f"{HERE}/clubs{SFX}.csv"); S = pd.read_csv(f"{HERE}/stations{SFX}.csv")
     H = pd.read_csv(os.environ.get("ISD_HISTORY", "/tmp/claude-0/sail/isd-history.csv"), dtype=str); H["station"] = H.USAF + "-" + H.WBAN
     S = S.merge(H[["station", "LAT", "LON"]], on="station"); S["slat"] = S.LAT.astype(float); S["slon"] = S.LON.astype(float)
     rows = []
@@ -30,7 +33,7 @@ def sites():
     return pd.DataFrame(rows, columns=["id", "lat", "lon"])
 
 def main(model, vars_):
-    out = f"{HERE}/data/all/model" if ALL else f"{HERE}/data/model"; os.makedirs(out, exist_ok=True)
+    out = f"{HERE}/data/all/model" if ALL else f"{HERE}/data/{REGION}/model" if REGION else f"{HERE}/data/model"; os.makedirs(out, exist_ok=True)
     meta = requests.get(f"https://openmeteo.s3.amazonaws.com/data/{model}/static/meta.json", timeout=30).json()
     g = GRIDS[model]; S = sites()
     win = [(a.replace(tzinfo=dt.timezone.utc).timestamp(), b.replace(tzinfo=dt.timezone.utc).timestamp()) for a, b in SUMMERS]
